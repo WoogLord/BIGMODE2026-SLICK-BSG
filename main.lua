@@ -5,7 +5,7 @@ love.graphics.setDefaultFilter("nearest","nearest")
 
 -- love.load functions
 local initF require "code.init.startgame"
-local initUIF require "code.init.initUI"
+local initUIF require "code.init.initui"
 
 -- love.update functions
 local updF require "code.update.mainupdate"
