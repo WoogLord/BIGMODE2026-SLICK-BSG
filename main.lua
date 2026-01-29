@@ -5,7 +5,8 @@ love.graphics.setDefaultFilter("nearest","nearest")
 
 -- love.load functions
 local initF require "code.init.startgame"
-local initUIF require "code.init.initui"
+local inituiF require "code.init.initui"
+local initartF require "code.init.initart"
 
 -- love.update functions
 local updF require "code.update.mainupdate"
@@ -20,6 +21,8 @@ local uiF require "code.draw.ui"
 function love.load()
     init()
     initUI()
+    assignSpriteSheets()
+    assignLayerArt()
 end
 
 function love.update(dt)

@@ -1,5 +1,6 @@
 function drawStateMachine()
-    if gameState == "mainmenu" then drawMainMenu() 
+    if gameState == "mainmenu" then drawMainMenu()
+    elseif gameState == "play2dTopDown" then draw2dTopDown()
     end
 end
 
@@ -13,7 +14,8 @@ function drawMainMenu()
 end
 
 function draw2dTopDown()
-
+    love.graphics.draw(bg_01_dirt,0,0,0,gfxScale,gfxScale)
+    love.graphics.draw(player.spriteSheet,0,0,0,gfxScale,gfxScale)
 end
 
 function drawDebug()
