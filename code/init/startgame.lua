@@ -17,8 +17,11 @@ function init()
         , mapTrueX = 0, mapTrueY = 0
         , speed = 10
     }
+    floater = {}
     
     mainMenuFont = love.graphics.newFont(32)
+    debugFont = love.graphics.newFont(16)
+    buttonFont = love.graphics.newFont(24)
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
