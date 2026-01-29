@@ -6,6 +6,7 @@ function init()
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
+        , jump = " "
         , select = {"return", "z"}, cancel = "x"
         , inventory = {"i"}
     }
