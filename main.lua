@@ -6,6 +6,7 @@ local initF require "code.init.startgame"
 
 -- love.update functions
 local updF require "code.update.mainupdate"
+local inputsF require "code.update.inputs"
 
 -- love.draw functions
 local drawF require "code.draw.maindraw"
