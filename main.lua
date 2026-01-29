@@ -7,6 +7,7 @@ local initF require "code.init.startgame"
 -- love.update functions
 local updF require "code.update.mainupdate"
 local inputsF require "code.update.inputs"
+local statsF require "code.update.statsmanager"
 
 -- love.draw functions
 local drawF require "code.draw.maindraw"
@@ -18,6 +19,7 @@ end
 function love.update(dt)
     love.timer.sleep(1/60)
     gameManager()
+    speedManager(dt)
 end
 
 function love.draw()

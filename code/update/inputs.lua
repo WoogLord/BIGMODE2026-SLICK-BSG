@@ -1,7 +1,46 @@
 function love.keypressed(key)
     if key == INPUTS_ARR.debug then isDebug = not isDebug end
     if key == INPUTS_ARR.pause then love.event.quit() end
-    if key == INPUTS_ARR.fullscreen then isFullScreen = not isFullScreen
-        love.window.setFullscreen(isFullScreen)
+    if key == INPUTS_ARR.fullscreen then isFullScreen = not isFullScreen love.window.setFullscreen(isFullScreen) end
+end
+
+function playerControls()
+    --== MOVEMENT ==--
+    player.currentAnimState = "Idle"
+    -- Angles are in UPLEFT, DOWNLEFT, DOWNRIGHT, UPRIGHT order, then UP, LEFT, DOWN, RIGHT
+    -- note: anims are still 4-directions, movement is 8 dir omni
+    if (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
+        and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
+        player.currentAnimState = "WalkUp"
+        player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
+        player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+    elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
+        and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
+        player.currentAnimState = "WalkRight" player.isFlippedLeft = true
+        player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
+        player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+    elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
+        and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
+        player.currentAnimState = "WalkDown"
+        player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
+        player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
+    elseif (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
+        and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
+        player.currentAnimState = "WalkRight"
+        player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
+        player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
+    elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
+        player.currentAnimState = "WalkUp"
+        player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
+    elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
+        player.currentAnimState = "WalkRight" player.isFlippedLeft = true
+        player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+    elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
+        player.currentAnimState = "WalkDown"
+        player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
+    elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
+        player.currentAnimState = "WalkRight"
+        player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
     end
+    player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
 end

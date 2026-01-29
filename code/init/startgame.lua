@@ -1,12 +1,22 @@
 function init()
     gameState = "mainmenu"
+    gfxScale = 3
+    moveSpeed = 0
+    moveSpeedDampener = 0.40
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
         , select = {"return", "z"}, cancel = "x"
         , inventory = {"i"}
     }
-
+    player = {
+        currentAnimState = "Idle"
+        , isFlippedLeft = false
+        , mapTileX = 0, mapTileY = 0
+        , mapTrueX = 0, mapTrueY = 0
+        , speed = 10
+    }
+    
     mainMenuFont = love.graphics.newFont(32)
 
     -- window/screen logic
