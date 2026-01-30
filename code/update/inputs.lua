@@ -2,6 +2,25 @@ function love.keypressed(key)
     if key == INPUTS_ARR.debug then isDebug = not isDebug end
     if key == INPUTS_ARR.pause then love.event.quit() end
     if key == INPUTS_ARR.fullscreen then allTheFullscreenChangeStuff() end
+
+    -- ui -- mainMenu
+    if gameState == "mainmenu" then
+        if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+            selOptionMain = math.min(selOptionMain + 1 , #menuOptionsMain)
+        elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+            selOptionMain = math.max(selOptionMain - 1 , 1)
+        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+            if menuOptionsMain[selOptionMain] == "play" then
+                gameState = "play"
+            elseif menuOptionsMain[selOptionMain] == "quit" then
+                love.event.quit()
+            end
+        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] and menuOptionsMain[selOptionMain] == "volume" then
+            volumeMaster = math.max(volumeMaster - 0.1, 0)
+        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] and menuOptionsMain[selOptionMain] == "volume" then
+            volumeMaster = math.min(volumeMaster + 0.1, 1.0)
+        end
+    end
 end
 
 -- handle inputs - mouse

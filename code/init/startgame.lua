@@ -33,4 +33,7 @@ function init()
 
     -- SpriteSheet sizing for pixels
     tileWH = 32
+
+    -- music and sound
+    volumeMaster = 0.5
 end

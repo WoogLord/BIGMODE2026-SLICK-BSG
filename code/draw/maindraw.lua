@@ -7,10 +7,27 @@ end
 function drawMainMenu()
     love.graphics.setColor(1,1,1,1)
     love.graphics.setFont(mainMenuFont)
-    love.graphics.print("this is the mainmenu", currWinDim.w / 2 - (#tostring("this is the mainmenu")*mainMenuFont:getHeight()), currWinDim.h / 2)
-    for i, button in pairs(buttonsMainMenu) do
-        drawButton(button)
+    love.graphics.print("this is the mainmenu")
+    
+    -- old button code
+    -- for i, button in pairs(buttonsMainMenu) do
+    --     drawButton(button)
+    -- end
+
+    for i, option in ipairs(menuOptionsMain) do
+        if i == selOptionMain then love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
+        else love.graphics.setColor(1, 1, 1)  -- Normal color
+        end
+        -- are things not centered?  check here lol, fix #option
+        love.graphics.print(option, currWinDim.w / 2 - (#option * 10), currWinDim.h / 2 + (i - 1) * 40)
+    end  
+
+    for j=1, 10, 1 do 
+        if math.floor(volumeMaster*10) == j then love.graphics.setColor(0, 0, 1) else love.graphics.setColor(1, 1, 1) end
+        love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + (j*12), currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
     end
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(volumeMaster*100, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144, currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
 end
 
 function drawPlay()
