@@ -28,9 +28,10 @@ end
 
 function love.update(dt)
     love.timer.sleep(1/60)
-    gameManager()
+    gameManager()    
     speedManager(dt)
     doFloaters()
+    animationManager(dt)
 end
 
 function love.draw()

@@ -4,6 +4,8 @@ function init()
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     moveSpeedDampener = 0.40
+    globalSpriteTimer = 0
+
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
@@ -20,6 +22,7 @@ function init()
     }
     floater = {}
     
+    -- fonts
     mainMenuFont = love.graphics.newFont(32)
     debugFont = love.graphics.newFont(16)
     buttonFont = love.graphics.newFont(24)

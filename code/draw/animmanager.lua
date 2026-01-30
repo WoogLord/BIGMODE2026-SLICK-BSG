@@ -28,3 +28,7 @@ function AnimClass:BuildAnimations(_spriteSheet)
     end
     return retArr
 end
+
+function animationManager(_dt)
+    globalSpriteTimer = globalSpriteTimer + _dt
+end
