@@ -4,7 +4,7 @@ end
 
 function handleMainMenuButton(_buttonPressed)
     if _buttonPressed == 1 and isMouseOverButton(buttonsMainMenu.quit) then love.event.quit()
-    elseif _buttonPressed == 1 and isMouseOverButton(buttonsMainMenu.play2dTopDown) then gameState = "play2dTopDown"
+    elseif _buttonPressed == 1 and isMouseOverButton(buttonsMainMenu.play) then gameState = "play"
     end
 end
 

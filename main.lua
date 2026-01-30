@@ -23,6 +23,7 @@ function love.load()
     initUI()
     assignSpriteSheets()
     assignLayerArt()
+    assignPortraits()
 end
 
 function love.update(dt)

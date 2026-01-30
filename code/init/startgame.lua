@@ -1,6 +1,7 @@
 function init()
     gameState = "mainmenu"
-    gfxScale = 3
+    gfxScale = 4
+    portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     moveSpeedDampener = 0.40
     INPUTS_ARR = {
@@ -27,7 +28,7 @@ function init()
     screenW, screenH = love.window.getDesktopDimensions()
     currWinDim = {w = screenW-math.floor(screenW*0.10), h = screenH-math.floor(screenH*0.10)}
     love.window.setMode(currWinDim.w, currWinDim.h)
-    isFullScreen = true
+    isFullScreen = false
     love.window.setFullscreen(isFullScreen)
 
     -- SpriteSheet sizing for pixels
