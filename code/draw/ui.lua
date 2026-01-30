@@ -8,6 +8,23 @@ function drawButton(_button)
     if _button.invis then else love.graphics.printf(_button.label, _button.x, _button.y + _button.h - (buttonFont:getHeight()*1.5), _button.w, "center") end
 end
 
+function nineSlicer(_x, _y, _w, _h, _boxColor, _nineSlice)
+    love.graphics.setColor(_boxColor)
+    love.graphics.rectangle("fill", _x, _y, _w, _h)
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.draw(_nineSlice.fill, _x, _y, 0, 2, 2)
+    love.graphics.draw(_nineSlice.outline, _x, _y, 0, 2, 2)
+end
+
+-- same logic as floaters
+function addExplosion()
+
+end
+
+function doExplosions()
+
+end
+
 function addFloater(_number, _target, _r, _g, _b)
     local floaterX, floaterY = _target.x, _target.y
     table.insert(floater, {
