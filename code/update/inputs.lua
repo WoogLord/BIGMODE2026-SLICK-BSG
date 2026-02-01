@@ -1,6 +1,5 @@
 function love.keypressed(key)
     if key == INPUTS_ARR.debug then isDebug = not isDebug end
-    if key == INPUTS_ARR.pause then love.event.quit() end
     if key == INPUTS_ARR.fullscreen then allTheFullscreenChangeStuff() end
 
     -- ui -- mainMenu
@@ -12,6 +11,7 @@ function love.keypressed(key)
         elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
             if menuOptionsMain[selOptionMain] == "play" then
                 gameState = "play"
+                playState = "exploring"
             elseif menuOptionsMain[selOptionMain] == "quit" then
                 love.event.quit()
             end
@@ -21,6 +21,28 @@ function love.keypressed(key)
             volumeMaster = math.min(volumeMaster + 0.1, 1.0)
         end
     end
+    
+    
+    -- ui -- play
+    if gameState == "play" then
+        -- Pause logic
+            --pause toggle
+        if key == INPUTS_ARR.pause and playState ~= "pause" then
+            playState = "pause"
+        elseif key == INPUTS_ARR.pause and playState == "pause" then
+            playState = "exploring"
+        end
+           -- Pause quit
+        if playState == "pause" and key == INPUTS_ARR.cancel then
+            love.event.quit()
+        end
+        
+        -- Inventory logic
+        if playState == "exploring" and key == INPUTS_ARR.inventory then
+            inventoryHandler = not inventoryHandler
+            end
+        end 
+
 end
 
 -- handle inputs - mouse

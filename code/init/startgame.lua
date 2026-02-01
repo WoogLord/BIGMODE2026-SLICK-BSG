@@ -1,5 +1,6 @@
 function init()
     gameState = "mainmenu"
+    inventoryHandler = false
     gfxScale = 4
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
@@ -11,7 +12,7 @@ function init()
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
         , jump = " "
         , select = {"return", "z"}, cancel = "x"
-        , inventory = {"i"}
+        , inventory = "i"
     }
     player = {
         currentAnimState = "Idle"
