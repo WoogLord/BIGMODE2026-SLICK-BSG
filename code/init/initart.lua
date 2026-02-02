@@ -1,6 +1,15 @@
 function assignSpriteSheets()
     -- player
     player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
+    player.anim = playerAnimationArray
+    player.anim:BuildAnimations(player.spriteSheet)
+
+    -- everyone Else
+
+    thingsBeingAnimated = {
+        player.anim
+    }
+
 end
 
 function assignLayerArt()

@@ -54,10 +54,8 @@ function drawPlay()
 end
 
 function drawExploring()
-    
-
+    -- terrain + scenery
     love.graphics.draw(bg_01_dirt,0,0,0,gfxScale,gfxScale)
-    love.graphics.draw(player.spriteSheet,0,0,0,gfxScale,gfxScale)
     
     nineSlicer(
         0, currWinDim.h * 3 / 5, currWinDim.w, currWinDim.h
@@ -67,7 +65,7 @@ function drawExploring()
     
     love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
     love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)love.graphics.draw(bg_01_dirt,0,0,0,gfxScale,gfxScale)
-    love.graphics.draw(player.spriteSheet,0,0,0,gfxScale,gfxScale)
+    -- love.graphics.draw(player.spriteSheet,0,0,0,gfxScale,gfxScale)
     
     nineSlicer(
         0, currWinDim.h * 3 / 5, currWinDim.w, currWinDim.h
@@ -79,10 +77,9 @@ function drawExploring()
     love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
 
     -- Inventory call
+    if inventoryHandler == true then drawInventory() end
 
-    if inventoryHandler == true then
-        drawInventory()
-    end
+    love.graphics.draw(player.spriteSheet, player.anim.currentAnim, 0,0,0,gfxScale,gfxScale)
 end
 
 function drawConversation()

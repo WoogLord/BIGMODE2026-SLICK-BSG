@@ -15,8 +15,7 @@ function init()
         , inventory = "i"
     }
     player = {
-        currentAnimState = "Idle"
-        , isFlippedLeft = false
+        isFlippedLeft = false
         , mapTileX = 0, mapTileY = 0
         , mapTrueX = 0, mapTrueY = 0
         , speed = 10
