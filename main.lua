@@ -28,6 +28,7 @@ function love.load()
 end
 
 function love.update(dt)
+    print(player.facing)
     love.timer.sleep(1/60)
     gameManager()    
     speedManager(dt)

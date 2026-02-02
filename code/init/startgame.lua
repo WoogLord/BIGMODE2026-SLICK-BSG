@@ -15,6 +15,7 @@ function init()
     }
     player = {
         isFlippedLeft = false
+        , facing = "Right"
         , mapTileX = 0, mapTileY = 0
         , mapTrueX = 0, mapTrueY = 0
         , speed = 25

@@ -59,12 +59,19 @@ function animationManager(_dt)
     globalSpriteTimer = globalSpriteTimer + _dt
     
     for _, thing in ipairs(thingsBeingAnimated) do
-        local localSpriteTimer = 0
+        local localSpriteTimer, timing = 0, 0
+        local randomStagger = math.random(1,3)
+
+        if thing.isRandomizedStagger[thing.currAnimState] then 
+            timing = thing.framesPerSecond[thing.currAnimState] + randomStagger 
+        else timing = thing.framesPerSecond[thing.currAnimState] 
+        end
+
         if thing.isLocal[thing.currAnimState] then
             localSpriteTimer = localSpriteTimer + _dt
-            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(localSpriteTimer*thing.framesPerSecond[thing.currAnimState] % 4)]
+            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(localSpriteTimer*timing % 4)]
         else
-            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(globalSpriteTimer*thing.framesPerSecond[thing.currAnimState] % 4)]
+            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(globalSpriteTimer*timing % 4)]
         end
     end
 end

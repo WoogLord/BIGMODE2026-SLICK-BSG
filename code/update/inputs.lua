@@ -88,7 +88,7 @@ function playerControls()
             player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
             player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
-            player.anim.currAnimState = 5
+            player.anim.currAnimState = 5 player.facing = "Up" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
             player.anim.currAnimState = 6 player.facing = "Left" player.isFlippedLeft = true
