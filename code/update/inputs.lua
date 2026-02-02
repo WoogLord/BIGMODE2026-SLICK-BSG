@@ -70,42 +70,46 @@ function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
 end
 
 function playerControls()
-    if gameState == "2dTopDown" then
+    if gameState == "play" and playState == "exploring" then
         --== MOVEMENT ==--
-        player.currentAnimState = "Idle"
+        if player.facing == "Down" then player.anim.currAnimState = 1 player.isFlippedLeft = false
+        elseif player.facing == "Up" then player.anim.currAnimState = 2 player.isFlippedLeft = false
+        elseif player.facing == "Right" then player.anim.currAnimState = 3 player.isFlippedLeft = false
+        elseif player.facing == "Left" then player.anim.currAnimState = 3 player.isFlippedLeft = true
+        end
         -- Angles are in UPLEFT, DOWNLEFT, DOWNRIGHT, UPRIGHT order, then UP, LEFT, DOWN, RIGHT
         -- note: anims are still 4-directions, movement is 8 dir omni
         if (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
-            player.currentAnimState = "WalkUp"
+            player.anim.currAnimState = 5 player.facing = "Up" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
             player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
-            player.currentAnimState = "WalkRight" player.isFlippedLeft = true
+            player.anim.currAnimState = 6 player.facing = "Left" player.isFlippedLeft = true
             player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
             player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
-            player.currentAnimState = "WalkDown"
+            player.anim.currAnimState = 4 player.facing = "Down" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
             player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
-            player.currentAnimState = "WalkRight"
+            player.anim.currAnimState = 6 player.facing = "Right" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
             player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
-            player.currentAnimState = "WalkUp"
+            player.anim.currAnimState = 5 player.facing = "Up" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
-            player.currentAnimState = "WalkRight" player.isFlippedLeft = true
+            player.anim.currAnimState = 6 player.facing = "Left" player.isFlippedLeft = true
             player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
-            player.currentAnimState = "WalkDown"
+            player.anim.currAnimState = 4 player.facing = "Down" player.isFlippedLeft = false
             player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
-            player.currentAnimState = "WalkRight"
+            player.anim.currAnimState = 6 player.facing = "Right" player.isFlippedLeft = false
             player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
         end
         player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)

@@ -19,3 +19,13 @@ function allTheFullscreenChangeStuff()
     -- use the recalcRatio like below:
     -- PLAYER_STATS_ARR.x, PLAYER_STATS_ARR.y = PLAYER_STATS_ARR.x * recalcRatio, PLAYER_STATS_ARR.y * recalcRatio
 end
+
+function handleCollision()
+
+end
+
+function handleInteraction()
+   -- check for interactable
+   -- starts conversation/does interactable
+   
+end

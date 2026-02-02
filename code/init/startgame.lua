@@ -4,7 +4,6 @@ function init()
     gfxScale = 4
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
-    moveSpeedDampener = 0.40
     globalSpriteTimer = 0
 
     INPUTS_ARR = {
@@ -15,11 +14,15 @@ function init()
         , inventory = "i"
     }
     player = {
-        currentAnimState = "Idle"
-        , isFlippedLeft = false
+        isFlippedLeft = false
+        , facing = "Right"
         , mapTileX = 0, mapTileY = 0
         , mapTrueX = 0, mapTrueY = 0
-        , speed = 10
+        , speed = 25
+        , items = {
+            hairGrowGel = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Beer.png")}
+        }
+        , hitbox = {w = 16, h = 16}
     }
     floater = {}
     

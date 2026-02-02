@@ -12,6 +12,7 @@ local initartF require "code.init.initart"
 local updF require "code.update.mainupdate"
 local inputsF require "code.update.inputs"
 local statsF require "code.update.statsmanager"
+local soundF require "code.update.soundmanager"
 
 -- love.draw functions
 local drawF require "code.draw.maindraw"
@@ -27,11 +28,14 @@ function love.load()
 end
 
 function love.update(dt)
+    print(player.facing)
     love.timer.sleep(1/60)
     gameManager()    
     speedManager(dt)
     doFloaters()
     animationManager(dt)
+    soundManager()
+    playerControls()
 end
 
 function love.draw()
