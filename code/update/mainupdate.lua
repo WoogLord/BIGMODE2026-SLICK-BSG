@@ -1,8 +1,8 @@
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
-    player.lastMapTileX, player.lastMapTileY = player.mapTileX, player.mapTileY
-    player.hitbox.x = currWinDim.w / 2 - (tileWH / 2) + (8 * gfxScale)
-    player.hitbox.y = currWinDim.h / 2 - (tileWH / 2) + (16 * gfxScale)
+    player.hitbox.x = currWinDim.w / 2 - (tileWH / 2) + (9 * gfxScale)
+    player.hitbox.y = currWinDim.h / 2 - (tileWH / 2) + (18 * gfxScale)
+    
     handleCollision()
     handleInteraction()
 end
@@ -50,10 +50,19 @@ end
 function handleCollision()
     if isRedPixel(player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
+        
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
-        -- player.mapTileX, player.mapTileY = math.floor(player.lastMapTileX), math.floor(player.lastMapTileY)
-    else player.isColliding = false end
+        player.mapTrueX, player.mapTrueY = player.lastMapTrueX, player.lastMapTrueY
+    else 
+        player.isColliding = false
+        lastPositionSave()
+    end
+end
+
+function lastPositionSave()
+    player.lastMapTileX, player.lastMapTileY = player.mapTileX, player.mapTileY
+    player.lastMapTrueX, player.lastMapTrueY = player.mapTrueX, player.mapTrueY
 end
 
 function handleInteraction()

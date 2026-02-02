@@ -24,7 +24,7 @@ function init()
         , items = {
             hairGrowGel = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Beer.png")}
         }
-        , hitbox = {w = 16, h = 16}
+        , hitbox = {w = 14, h = 14}
         , isColliding = false
     }
     floater = {}
