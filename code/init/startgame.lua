@@ -1,5 +1,6 @@
 function init()
     gameState = "mainmenu"
+    playState = ""
     inventoryHandler = false
     gfxScale = 4
     portScale = 1 / 4 * gfxScale
@@ -18,11 +19,13 @@ function init()
         , facing = "Right"
         , mapTileX = 0, mapTileY = 0
         , mapTrueX = 0, mapTrueY = 0
+        , lastMapTileX = 0, lastMapTileY = 0 
         , speed = 25
         , items = {
             hairGrowGel = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Beer.png")}
         }
         , hitbox = {w = 16, h = 16}
+        , isColliding = false
     }
     floater = {}
     
@@ -43,4 +46,13 @@ function init()
 
     -- music and sound
     volumeMaster = 0.5
+    musicClubTracks = {
+        -- mus_01_aye
+        -- mus_02_rave
+        -- mus_03_rave2
+        mus_04_funkyRave = love.audio.newSource("assets/music/Funky_Rave.mp3", "stream")
+        , mus_05_rave3_no_L = love.audio.newSource("assets/music/rave_3_no_L.mp3", "stream")
+    }
+    credits = 0 -- mus_06_rave3_w_L
+    
 end

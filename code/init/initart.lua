@@ -14,13 +14,15 @@ end
 
 function assignLayerArt()
     -- bgs
-    bg_01_nightclub = love.graphics.newImage("assets/art/bgs/bg_01_master - Copy.png")
+    bg_01_nightclub = love.graphics.newImage("assets/art/bgs/bg_01_master - All layers.png")
 
     -- top
-    bg_01_topLayer = love.graphics.newImage("assets/art/bgs/bg_01_master - Copy.png")
+    bg_01_topLayer = love.graphics.newImage("assets/art/bgs/bg_01_master - All layers.png")
 
     -- collision
+    -- debug
     bg_01_collision = love.graphics.newImage("assets/art/bgs/bg_01_master - Collision.png")
+    bg_01_collisionData = love.image.newImageData("assets/art/bgs/bg_01_master - Collision.png")
 
     -- interactables
     

@@ -6,6 +6,10 @@ function drawDebug()
     love.graphics.print("Current gameState: "..gameState,0,0)
     love.graphics.print("Current playState: "..playState,0,20)
     love.graphics.print("Current inventoryHandler: "..tostring(inventoryHandler),0,40)
+    love.graphics.print("Current player.mapTileX: "..player.mapTileX..", player.mapTileY: "..player.mapTileY,0,60)
+    love.graphics.print("Current player.lastMapTileX: "..player.lastMapTileX..", player.lastMapTileY: "..player.lastMapTileY,0,80)
+    love.graphics.print("Current player.mapTrueX: "..player.mapTrueX..", player.mapTrueY: "..player.mapTrueY,0,100)
+    love.graphics.print("Current player.isColliding: "..tostring(player.isColliding),0,120)
 end
 
 -- Top level state handler
@@ -41,7 +45,7 @@ function drawMainMenu()
         love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + (j*12), currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.print(volumeMaster*100, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144, currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
+    love.graphics.print(volumeMaster*10, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144, currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
 end
 
 -- Play state handler and play drawing functions
@@ -54,6 +58,7 @@ function drawPlay()
 end
 
 function drawExploring()
+    love.graphics.setColor(1,1,1,1)
     local mapOffsetX = tileWH * gfxScale * (-1 * player.mapTileX)
     local mapOffsetY = tileWH * gfxScale * (-1 * player.mapTileY)
     local drawnMapOffsetX = mapOffsetX + (currWinDim.w / 2 - (tileWH / 2))
@@ -64,6 +69,14 @@ function drawExploring()
         ,drawnMapOffsetX, drawnMapOffsetY
         ,0,gfxScale,gfxScale)
 
+    if isDebug then 
+        love.graphics.setColor(1,1,1,0.5)
+        love.graphics.draw(bg_01_collision
+            ,drawnMapOffsetX, drawnMapOffsetY
+            ,0,gfxScale,gfxScale)
+    end
+    love.graphics.setColor(1,1,1,1)
+
     drawPlayer() 
 
     -- Inventory call
@@ -71,15 +84,15 @@ function drawExploring()
 end
 
 function drawPlayer()
+    love.graphics.setColor(1,1,1,1)
     -- change spriteSheets for each item
     -- default
-    if player.isFlippedLeft then
-        
-    else
-        love.graphics.draw(player.spriteSheet, player.anim.currentAnim
-            ,currWinDim.w / 2 - (tileWH / 2), currWinDim.h / 2 - (tileWH / 2)
-            ,0,gfxScale,gfxScale)
-    end
+    local flip = player.isFlippedLeft and -1 or 1  
+    local flipOffset = player.isFlippedLeft and (tileWH * gfxScale) or 0 
+    
+    love.graphics.draw(player.spriteSheet, player.anim.currentAnim
+            ,currWinDim.w / 2 - (tileWH / 2) + flipOffset, currWinDim.h / 2 - (tileWH / 2)
+            ,0,gfxScale * flip,gfxScale)
 
     -- hair
     -- glasses
@@ -87,11 +100,19 @@ function drawPlayer()
     -- shirt
     -- pants
     -- shoes
+
+    if isDebug then 
+        love.graphics.setColor(0.5,1,0.5,0.5)
+        love.graphics.rectangle("fill"
+            , player.hitbox.x, player.hitbox.y
+            , player.hitbox.w * gfxScale, player.hitbox.h * gfxScale
+        )
+    end
 end
 
 function drawConversation()
     nineSlicer(
-        0, currWinDim.h * 3 / 5, currWinDim.w, currWinDim.h
+        0, currWinDim.h * 2 / 3, currWinDim.w, currWinDim.h
         , {0.7, 0.7, 0.7, 0.7}
         , chatbox_9slice
     )
@@ -102,11 +123,15 @@ function drawConversation()
 end
 
 function drawInventory()
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.setFont(mainMenuFont)
     love.graphics.rectangle("fill", currWinDim.w / 4, currWinDim.h / 4, 700, 400)
     love.graphics.draw(player.spriteSheet,currWinDim.w / 4 + 550,currWinDim.h / 4 + 140,0,gfxScale,gfxScale)
 end
 
 function drawPauseMenu()
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.setFont(mainMenuFont)
     love.graphics.print("PAUSE", currWinDim.w / 2, currWinDim.h / 2, 0,portScale,portScale)
     love.graphics.print("Press x to quit game :(", currWinDim.w / 2 - 35, currWinDim.h / 2 + 120, 0, .5, .5)
 end
