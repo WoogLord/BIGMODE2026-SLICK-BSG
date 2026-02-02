@@ -33,22 +33,27 @@ function checkCollision(_a, _b)
         and _a.y + _a.hitbox.h > _b.y -- y max
 end
 
-function isRedPixel(_x, _y) -- the red being whatever we need to check
+function isRedPixel(_x, _y, _w, _h) -- the red being whatever we need to check
     _x = math.floor(_x)
     _y = math.floor(_y)
-    if _x < 0 or _y < 0 or _x >= bg_01_collisionData:getWidth() or _y >= bg_01_collisionData:getHeight() then return false end
-    local r,g,b,a = bg_01_collisionData:getPixel(_x, _y)
-    print("checking coords: x ".._x..", y ".._y.."; and colors r"..r..", g"..g..", b"..b..", a"..a)
-    return r == (192 / 255) and g == (33/ 255) and b == (33/ 255) and a == (255/ 255)
+    if _x < 0 or _y < 0 or (_x + _w) >= bg_01_collisionData:getWidth() or (_y + _h) >= bg_01_collisionData:getHeight() then return true end
+    for w = 0, _w-1, 1 do
+        for h = 0, _h-1 , 1 do
+            local r,g,b,a = bg_01_collisionData:getPixel(_x + w, _y + h)
+            if r == (192 / 255) and g == (33/ 255) and b == (33/ 255) and a > 0 then
+                return true
+            end
+        end
+    end
 end
 
 function handleCollision()
-    if isRedPixel(player.mapTrueX + (8 * gfxScale), player.mapTrueY + (16 * gfxScale)) then
+    if isRedPixel(player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+        , player.hitbox.w, player.hitbox.h) then
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
-    else
-        player.isColliding = false
-    end
+        -- player.mapTileX, player.mapTileY = math.floor(player.lastMapTileX), math.floor(player.lastMapTileY)
+    else player.isColliding = false end
 end
 
 function handleInteraction()
