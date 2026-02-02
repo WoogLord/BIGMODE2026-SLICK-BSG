@@ -11,4 +11,7 @@ function initUI()
         fill = love.graphics.newImage("assets/art/nineslices/nineslice_chatbox_fill.png")
         , outline = love.graphics.newImage("assets/art/nineslices/nineslice_chatbox_outline.png")
     }   
+
+    selOptionInv = 1
+    inventory = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 end

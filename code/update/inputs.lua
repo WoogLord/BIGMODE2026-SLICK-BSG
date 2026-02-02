@@ -43,6 +43,18 @@ function love.keypressed(key)
             end
         end 
 
+        if playState == "exploring" and inventoryHandler then
+            if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
+            elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+                selOptionInv = math.max(selOptionInv - 5, 1) 
+            elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
+                selOptionInv = math.min(selOptionInv - 1 , #InventoryBag)
+            elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
+                selOptionInv = math.max(selOptionInv + 1, 1)
+            end
+        end
+
 end
 
 -- handle inputs - mouse
