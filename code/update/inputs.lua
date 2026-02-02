@@ -43,6 +43,18 @@ function love.keypressed(key)
             end
         end 
 
+        if playState == "exploring" and inventoryHandler then
+            if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
+            elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+                selOptionInv = math.max(selOptionInv - 5, 1) 
+            elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
+                selOptionInv = math.min(selOptionInv - 1 , #InventoryBag)
+            elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
+                selOptionInv = math.max(selOptionInv + 1, 1)
+            end
+        end
+
 end
 
 -- handle inputs - mouse
@@ -58,7 +70,7 @@ function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
 end
 
 function playerControls()
-    if gameState == "play" and playState == "exploring" then
+    if gameState == "play" and playState == "exploring" and not inventoryHandler then
         --== MOVEMENT ==--
         if player.facing == "Down" then player.anim.currAnimState = 1 player.isFlippedLeft = false
         elseif player.facing == "Up" then player.anim.currAnimState = 2 player.isFlippedLeft = false

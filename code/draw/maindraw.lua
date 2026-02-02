@@ -17,6 +17,8 @@ end
 function drawStateMachine()
     if gameState == "mainmenu" then drawMainMenu()
     elseif gameState == "play" then drawPlay()
+    elseif gameState == 'defeat' then drawDefeat()
+    elseif gameState == 'victory' then drawVictory()
     end
 end
 
@@ -125,13 +127,90 @@ end
 function drawInventory()
     love.graphics.setColor(1,1,1,1)
     love.graphics.setFont(mainMenuFont)
-    love.graphics.rectangle("fill", currWinDim.w / 4, currWinDim.h / 4, 700, 400)
-    love.graphics.draw(player.spriteSheet,currWinDim.w / 4 + 550,currWinDim.h / 4 + 140,0,gfxScale,gfxScale)
+    
+    -- Base rectangle
+    local baseRecWidth = inventoryCellSize * inventoryCols
+    local baseRecHeight = inventoryCellSize * inventoryRows
+    love.graphics.setColor(.8, .7, .3, 1)
+    love.graphics.rectangle("fill", (currWinDim.w / 2) - (baseRecWidth / 2), (currWinDim.h / 2) - (baseRecHeight / 2), baseRecWidth + 100, baseRecHeight, 10, 10)
+
+    -- Inventory grid
+    love.graphics.setColor(.212, .203, .154, 1) -- Set color for the grid lines
+
+    for row = 1, inventoryRows do
+        for col = 1, inventoryCols do
+
+            local x = (currWinDim.w / 2) - (baseRecWidth / 2) + (col - 1) * inventoryCellSize
+            local y = (currWinDim.h / 2) - (baseRecHeight / 2) + (row - 1) * inventoryCellSize
+            -- Draw a rectangle for the slot
+            love.graphics.rectangle("line", x, y, inventoryCellSize, inventoryCellSize)
+        end
+    end
+
+    -- Inventory grid highlighter
+    for i, option in ipairs(InventoryBag) do
+        if i == selOptionInv then 
+            love.graphics.setColor(1, .7, .3, .4) 
+
+            local xCalc = 1
+            local yCalc = 1 
+
+            if i >= 1 and i <= 5 then
+                xCalc = i
+            end
+            if i >= 6 and i <= 10 then
+                yCalc = 2
+                xCalc = i - 5
+            end
+
+            local x = (currWinDim.w / 2) - (baseRecWidth / 2) + (xCalc - 1) * inventoryCellSize
+            local y = (currWinDim.h / 2) - (baseRecHeight / 2) + (yCalc - 1) * inventoryCellSize
+            love.graphics.rectangle("fill", x, y, inventoryCellSize, inventoryCellSize)
+            love.graphics.setColor(.212, .203, .154, 1) -- Set color highlighted item text
+            love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0 , 1.5, 1.5)
+            love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0 , 1.5, 1.5)
+
+        end
+        
+       
+    end  
+
+    -- Base Rectangle outline
+    love.graphics.setColor(.8, .5, .3, 1) -- Set color for the outline
+    love.graphics.setLineWidth(8)
+    love.graphics.rectangle("line", (currWinDim.w / 2) - (baseRecWidth / 2) - 3, (currWinDim.h / 2) - (baseRecHeight / 2) - 3, baseRecWidth + 103, baseRecHeight + 3, 10, 10)
+
+    -- Inventory items
+    love.graphics.reset()
+
+    for row = 1, inventoryRows do
+        for col = 1, inventoryCols do
+            local item = InventoryBag[(row - 1) * inventoryCols + col]
+            if item ~= nil then
+                local x = (currWinDim.w / 2) - (inventoryCellSize * inventoryCols / 2) + (col - 1) * inventoryCellSize
+                local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
+                
+                love.graphics.draw(item.image, x, y, 0, inventoryScale, inventoryScale)
+            end
+        end
+    end
+
+    -- Show player
+    love.graphics.reset()
+    love.graphics.draw(player.spriteSheet, currWinDim.w / 2 + 225, currWinDim.h / 2 - 55, 0, gfxScale, gfxScale)
 end
 
 function drawPauseMenu()
     love.graphics.setColor(1,1,1,1)
     love.graphics.setFont(mainMenuFont)
-    love.graphics.print("PAUSE", currWinDim.w / 2, currWinDim.h / 2, 0,portScale,portScale)
+    love.graphics.print("PAUSE", currWinDim.w / 2, currWinDim.h / 2, 0,portScale, portScale)
     love.graphics.print("Press x to quit game :(", currWinDim.w / 2 - 35, currWinDim.h / 2 + 120, 0, .5, .5)
+end
+
+function drawDefeat()
+
+end
+
+function drawVictory()
+
 end

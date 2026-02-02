@@ -55,4 +55,13 @@ function init()
     }
     credits = 0 -- mus_06_rave3_w_L
     
+    -- Inventory Object
+    InventoryBag = {{name = "Dooker", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"}}
+
+    -- Inventory variables
+    inventoryScale = 3
+    inventoryCellSize = 32 * inventoryScale
+    inventoryCols = 5
+    inventoryRows = 2
+
 end
