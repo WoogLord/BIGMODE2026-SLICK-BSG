@@ -34,6 +34,7 @@ function love.update(dt)
     doFloaters()
     animationManager(dt)
     soundManager()
+    playerControls()
 end
 
 function love.draw()

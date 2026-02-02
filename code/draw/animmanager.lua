@@ -41,12 +41,12 @@ playerAnimationArray = AnimClass:new(
         , {}, {}, {}
     }
     , {
-        12, 12, 12
-        , 12, 12, 12
+        4, 4, 4
+        , 4, 4, 4
     }
     , {
         false, false, false
-        , true, true, true
+        , false, false, false
     }
     , {
         false, false, false
@@ -59,8 +59,10 @@ function animationManager(_dt)
     globalSpriteTimer = globalSpriteTimer + _dt
     
     for _, thing in ipairs(thingsBeingAnimated) do
+        local localSpriteTimer = 0
         if thing.isLocal[thing.currAnimState] then
-            thing.currentAnim = thing.animations[thing.currAnimState][thing.currFrame]
+            localSpriteTimer = localSpriteTimer + _dt
+            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(localSpriteTimer*thing.framesPerSecond[thing.currAnimState] % 4)]
         else
             thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(globalSpriteTimer*thing.framesPerSecond[thing.currAnimState] % 4)]
         end

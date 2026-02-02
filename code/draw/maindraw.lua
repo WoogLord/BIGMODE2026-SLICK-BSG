@@ -54,19 +54,42 @@ function drawPlay()
 end
 
 function drawExploring()
+    local mapOffsetX = tileWH * gfxScale * (-1 * player.mapTileX)
+    local mapOffsetY = tileWH * gfxScale * (-1 * player.mapTileY)
+    local drawnMapOffsetX = mapOffsetX + (currWinDim.w / 2 - (tileWH / 2))
+    local drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
+   
     -- terrain + scenery
-    love.graphics.draw(bg_01_dirt,0,0,0,gfxScale,gfxScale)
-    
-    nineSlicer(
-        0, currWinDim.h * 3 / 5, currWinDim.w, currWinDim.h
-        , {0.7, 0.7, 0.7, 0.7}
-        , chatbox_9slice
-    )
-    
-    love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
-    love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)love.graphics.draw(bg_01_dirt,0,0,0,gfxScale,gfxScale)
-    -- love.graphics.draw(player.spriteSheet,0,0,0,gfxScale,gfxScale)
-    
+    love.graphics.draw(bg_01_nightclub
+        ,drawnMapOffsetX, drawnMapOffsetY
+        ,0,gfxScale,gfxScale)
+
+    drawPlayer() 
+
+    -- Inventory call
+    if inventoryHandler == true then drawInventory() end    
+end
+
+function drawPlayer()
+    -- change spriteSheets for each item
+    -- default
+    if player.isFlippedLeft then
+        
+    else
+        love.graphics.draw(player.spriteSheet, player.anim.currentAnim
+            ,currWinDim.w / 2 - (tileWH / 2), currWinDim.h / 2 - (tileWH / 2)
+            ,0,gfxScale,gfxScale)
+    end
+
+    -- hair
+    -- glasses
+    -- face
+    -- shirt
+    -- pants
+    -- shoes
+end
+
+function drawConversation()
     nineSlicer(
         0, currWinDim.h * 3 / 5, currWinDim.w, currWinDim.h
         , {0.7, 0.7, 0.7, 0.7}
@@ -75,14 +98,6 @@ function drawExploring()
     
     love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
     love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
-
-    -- Inventory call
-    if inventoryHandler == true then drawInventory() end
-
-    love.graphics.draw(player.spriteSheet, player.anim.currentAnim, 0,0,0,gfxScale,gfxScale)
-end
-
-function drawConversation()
 
 end
 

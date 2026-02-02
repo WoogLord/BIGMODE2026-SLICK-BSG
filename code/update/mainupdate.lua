@@ -23,3 +23,9 @@ end
 function handleCollision()
 
 end
+
+function handleInteraction()
+   -- check for interactable
+   -- starts conversation/does interactable
+   
+end
