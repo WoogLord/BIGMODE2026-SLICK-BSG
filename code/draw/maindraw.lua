@@ -190,14 +190,15 @@ function drawInventory()
                 local x = (currWinDim.w / 2) - (inventoryCellSize * inventoryCols / 2) + (col - 1) * inventoryCellSize
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
                 
-                love.graphics.draw(item.image, x, y, 0, inventoryScale, inventoryScale)
+                -- hey richard, i added this shit here (player.anim.animations[1][1]) to get rid of the spritesheet dupe issue you had
+                love.graphics.draw(item.image, player.anim.animations[1][1], x, y, 0, inventoryScale, inventoryScale)
             end
         end
     end
 
     -- Show player
     love.graphics.reset()
-    love.graphics.draw(player.spriteSheet, currWinDim.w / 2 + 225, currWinDim.h / 2 - 55, 0, gfxScale, gfxScale)
+    love.graphics.draw(player.spriteSheet, player.anim.animations[1][1], currWinDim.w / 2 + 225, currWinDim.h / 2 - 55, 0, gfxScale, gfxScale)
 end
 
 function drawPauseMenu()

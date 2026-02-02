@@ -112,6 +112,5 @@ function playerControls()
             player.anim.currAnimState = 6 player.facing = "Right" player.isFlippedLeft = false
             player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
         end
-        player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH) , (player.mapTileY * tileWH)
     end
 end
