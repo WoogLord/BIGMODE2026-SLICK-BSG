@@ -78,7 +78,8 @@ function drawExploring()
             ,0,gfxScale,gfxScale)
     end
     love.graphics.setColor(1,1,1,1)
-
+    
+    drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
     drawPlayer() 
 
     -- Inventory call
@@ -96,12 +97,13 @@ function drawPlayer()
             ,currWinDim.w / 2 - (tileWH / 2) + flipOffset, currWinDim.h / 2 - (tileWH / 2)
             ,0,gfxScale * flip,gfxScale)
 
-    -- hair
-    -- glasses
-    -- face
-    -- shirt
-    -- pants
-    -- shoes
+    -- hair -- pompadour -- minoxidyl-phensitride
+    -- glasses -- gurenn lagann glasses -- 
+    -- face -- mew
+    -- jacket -- leather jacket
+    -- abs -- bowflex
+    -- pants -- ???
+    -- shoes -- ???
 
     if isDebug then 
         love.graphics.setColor(0.5,1,0.5,0.5)
@@ -109,6 +111,13 @@ function drawPlayer()
             , player.hitbox.x, player.hitbox.y
             , player.hitbox.w * gfxScale, player.hitbox.h * gfxScale
         )
+    end
+end
+
+function drawInteractables(_drawnMapOffsetX, _drawnMapOffsetY)
+    for _, interacts in pairs(interactables) do
+        print("testin this part")
+        love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, interacts.mapTrueX * gfxScale, interacts.mapTrueY * gfxScale, 0, gfxScale, gfxScale)
     end
 end
 

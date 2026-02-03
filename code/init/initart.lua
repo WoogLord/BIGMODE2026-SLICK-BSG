@@ -4,11 +4,23 @@ function assignSpriteSheets()
     player.anim = playerAnimationArray
     player.anim:BuildAnimations(player.spriteSheet)
     player.anim.currAnimState = 3
+
     -- everyone Else
+    interactables.gothGirl.spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
+    interactables.sororityGirl.spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
 
     thingsBeingAnimated = {
         player.anim
     }
+
+    for i, interacts in pairs(interactables) do
+        interacts.anim = everyoneElseAnimationArray
+        interacts.anim:BuildAnimations(interacts.spriteSheet)
+        interacts.anim.currAnimState = 1
+        table.insert(thingsBeingAnimated, interacts.anim)
+        print(thingsBeingAnimated[i])
+    end
+
 
 end
 

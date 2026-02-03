@@ -64,4 +64,10 @@ function init()
     inventoryCols = 5
     inventoryRows = 2
 
+    -- Interactables RICHARD THESE CONTAIN DIALOGUES
+    interactableHitbox = {w = 64, h = 64}
+    interactables = {
+        gothGirl = {id = 1, mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH)}
+        , sororityGirl = {id = 2, mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
+    }
 end
