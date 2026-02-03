@@ -63,8 +63,8 @@ function drawExploring()
     love.graphics.setColor(1,1,1,1)
     local mapOffsetX = tileWH * gfxScale * (-1 * player.mapTileX)
     local mapOffsetY = tileWH * gfxScale * (-1 * player.mapTileY)
-    local drawnMapOffsetX = mapOffsetX + (currWinDim.w / 2 - (tileWH / 2))
-    local drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
+    drawnMapOffsetX = mapOffsetX + (currWinDim.w / 2 - (tileWH / 2))
+    drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
    
     -- terrain + scenery
     love.graphics.draw(bg_01_nightclub
@@ -81,6 +81,9 @@ function drawExploring()
     
     drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
     drawPlayer() 
+
+    -- wrap this in conversation condition handler thing
+    drawInteractableButton()
 
     -- Inventory call
     if inventoryHandler == true then drawInventory() end    
@@ -114,10 +117,31 @@ function drawPlayer()
     end
 end
 
-function drawInteractables(_drawnMapOffsetX, _drawnMapOffsetY)
+function drawInteractables()
     for _, interacts in pairs(interactables) do
-        print("testin this part")
-        love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, interacts.mapTrueX * gfxScale, interacts.mapTrueY * gfxScale, 0, gfxScale, gfxScale)
+        local iX, iY = (interacts.mapTrueX * gfxScale) + drawnMapOffsetX, (interacts.mapTrueY * gfxScale) + drawnMapOffsetY
+        if isDebug then love.graphics.setColor(0.5,0.5,1,0.5) 
+            love.graphics.rectangle("fill", iX - (interactableHitbox.w / 6 * gfxScale), iY - (interactableHitbox.h / 6 * gfxScale)
+            , interactableHitbox.w * gfxScale, interactableHitbox.h * gfxScale) 
+        end love.graphics.setColor(1,1,1,1)
+        love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+    end
+end
+
+function drawInteractableButton()
+    for _, interacts in pairs(interactables) do
+        local iX, iY = (interacts.mapTrueX * gfxScale) + drawnMapOffsetX, (interacts.mapTrueY * gfxScale) + drawnMapOffsetY
+        if checkCollision(player, interacts) then
+            love.graphics.setColor(0.5,0.5,0.5,1)
+            love.graphics.setFont(mainMenuFont)
+            love.graphics.print("PRESS", iX - (tileWH * gfxScale * 2 / 3), iY + 4 - (tileWH * gfxScale * 2 / 5) - (updownFloating))
+            love.graphics.setColor(1,1,1,1)
+            love.graphics.print("PRESS", iX - (tileWH * gfxScale * 2 / 3), iY - (tileWH * gfxScale * 2 / 5) - (updownFloating))
+            love.graphics.setColor(0.5,0.5,0.5,1)
+            love.graphics.draw(z_key_art, iX + (tileWH * gfxScale / 4), iY - (tileWH * gfxScale / 2), 0, gfxScale / 2, gfxScale / 2)
+            love.graphics.setColor(1,1,1,1)
+            love.graphics.draw(z_key_art, iX + (tileWH * gfxScale / 4), iY - (tileWH * gfxScale / 2) - 4 - (updownFloating / 4), 0, gfxScale / 2, gfxScale / 2)
+        end
     end
 end
 
@@ -130,7 +154,6 @@ function drawConversation()
     
     love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
     love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
-
 end
 
 function drawInventory()

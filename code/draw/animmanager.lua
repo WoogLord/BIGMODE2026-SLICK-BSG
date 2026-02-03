@@ -57,6 +57,7 @@ everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}
 
 function animationManager(_dt)
     globalSpriteTimer = globalSpriteTimer + _dt
+    updownFloating = math.sin(love.timer.getTime()) * 2
     
     for _, thing in ipairs(thingsBeingAnimated) do
         local localSpriteTimer, timing = 0, 0

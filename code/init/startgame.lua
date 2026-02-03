@@ -6,6 +6,7 @@ function init()
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     globalSpriteTimer = 0
+    updownFloating = 0
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
@@ -65,7 +66,7 @@ function init()
     inventoryRows = 2
 
     -- Interactables RICHARD THESE CONTAIN DIALOGUES
-    interactableHitbox = {w = 64, h = 64}
+    interactableHitbox = {w = 48, h = 48}
     interactables = {
         gothGirl = {id = 1, mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH)}
         , sororityGirl = {id = 2, mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}

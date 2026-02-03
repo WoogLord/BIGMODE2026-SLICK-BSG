@@ -27,10 +27,10 @@ end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    return _a.mapTrueX < _b.mapTrueX + interactableHitbox.w -- x min
-        and _a.mapTrueX + _a.hitbox.w > _b.mapTrueX -- x max
-        and _a.mapTrueY < _b.mapTrueY + interactableHitbox.h -- y min
-        and _a.mapTrueY + _a.hitbox.h > _b.mapTrueY -- y max
+    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * 3 / 6) -- x min
+        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w * 3 / 6)) -- x max
+        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * 3 / 6) -- y min
+        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
 end
 
 function isRedPixel(_x, _y, _w, _h) -- the red being whatever we need to check
@@ -66,9 +66,7 @@ function lastPositionSave()
 end
 
 function handleInteraction()
-    -- check for interactable
-    -- starts conversation/does interactable
     for _, interacts in pairs(interactables) do
-        -- print("Checking Collision for interacts"..tostring(checkCollision(player, interacts)))
+        print("colliding with interacts id "..interacts.id..": "..tostring(checkCollision(player, interacts)))
     end
 end

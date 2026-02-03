@@ -20,8 +20,6 @@ function assignSpriteSheets()
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
     end
-
-
 end
 
 function assignLayerArt()
@@ -37,7 +35,7 @@ function assignLayerArt()
     bg_01_collisionData = love.image.newImageData("assets/art/bgs/bg_01_master - Collision.png")
 
     -- interactables
-    
+    z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")
 end
 
 function assignPortraits()
