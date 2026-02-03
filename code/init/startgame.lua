@@ -1,6 +1,7 @@
 function init()
     gameState = "mainmenu"
     playState = ""
+    conversationState = ""
     inventoryHandler = false
     gfxScale = 4
     portScale = 1 / 4 * gfxScale
@@ -68,7 +69,7 @@ function init()
     -- Interactables RICHARD THESE CONTAIN DIALOGUES
     interactableHitbox = {w = 48, h = 48}
     interactables = {
-        gothGirl = {id = 1, mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH)}
-        , sororityGirl = {id = 2, mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
+        {id = 1, name = "gothGirl", vanityName = "Debra", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH)}
+        , {id = 2, name = "sororityGirl", vanityName = "Lonnie", mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
     }
 end

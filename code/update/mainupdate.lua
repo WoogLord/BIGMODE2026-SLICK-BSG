@@ -4,7 +4,7 @@ function gameManager()
     player.hitbox.y = currWinDim.h / 2 - (tileWH / 2) + (18 * gfxScale)
     
     handleCollision()
-    handleInteraction()
+    handleConversation()
 end
 
 function handleMainMenuButton(_buttonPressed)
@@ -67,6 +67,22 @@ end
 
 function handleInteraction()
     for _, interacts in pairs(interactables) do
-        print("colliding with interacts id "..interacts.id..": "..tostring(checkCollision(player, interacts)))
+        if checkCollision(player, interacts) then return interacts.id end
+    end
+    return 0
+end
+
+function startConversationWith(_interactableID)
+    if _interactableID == 0 then print("no babe detected...")
+    else print(interactables[_interactableID].vanityName)
+        conversationState = interactables[_interactableID].vanityName
+    end
+end
+
+function handleConversation()
+    if conversationState == "" then
+        -- do nothing
+    elseif conversationState == interactables[1].vanityName then
+        -- gothGirl logic
     end
 end

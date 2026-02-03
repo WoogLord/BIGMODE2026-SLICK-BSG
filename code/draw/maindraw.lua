@@ -10,6 +10,7 @@ function drawDebug()
     love.graphics.print("Current player.lastMapTileX: "..player.lastMapTileX..", player.lastMapTileY: "..player.lastMapTileY,0,80)
     love.graphics.print("Current player.mapTrueX: "..player.mapTrueX..", player.mapTrueY: "..player.mapTrueY,0,100)
     love.graphics.print("Current player.isColliding: "..tostring(player.isColliding),0,120)
+    love.graphics.print("Current interactingWith: "..tostring(interactingWith),0,140)
 end
 
 -- Top level state handler
@@ -54,8 +55,7 @@ end
 
 function drawPlay()
     if playState == "exploring" then drawExploring()
-    elseif playState == "conversation" then drawConversation()
-    elseif playState == "pause" then drawPauseMenu()
+    elseif playState == "pause" then drawExploring() drawPauseMenu()
     end
 end
 
@@ -82,8 +82,16 @@ function drawExploring()
     drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
     drawPlayer() 
 
+    -- draw cool shader thing
+    love.graphics.setColor(1,0,1,0.05)
+    love.graphics.rectangle("fill",0,0,currWinDim.w,currWinDim.h)
+
     -- wrap this in conversation condition handler thing
-    drawInteractableButton()
+    if conversationState ~= "" then
+        drawConversation()
+    else
+        drawInteractableButton()
+    end
 
     -- Inventory call
     if inventoryHandler == true then drawInventory() end    
@@ -146,14 +154,33 @@ function drawInteractableButton()
 end
 
 function drawConversation()
-    nineSlicer(
-        0, currWinDim.h * 2 / 3, currWinDim.w, currWinDim.h
-        , {0.7, 0.7, 0.7, 0.7}
-        , chatbox_9slice
-    )
-    
-    love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
-    love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
+    love.graphics.setColor(1,1,1,1)
+
+    -- use each girls text bubble
+    if interactables[interactingWith].chatbox then
+        chatboxRenderer(
+            0, currWinDim.h * 2 / 3, currWinDim.w, currWinDim.h
+            , {0.7, 0.7, 0.7, 0.7}
+            , interactables[interactingWith].chatbox
+        )
+    else
+        -- default chatbox
+    end
+
+    if interactables[interactingWith].portrait then 
+        love.graphics.draw(interactables[interactingWith].portrait, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)    
+    else
+        -- default portrait
+    end
+
+    if interactables[interactingWith].portraitFrame then 
+        love.graphics.draw(interactables[interactingWith].portraitFrame, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)    
+    else
+        -- default portraitFrame
+    end
+
+    -- love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
+    -- love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
 end
 
 function drawInventory()
@@ -222,7 +249,7 @@ function drawInventory()
                 local x = (currWinDim.w / 2) - (inventoryCellSize * inventoryCols / 2) + (col - 1) * inventoryCellSize
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
                 
-                -- hey richard, i added this shit here (player.anim.animations[1][1]) to get rid of the spritesheet dupe issue you had
+                -- RICHARD, i added this shit here (player.anim.animations[1][1]) to get rid of the spritesheet dupe issue you had
                 love.graphics.draw(item.image, player.anim.animations[1][1], x, y, 0, inventoryScale, inventoryScale)
             end
         end
@@ -234,6 +261,10 @@ function drawInventory()
 end
 
 function drawPauseMenu()
+    -- draw cool shader thing
+    love.graphics.setColor(0.5,0.5,0.5,0.1)
+    love.graphics.rectangle("fill",0,0,currWinDim.w,currWinDim.h)
+
     love.graphics.setColor(1,1,1,1)
     love.graphics.setFont(mainMenuFont)
     love.graphics.print("PAUSE", currWinDim.w / 2, currWinDim.h / 2, 0,portScale, portScale)

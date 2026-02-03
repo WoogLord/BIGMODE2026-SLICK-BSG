@@ -6,8 +6,8 @@ function assignSpriteSheets()
     player.anim.currAnimState = 3
 
     -- everyone Else
-    interactables.gothGirl.spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
-    interactables.sororityGirl.spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
+    interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
+    interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
 
     thingsBeingAnimated = {
         player.anim
@@ -42,4 +42,16 @@ function assignPortraits()
     -- tests
     port_test_360 = love.graphics.newImage("assets/art/portraits/360360.png")
     port_test_256 = love.graphics.newImage("assets/art/portraits/256256.png")
+
+    -- chatbox
+    interactables[1].chatbox = {
+        fill = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_fill.png")
+        , outline = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_outline.png")
+    }
+
+    -- portraits
+    interactables[1].portrait = love.graphics.newImage("assets/art/portraits/360360.png")
+
+    -- portrait Frame
+    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/360360.png")
 end
