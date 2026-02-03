@@ -25,36 +25,43 @@ function love.keypressed(key)
     
     -- ui -- play
     if gameState == "play" then
-        -- Pause logic
+        if playState == "exploring" then
+            if inventoryHandler then
+                if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                    selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
+                elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+                    selOptionInv = math.max(selOptionInv - 5, 1) 
+                elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
+                    selOptionInv = math.min(selOptionInv - 1 , #InventoryBag)
+                elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
+                    selOptionInv = math.max(selOptionInv + 1, 1)
+                elseif key == INPUTS_ARR.inventory then inventoryHandler = not inventoryHandler
+                end
+            elseif conversationState ~= "" then
+                if key == INPUTS_ARR.pause then playState = "pause"
+                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+                    -- RICHARD: progress dialogue
+                end
+            else
+                --pause toggle
+                if key == INPUTS_ARR.pause then playState = "pause"
+                -- Inventory logic
+                elseif key == INPUTS_ARR.inventory then inventoryHandler = not inventoryHandler
+                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+                    interactingWith = handleInteraction()
+                    if interactingWith ~= 0 then
+                        startConversationWith(interactingWith)
+                    end
+                end
+            end
+        elseif playState == "pause" then
             --pause toggle
-        if key == INPUTS_ARR.pause and playState ~= "pause" then
-            playState = "pause"
-        elseif key == INPUTS_ARR.pause and playState == "pause" then
-            playState = "exploring"
-        end
-           -- Pause quit
-        if playState == "pause" and key == INPUTS_ARR.cancel then
-            love.event.quit()
-        end
-        
-        -- Inventory logic
-        if playState == "exploring" and key == INPUTS_ARR.inventory then
-            inventoryHandler = not inventoryHandler
+            if key == INPUTS_ARR.pause then playState = "exploring"
+            -- Pause quit
+            elseif key == INPUTS_ARR.cancel then love.event.quit()
             end
-        end 
-
-        if playState == "exploring" and inventoryHandler then
-            if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
-                selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
-            elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
-                selOptionInv = math.max(selOptionInv - 5, 1) 
-            elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] then
-                selOptionInv = math.min(selOptionInv - 1 , #InventoryBag)
-            elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] then
-                selOptionInv = math.max(selOptionInv + 1, 1)
-            end
-        end
-
+        end        
+    end 
 end
 
 -- handle inputs - mouse
@@ -70,7 +77,7 @@ function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
 end
 
 function playerControls()
-    if gameState == "play" and playState == "exploring" and not inventoryHandler then
+    if gameState == "play" and playState == "exploring" and not inventoryHandler and conversationState == "" then
         --== MOVEMENT ==--
         if player.facing == "Down" then player.anim.currAnimState = 1 player.isFlippedLeft = false
         elseif player.facing == "Up" then player.anim.currAnimState = 2 player.isFlippedLeft = false

@@ -8,12 +8,11 @@ function drawButton(_button)
     if _button.invis then else love.graphics.printf(_button.label, _button.x, _button.y + _button.h - (buttonFont:getHeight()*1.5), _button.w, "center") end
 end
 
-function nineSlicer(_x, _y, _w, _h, _boxColor, _nineSlice)
+function chatboxRenderer(_x, _y, _w, _h, _boxColor, _chatbox)
     love.graphics.setColor(_boxColor)
-    love.graphics.rectangle("fill", _x, _y, _w, _h)
+    love.graphics.draw(_chatbox.fill, _x, _y, 0, gfxScale, gfxScale)
     love.graphics.setColor(1,1,1,1)
-    love.graphics.draw(_nineSlice.fill, _x, _y, 0, 2, 2)
-    love.graphics.draw(_nineSlice.outline, _x, _y, 0, 2, 2)
+    love.graphics.draw(_chatbox.outline, _x, _y, 0, gfxScale, gfxScale)
 end
 
 -- same logic as floaters

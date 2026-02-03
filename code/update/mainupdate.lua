@@ -4,7 +4,7 @@ function gameManager()
     player.hitbox.y = currWinDim.h / 2 - (tileWH / 2) + (18 * gfxScale)
     
     handleCollision()
-    handleInteraction()
+    handleConversation()
 end
 
 function handleMainMenuButton(_buttonPressed)
@@ -27,10 +27,10 @@ end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    return _a.x < _b.x + _b.hitbox.w -- x min
-        and _a.x + _a.hitbox.w > _b.x -- x max
-        and _a.y < _b.y + _b.hitbox.h -- y min
-        and _a.y + _a.hitbox.h > _b.y -- y max
+    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * 3 / 6) -- x min
+        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w * 3 / 6)) -- x max
+        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * 3 / 6) -- y min
+        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
 end
 
 function isRedPixel(_x, _y, _w, _h) -- the red being whatever we need to check
@@ -66,7 +66,23 @@ function lastPositionSave()
 end
 
 function handleInteraction()
-   -- check for interactable
-   -- starts conversation/does interactable
-   
+    for _, interacts in pairs(interactables) do
+        if checkCollision(player, interacts) then return interacts.id end
+    end
+    return 0
+end
+
+function startConversationWith(_interactableID)
+    if _interactableID == 0 then print("no babe detected...")
+    else print(interactables[_interactableID].vanityName)
+        conversationState = interactables[_interactableID].vanityName
+    end
+end
+
+function handleConversation()
+    if conversationState == "" then
+        -- do nothing
+    elseif conversationState == interactables[1].vanityName then
+        -- gothGirl logic
+    end
 end
