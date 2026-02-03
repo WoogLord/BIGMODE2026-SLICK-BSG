@@ -1,10 +1,10 @@
 function init()
     gameState = "mainmenu"
+    playState = ""
     inventoryHandler = false
     gfxScale = 4
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
-    moveSpeedDampener = 0.40
     globalSpriteTimer = 0
 
     INPUTS_ARR = {
@@ -15,11 +15,17 @@ function init()
         , inventory = "i"
     }
     player = {
-        currentAnimState = "Idle"
-        , isFlippedLeft = false
+        isFlippedLeft = false
+        , facing = "Right"
         , mapTileX = 0, mapTileY = 0
         , mapTrueX = 0, mapTrueY = 0
-        , speed = 10
+        , lastMapTileX = 0, lastMapTileY = 0 
+        , speed = 25
+        , items = {
+            hairGrowGel = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Beer.png")}
+        }
+        , hitbox = {w = 14, h = 14}
+        , isColliding = false
     }
     floater = {}
     
@@ -40,4 +46,22 @@ function init()
 
     -- music and sound
     volumeMaster = 0.5
+    musicClubTracks = {
+        -- mus_01_aye
+        -- mus_02_rave
+        -- mus_03_rave2
+        mus_04_funkyRave = love.audio.newSource("assets/music/Funky_Rave.mp3", "stream")
+        , mus_05_rave3_no_L = love.audio.newSource("assets/music/rave_3_no_L.mp3", "stream")
+    }
+    credits = 0 -- mus_06_rave3_w_L
+    
+    -- Inventory Object
+    InventoryBag = {{name = "Dooker", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"}}
+
+    -- Inventory variables
+    inventoryScale = 3
+    inventoryCellSize = 32 * inventoryScale
+    inventoryCols = 5
+    inventoryRows = 2
+
 end
