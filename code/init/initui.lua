@@ -1,5 +1,8 @@
 function initUI()
     selOptionMain = 1
+    selOptionInv = 1
+    selDialogOption = 1
+    currentDialogTreeId = 1
     menuOptionsMain = {"play", "volume", "quit"}
 
     mainMenuImage = love.graphics.newImage("assets/art/bgs/Intro title screen.png")
@@ -14,6 +17,5 @@ function initUI()
         , outline = love.graphics.newImage("assets/art/nineslices/nineslice_chatbox_outline.png")
     }   
 
-    selOptionInv = 1
-    inventory = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
+    
 end

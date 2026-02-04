@@ -11,6 +11,8 @@ function drawDebug()
     love.graphics.print("Current player.mapTrueX: "..player.mapTrueX..", player.mapTrueY: "..player.mapTrueY,0,100)
     love.graphics.print("Current player.isColliding: "..tostring(player.isColliding),0,120)
     love.graphics.print("Current interactingWith: "..tostring(interactingWith),0,140)
+    love.graphics.print("Current gothGirlConvoState: "..gothGirlConvoState,0,160)
+
 end
 
 -- Top level state handler
@@ -176,9 +178,18 @@ function drawConversation()
     else
         -- default portraitFrame
     end
+    
+    -- dialog text
+    love.graphics.printf(currentDialogTreeNode.npcText, 160, currWinDim.h * 2 / 3 + 50, 1500, "left", 0 , .8, .8)
 
-    -- love.graphics.draw(port_test_360, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)
-    -- love.graphics.draw(port_test_256, currWinDim.w * 1 / 24, currWinDim.h * 17 / 24, 0,portScale,portScale)
+    for i, option in ipairs(currentDialogTreeNode.responses) do
+        if i == selDialogOption then love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
+        else love.graphics.setColor(1, 1, 1)  -- Normal color
+        end
+        love.graphics.printf(option.text, 160, currWinDim.h * 2 / 3 + 200 + (i - 1) * 40, 1500, "left", 0 , .7, .7)
+    end
+
+
 end
 
 function drawInventory()

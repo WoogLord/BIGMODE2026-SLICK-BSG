@@ -26,7 +26,7 @@ function love.keypressed(key)
     -- ui -- play
     if gameState == "play" then
         if playState == "exploring" then
-            if inventoryHandler then
+            if inventoryHandler then --Inventory Logic
                 if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
                     selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
                 elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
@@ -37,10 +37,17 @@ function love.keypressed(key)
                     selOptionInv = math.max(selOptionInv + 1, 1)
                 elseif key == INPUTS_ARR.inventory then inventoryHandler = not inventoryHandler
                 end
-            elseif conversationState ~= "" then
+            elseif conversationState ~= "" then --Conversation logic
                 if key == INPUTS_ARR.pause then playState = "pause"
                 elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
-                    -- RICHARD: progress dialogue
+                    handleDialogSelection()
+                elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                    selDialogOption = math.min(selDialogOption + 1 , #currentDialogTreeNode.responses)
+                elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then
+                    selDialogOption = math.max(selDialogOption - 1 , 1)
+                elseif key == INPUTS_ARR.cancel then -- UPDATE LATER
+                    conversationState = ""
+                    currentDialogTreeNode = nil
                 end
             else
                 --pause toggle
