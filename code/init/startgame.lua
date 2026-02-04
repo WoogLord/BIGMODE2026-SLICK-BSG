@@ -8,6 +8,7 @@ function init()
     moveSpeed = 0
     globalSpriteTimer = 0
     updownFloating = 0
+    alphaTween = 0
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
@@ -48,11 +49,12 @@ function init()
 
     -- music and sound
     volumeMaster = 0.5
+    titleMusic = love.audio.newSource("assets/music/Title_theme_outside.mp3", "stream", true)
     musicClubTracks = {
-        -- mus_01_aye
+          mus_01_aye = love.audio.newSource("assets/music/Aye.mp3", "stream")
         -- mus_02_rave
         -- mus_03_rave2
-        mus_04_funkyRave = love.audio.newSource("assets/music/Funky_Rave.mp3", "stream")
+        , mus_04_funkyRave = love.audio.newSource("assets/music/Funky_Rave.mp3", "stream")
         , mus_05_rave3_no_L = love.audio.newSource("assets/music/rave_3_no_L.mp3", "stream")
     }
     credits = 0 -- mus_06_rave3_w_L

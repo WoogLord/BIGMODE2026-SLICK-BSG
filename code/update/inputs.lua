@@ -3,7 +3,7 @@ function love.keypressed(key)
     if key == INPUTS_ARR.fullscreen then allTheFullscreenChangeStuff() end
 
     -- ui -- mainMenu
-    if gameState == "mainmenu" then
+    if gameState == "mainmenu" and globalSpriteTimer > 5 then
         if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
             selOptionMain = math.min(selOptionMain + 1 , #menuOptionsMain)
         elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
