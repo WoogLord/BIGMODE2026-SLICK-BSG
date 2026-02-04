@@ -26,29 +26,27 @@ end
 -- Main menu
 
 function drawMainMenu()
-    love.graphics.setColor(1,1,1,1)
+    love.graphics.setColor(1,1,1,alphaTween)
     love.graphics.setFont(mainMenuFont)
-    love.graphics.print("this is the mainmenu 8=D")
-    
-    -- old button code
-    -- for i, button in pairs(buttonsMainMenu) do
-    --     drawButton(button)
-    -- end
 
-    for i, option in ipairs(menuOptionsMain) do
-        if i == selOptionMain then love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
-        else love.graphics.setColor(1, 1, 1)  -- Normal color
+    love.graphics.draw(mainMenuImage, 0, 0, 0, gfxScale, gfxScale)
+
+    if globalSpriteTimer > 5 then
+        for i, option in ipairs(menuOptionsMain) do
+            if i == selOptionMain then love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
+            else love.graphics.setColor(1, 1, 1)  -- Normal color
+            end
+            -- are things not centered?  check here lol, fix #option
+            love.graphics.print(option, currWinDim.w / 2 - (#option * 10), currWinDim.h / 2 + (i - 1) * 40)
+        end  
+
+        for j=1, 10, 1 do 
+            if math.floor(volumeMaster*10) == j then love.graphics.setColor(0, 0, 1) else love.graphics.setColor(1, 1, 1) end
+            love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + (j*12), currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
         end
-        -- are things not centered?  check here lol, fix #option
-        love.graphics.print(option, currWinDim.w / 2 - (#option * 10), currWinDim.h / 2 + (i - 1) * 40)
-    end  
-
-    for j=1, 10, 1 do 
-        if math.floor(volumeMaster*10) == j then love.graphics.setColor(0, 0, 1) else love.graphics.setColor(1, 1, 1) end
-        love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + (j*12), currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print(volumeMaster*10, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144, currWinDim.h / 2 + mainMenuFont:getHeight() + 6) 
     end
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print(volumeMaster*10, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144, currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
 end
 
 -- Play state handler and play drawing functions
