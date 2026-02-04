@@ -73,7 +73,7 @@ function init()
     credits = 0 -- mus_06_rave3_w_L
     
       -- Inventory Object
-    InventoryBag = {{name = "Dooker", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"},{name = "Hair Gel", image = love.graphics.newImage("assets/art/spritesheets/player-sheet.png"), description = "Makes hair goonable"}}
+    InventoryBag = {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil}
 
     -- Inventory variables
     inventoryScale = 3
@@ -81,10 +81,14 @@ function init()
     inventoryCols = 5
     inventoryRows = 2
 
+    -- CONVERSATION SECTION
+
+    gothGirlConvoState = 0
+
     -- Interactables RICHARD THESE CONTAIN DIALOGUES
     interactableHitbox = {w = 48, h = 48}
     interactables = {
-        {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH)}
+        {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}}
         , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
     }
 
@@ -151,7 +155,7 @@ function init()
         {id = "39b", npcText = "*Blushes* Thanks. You're kinda ugly but at least you're sweet", responses = {{text = "Ugly? You just mean my shirt right??", nextDialog = "41a"}}},
         {id = "41a", npcText = "No haha. You're short, fat, and you've got the hair of a 50 year old. You could use some work.", responses = {{text = "But I can make you smile. That's what counts.", nextDialog = "42a"}, {text = "I'm just trying to get you number and subsequently hit. Are you letting me or not?", nextDialog = "19a"}}},
         {id = "42a", npcText = "That's definitely part of it. I'll give you that.", responses = {{text = "How about I get your number and I can make you laugh over dinner?", nextDialog = "47b"}}},
-        {id = "19b", npcText = "Ok asshole. Just beacause I have purple hair, doesn't mean I like metal and fucking sorrow.", responses = {{text = "Ok, lets start over. How's your relationship with your dad?", nextDialog = "4b"}, {text = "Well... Do you like metal?", nextDialog = "43a"}}},
+        {id = "19b", npcText = "Ok asshole. Just beacause I have purple hair, doesn't mean I like metal and fucking sorrow.", responses = {{text = "Ok, lets start over. How's your relationship with your dad?", nextDialog = "4b"}, {text = "Well... Do you like metal?", nextDialog = "43b"}}},
         {id = "43b", npcText = "I do happen to like metal but its not because I'm goth. And no, I don't like sorrow.", responses = {{text = "See, We do have something in common.", nextDialog = "44a"}, {text = "Are you more of an aluminum fan or a copper fan?", nextDialog = "44b"}}},
         {id = "44a", npcText = "I guess you're right. I've been a bitch. Sorry.", responses = {{text = "Nah, you're good. We all get a little heated sometimes.", nextDialog = "45a"}, {text = "I mean... I wasn't going to say it....", nextDialog = "45b"}}},
         {id = "45a", npcText = "Thanks for being so chill.", responses = {{text = "I'm a chill guy and I'm looking for a pretty girl like you to hang with.", nextDialog = "8a"}, {text = "*shits pants* Thanks....", nextDialog = "46a"}}},
@@ -163,7 +167,7 @@ function init()
         {id = "44b", npcText = "Definitely copper. I value conductivity way too much.", responses = {{text = "Why would you want a fan to be conductive? It doesn't affect the airflow.", nextDialog = "49a"}, {text = "I think I'm in love.", nextDialog = "49b"}}},
         {id = "49a", npcText = "True but I use the electric field it creates to protect me from 5G wifi.", responses = {{text = "I carry this totem of Jakub around so the hyperboreans don't slaughter me when they return.", nextDialog = "50a"}, {text = "Understandable. Have a nice day", nextDialog = "failure"}}},
         {id = "50a", npcText = "Wow. You believe in hyperborea too! Do you want my number?", responses = {{text = "100%. What is it?", nextDialog = "51a"}, {text = "Nah, I rather just smash tonight and never see you again.", nextDialog = "51b"}}},
-        {id = "51a", npcText = "Well actually, I don't want anyone seeing me giving you my number. You look awful. Go get a jacket to cover that horrible shirt.", responses = {{text = "-->", nextDialog = "failure"}}, checkPoint = "1"}, --CHECKPOINT 1
+        {id = "51a", npcText = "Well actually, I don't want anyone seeing me giving you my number. You look awful. Go get a jacket to cover that horrible shirt.", responses = {{text = "-->", nextDialog = "failure"}}, checkPoint = "1"}, --CHECKPOINT Setter for 1
         {id = "51b", npcText = "And just like that, you fucked yourself", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "49b", npcText = "Woah. Calm down. Lets slow down. I'm Layla.", responses = {{text = "Pretty name for a pretty girl.", nextDialog = "8a"}, {text = "Yeah, I don't need your name, I just need your number. Yeah, I don't need your name, I just need your number. ", nextDialog = "8b"}}},
         {id = "52a", npcText = "You talk a big game but you look like ass.", responses = {{text = "At least I don't smell like ass.", nextDialog = "53a"}, {text = "I'll have you know I'm a hit with the ladies. I have loads of gal pals.", nextDialog = "36a"}}},
