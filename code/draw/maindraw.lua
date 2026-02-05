@@ -12,6 +12,11 @@ function drawDebug()
     love.graphics.print("Current player.isColliding: "..tostring(player.isColliding),0,120)
     love.graphics.print("Current interactingWith: "..tostring(interactingWith),0,140)
     love.graphics.print("Current gothGirlConvoState: "..gothGirlConvoState,0,160)
+    love.graphics.print(
+        tostring(interactables[1].portrait.anim.animations[1][1]),
+        0,
+        180
+    )
 
 end
 
@@ -167,8 +172,8 @@ function drawConversation()
         -- default chatbox
     end
 
-    if interactables[interactingWith].portrait then 
-        love.graphics.draw(interactables[interactingWith].portrait, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)    
+    if interactables[interactingWith].portrait.spriteSheet then 
+        love.graphics.draw(interactables[interactingWith].portrait.spriteSheet, currWinDim.w * 18 / 24, currWinDim.h *  31 / 48, 0,portScale,portScale)    
     else
         -- default portrait
     end
@@ -223,18 +228,31 @@ function drawConversation()
                 local padX, padY = 8, 4
                 local textW = math.min(font:getWidth(option.text), 1500) * scale
                 local textH = font:getHeight() * scale
+                local textLimit = px * 3 - padX * 2 + 50
 
                 -- background rectangle
-                if i == selDialogOption then love.graphics.setColor(0.6, 0.1, 0.1, 0.9)
-                else love.graphics.setColor(0, 0, 0, 0.6) end
-                love.graphics.rectangle("fill", px - padX, py - padY, px * 3, textH + padY * 2, 4, 4)
+                local fullWidth = font:getWidth(option.text) * scale
+                local lines = math.max(1, math.ceil(fullWidth / textLimit))
+                local rectH = textH * lines + padY * 2
+
+                love.graphics.setColor(0, 0, 0, 0.6)
+                love.graphics.rectangle("fill", px - padX, py - padY, px * 3, rectH, 4, 4)
+
+                -- rectangle outline if selected
+                if i == selDialogOption then
+                    love.graphics.setLineWidth(2)
+                    love.graphics.setColor(0.6, 0.1, 0.1, 0.9)
+                    love.graphics.rectangle("line", px - padX, py - padY, px * 3, rectH, 4, 4)
+                    love.graphics.setLineWidth(1)
+                end
 
                 -- text (override color)
                 if i == selDialogOption then love.graphics.setColor(1, 0, 0)
                 else love.graphics.setColor(1, 1, 1) end
-                love.graphics.printf(option.text, px, py, 1500, "left", 0, scale, scale)
+                
+                love.graphics.printf(option.text, px, py, textLimit, "left", 0, scale, scale)
 
-                --Enables the ability to use the select buttons again
+                -- Enables the ability to use the select buttons again
                 disableSelect = false
             end
         end

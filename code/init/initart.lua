@@ -50,8 +50,16 @@ function assignPortraits()
     }
 
     -- portraits
-    interactables[1].portrait = love.graphics.newImage("assets/art/portraits/360360.png")
+    interactables[1].portrait = {
+        spriteSheet = love.graphics.newImage("assets/art/portraits/360360.png"),
+        anim = portraitAnimationArray
+    }
 
+    interactables[1].portrait.anim:BuildAnimations(interactables[1].portrait.spriteSheet, 360)
+    interactables[1].portrait.anim.currAnimState = 1 -- This is the neutral emotion
+
+    
     -- portrait Frame
     interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/360360.png")
+    
 end
