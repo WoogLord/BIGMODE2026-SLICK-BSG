@@ -241,13 +241,13 @@ function drawConversation()
                 -- rectangle outline if selected
                 if i == selDialogOption then
                     love.graphics.setLineWidth(2)
-                    love.graphics.setColor(0.6, 0.1, 0.1, 0.9)
+                    love.graphics.setColor(139/255, 77/255, 188/255, 1)
                     love.graphics.rectangle("line", px - padX, py - padY, px * 3, rectH, 4, 4)
                     love.graphics.setLineWidth(1)
                 end
 
                 -- text (override color)
-                if i == selDialogOption then love.graphics.setColor(1, 0, 0)
+                if i == selDialogOption then love.graphics.setColor(139/255, 77/255, 188/255, 1)
                 else love.graphics.setColor(1, 1, 1) end
                 
                 love.graphics.printf(option.text, px, py, textLimit, "left", 0, scale, scale)
@@ -352,9 +352,9 @@ function drawPauseMenu()
 end
 
 function drawDefeat()
-
+    love.graphics.print("You are forever bitchless", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
 end
 
 function drawVictory()
-
+    love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
 end

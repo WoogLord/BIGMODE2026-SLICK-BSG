@@ -125,7 +125,13 @@ function handleDialogSelection()
     local selectedOption = currentDialogTreeNode.responses[selDialogOption]
     if selectedOption == nil then return end
 
-    if selectedOption.nextDialog == nil or selectedOption.nextDialog == "failure" then
+    if selectedOption.nextDialog == "failure" then
+        conversationState = ""
+        currentDialogTreeNode = 1
+        gameState = "defeat"
+    end
+
+    if selectedOption.nextDialog == nil or selectedOption.nextDialog == "reset" then
         conversationState = ""
         currentDialogTreeNode = 1
     end
