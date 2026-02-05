@@ -2,7 +2,7 @@ function assignSpriteSheets()
     -- player
     player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
     player.anim = playerAnimationArray
-    player.anim:BuildAnimations(player.spriteSheet)
+    player.anim:BuildAnimations(player.spriteSheet, tileWH)
     player.anim.currAnimState = 3
 
     -- everyone Else
@@ -15,7 +15,7 @@ function assignSpriteSheets()
 
     for i, interacts in pairs(interactables) do
         interacts.anim = everyoneElseAnimationArray
-        interacts.anim:BuildAnimations(interacts.spriteSheet)
+        interacts.anim:BuildAnimations(interacts.spriteSheet, tileWH)
         interacts.anim.currAnimState = 1
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
