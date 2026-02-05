@@ -179,14 +179,67 @@ function drawConversation()
         -- default portraitFrame
     end
     
-    -- dialog text
-    love.graphics.printf(currentDialogTreeNode.npcText, 160, currWinDim.h * 2 / 3 + 50, 1500, "left", 0 , .8, .8)
+    -- DIALOG TEXT
 
-    for i, option in ipairs(currentDialogTreeNode.responses) do
-        if i == selDialogOption then love.graphics.setColor(1, 0, 0)  -- Highlight selected option in red
-        else love.graphics.setColor(1, 1, 1)  -- Normal color
+    -- npc text section
+
+    -- Disables the ability to use the select buttons
+    disableSelect = true
+
+    -- Typewriter effect
+    if _G.__typewriteState == nil then
+        _G.__typewriteState = { lastText = "", startTime = love.timer.getTime(), speed = 45 } -- speed = chars/sec
+    end
+
+    local fullText = currentDialogTreeNode.npcText or ""
+
+    -- reset when dialog text changes
+    if _G.__typewriteState.lastText ~= fullText then
+        _G.__typewriteState.lastText = fullText
+        _G.__typewriteState.startTime = love.timer.getTime()
+    end
+
+    local elapsed = love.timer.getTime() - _G.__typewriteState.startTime
+    local charsToShow = math.floor(elapsed * _G.__typewriteState.speed)
+    if charsToShow < 0 then charsToShow = 0 end
+    if charsToShow > #fullText then charsToShow = #fullText end
+
+    local toShow = string.sub(fullText, 1, charsToShow)
+    love.graphics.printf(toShow, 160, currWinDim.h * 2 / 3 + 150, 1500, "left", 0, 1, 1)
+
+    -- Response logic
+    local delayAfterFinish = 0.4
+
+    if charsToShow >= #fullText then
+        if _G.__typewriteState.finishedTime == nil then
+            _G.__typewriteState.finishedTime = love.timer.getTime()
         end
-        love.graphics.printf(option.text, 160, currWinDim.h * 2 / 3 + 200 + (i - 1) * 40, 1500, "left", 0 , .7, .7)
+
+        if love.timer.getTime() - _G.__typewriteState.finishedTime >= delayAfterFinish then
+            for i, option in ipairs(currentDialogTreeNode.responses or {}) do
+                local px, py = currWinDim.w * 1 / 5, currWinDim.h * 1 / 3 + (i - 1) * 70
+                local font = love.graphics.getFont()
+                local scale = .9
+                local padX, padY = 8, 4
+                local textW = math.min(font:getWidth(option.text), 1500) * scale
+                local textH = font:getHeight() * scale
+
+                -- background rectangle
+                if i == selDialogOption then love.graphics.setColor(0.6, 0.1, 0.1, 0.9)
+                else love.graphics.setColor(0, 0, 0, 0.6) end
+                love.graphics.rectangle("fill", px - padX, py - padY, px * 3, textH + padY * 2, 4, 4)
+
+                -- text (override color)
+                if i == selDialogOption then love.graphics.setColor(1, 0, 0)
+                else love.graphics.setColor(1, 1, 1) end
+                love.graphics.printf(option.text, px, py, 1500, "left", 0, scale, scale)
+
+                --Enables the ability to use the select buttons again
+                disableSelect = false
+            end
+        end
+    else
+        _G.__typewriteState.finishedTime = nil
     end
 
 
