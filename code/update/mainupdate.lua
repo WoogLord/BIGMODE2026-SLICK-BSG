@@ -121,7 +121,7 @@ function handleConversation()
 end
 
 function handleDialogSelection()
-    if currentDialogTreeNode == nil then return end
+    if currentDialogTreeNode == nil or disableSelect == true then return end
     local selectedOption = currentDialogTreeNode.responses[selDialogOption]
     if selectedOption == nil then return end
 

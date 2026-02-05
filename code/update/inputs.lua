@@ -22,8 +22,8 @@ function love.keypressed(key)
         end
     end
     
-    
     -- ui -- play
+
     if gameState == "play" then
         if playState == "exploring" then
             if inventoryHandler then --Inventory Logic
@@ -39,7 +39,7 @@ function love.keypressed(key)
                 end
             elseif conversationState ~= "" then --Conversation logic
                 if key == INPUTS_ARR.pause then playState = "pause"
-                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then               
                     handleDialogSelection()
                 elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
                     selDialogOption = math.min(selDialogOption + 1 , #currentDialogTreeNode.responses)
