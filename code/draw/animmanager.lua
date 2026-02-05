@@ -53,7 +53,9 @@ playerAnimationArray = AnimClass:new(
         , false, false, false
     }
 )
-everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {1}, {{}}, {4}, {false}, {false})
+portraitAnimationArray = AnimClass:new({"IdleDown"}, {1}, {{}}, {4}, {false}, {false})
+
+everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 
 function animationManager(_dt)
     globalSpriteTimer = globalSpriteTimer + _dt
