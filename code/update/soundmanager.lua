@@ -5,6 +5,7 @@ end
 function musicManager(dt)
     local hg = player.inClub and 1 or 0.001 * 1.5
     if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} end
+    if currentAnnouncement then currentAnnouncement:setFilter{type = "lowpass", highgain = hg} end
 
     titleMusic:setVolume(volumeMaster)
 

@@ -14,11 +14,8 @@ function drawDebug()
     love.graphics.print("Current player.isColliding: " .. tostring(player.isColliding), 0, 120)
     love.graphics.print("Current interactingWith: " .. tostring(interactingWith), 0, 140)
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
-    love.graphics.print(
-        tostring(interactables[1].portrait.anim.animations[1][1]),
-        0,
-        180
-    )
+    love.graphics.print(tostring(interactables[1].portrait.anim.animations[1][1]), 0, 180)
+    love.graphics.print("In boss fight?"..tostring(isInBossFight), 0, 200)
 end
 
 -- Top level state handler
@@ -74,7 +71,11 @@ end
 
 function drawPlay()
     if playState == "exploring" then
-        drawExploring()
+        if isInBossFight then 
+            drawBossFight()
+        else
+            drawExploring()
+        end
     elseif playState == "pause" then
         drawExploring()
         drawPauseMenu()
@@ -172,7 +173,15 @@ function drawInteractables()
                 , interactableHitbox.w * gfxScale, interactableHitbox.h * gfxScale)
         end
         love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+        if _ == 4 or _ == 11 then
+            if contains(InventoryBag, "jacket", false) then
+                love.graphics.draw(interactables[11].spriteSheet, interactables[11].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+            else
+                love.graphics.draw(interactables[4].spriteSheet, interactables[4].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+            end
+        else
+            love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+        end
     end
 end
 
@@ -360,8 +369,12 @@ function drawInventory()
             local y = (currWinDim.h / 2) - (baseRecHeight / 2) + (yCalc - 1) * inventoryCellSize
             love.graphics.rectangle("fill", x, y, inventoryCellSize, inventoryCellSize)
             love.graphics.setColor(.212, .203, .154, 1) -- Set color highlighted item text
-            love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0, 1.5, 1.5)
-            love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0, 1.5, 1.5)
+            if option.name then
+                love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0, 1.5, 1.5)    
+            end
+            if option.description then
+                love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0, 1.5, 1.5)    
+            end
         end
     end
 
@@ -410,4 +423,8 @@ end
 
 function drawVictory()
     love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+end
+
+function drawBossFight()
+    love.graphics.draw(bossFightIntroMovie, 0, 0, 0, 1, 1)
 end

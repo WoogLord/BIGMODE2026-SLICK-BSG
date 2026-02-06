@@ -31,26 +31,32 @@ playerAnimationArray = AnimClass:new(
     {
         "IdleDown", "IdleUp", "IdleRight"
         , "WalkDown", "WalkUp", "WalkRight"
+        , "ItemGet"
     }
     , {
         4, 4, 4
         , 4, 4, 4
+        , 4
     }
     , {
         {}, {}, {}
         , {}, {}, {}
+        , {}
     }
     , {
         4, 4, 4
         , 4, 4, 4
+        , 4
     }
     , {
         false, false, false
         , false, false, false
+        , false
     }
     , {
         false, false, false
         , false, false, false
+        , false
     }
 )
 

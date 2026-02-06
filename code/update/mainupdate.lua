@@ -30,6 +30,8 @@ function gameManager()
 
     handleCollision()
     handleConversation()
+
+    if bossFightIntroMovie:isPlaying() then isInBossFight = true else isInBossFight = false end
 end
 
 function handleMainMenuButton(_buttonPressed)
@@ -320,4 +322,11 @@ function handleDialogSelection()
 
     currentDialogTreeId = selectedOption.nextDialog
     selDialogOption = 1
+end
+
+-- CUTSCENES/MOVIES AND BOSSFIGHT
+function bossFight()
+    if bossFightIntroMovie then
+        bossFightIntroMovie:play()
+    end
 end

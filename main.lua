@@ -20,6 +20,9 @@ local animsF require "code.draw.animmanager"
 local uiF require "code.draw.ui"
 
 function love.load()
+    love.window.setTitle("One Night Window")
+    icon = love.image.newImageData("assets/icon.png")
+    love.window.setIcon(icon)
     init()
     initUI()
     assignSpriteSheets()

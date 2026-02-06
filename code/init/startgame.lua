@@ -10,7 +10,7 @@ function init()
     updownFloating = 0
     alphaTween = 0
     introWindUpTime = 1
-
+    isInBossFight = false
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
@@ -18,6 +18,7 @@ function init()
         , jump = " "
         , select = {"return", "z", "e"}, cancel = "x"
         , inventory = "i"
+        , bossFightDebug = "b"
     }
     player = {
         isFlippedLeft = false
@@ -27,7 +28,13 @@ function init()
         , lastMapTileX = 0, lastMapTileY = 0 
         , speed = 25
         , items = {
-            hairGrowGel = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Beer.png")}
+            jacket = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png")}
+            , hair = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Pill bottles for hair.png")}
+            , shades = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/gurren lagan glasses.png")}
+            , abs = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Bowflex Sprite.png")}
+            , shoes = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Shoe sprite for one night.png")}
+            , pants = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Pants for one night.png")}
+            , mew = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Book of Mew.png")}
         }
         , hitbox = {w = 14, h = 14}
         , isColliding = false
@@ -99,8 +106,11 @@ function init()
     }
     credits = 0 -- mus_06_rave3_w_L
     
-      -- Inventory Object
-    InventoryBag = {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil}
+    -- Movies
+    bossFightIntroMovie = love.graphics.newVideo("assets/videos/mangaPanel_test.ogv")
+
+    -- Inventory Object
+    InventoryBag = {"jacket",nil,nil,nil,nil,nil,nil,nil,nil,nil}
 
     -- Inventory variables
     inventoryScale = 3
