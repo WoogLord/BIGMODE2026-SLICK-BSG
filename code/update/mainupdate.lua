@@ -1,3 +1,22 @@
+-- UTILITY FUNCTIONS
+
+-- Generic contains function: checks whether a table contains the given string.
+-- Usage: `local has = contains(InventoryBag, "Jacket", true)`
+-- third arg `caseInsensitive` is optional (default false)
+function contains(tbl, searchStr, caseInsensitive)
+    if not tbl or not searchStr then return false end
+    for _, v in ipairs(tbl) do
+        if type(v) == "string" and type(searchStr) == "string" then
+            if caseInsensitive then
+                if v:lower() == searchStr:lower() then return true end
+            else
+                if v == searchStr then return true end
+            end
+        end
+    end
+    return false
+end
+
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH), (player.mapTileY * tileWH)
     player.hitbox.x = currWinDim.w / 2 - (tileWH / 2) + (9 * gfxScale)
@@ -81,13 +100,17 @@ function startConversationWith(_interactableID)
     else 
         print(interactables[_interactableID].vanityName)
         conversationState = interactables[_interactableID].vanityName
-
+ 
         -- Goth girl section
         if conversationState == interactables[1].vanityName then
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                currentDialogTreeId = interactables[1].checkPoints[1]
+                if contains(InventoryBag, interactables[1].passingItems[1], true) then
+                    currentDialogTreeId = interactables[1].passPoints[1]
+                else
+                    currentDialogTreeId = interactables[1].checkPoints[1]
+                end
             end
         end
     end
@@ -127,17 +150,20 @@ function handleDialogSelection()
 
     if selectedOption.nextDialog == "failure" then
         conversationState = ""
-        currentDialogTreeNode = 1
+        currentDialogTreeNode = nil
         gameState = "defeat"
+        return
     end
 
     if selectedOption.nextDialog == nil or selectedOption.nextDialog == "reset" then
         conversationState = ""
-        currentDialogTreeNode = 1
+        currentDialogTreeNode = nil
+        return
     end
 
     if selectedOption.nextDialog == "success" then
         gothGirlConvoState = 2 --ending number
+        return
     end
 
     currentDialogTreeId = selectedOption.nextDialog

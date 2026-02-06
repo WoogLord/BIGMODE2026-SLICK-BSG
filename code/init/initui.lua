@@ -2,7 +2,7 @@ function initUI()
     selOptionMain = 1
     selOptionInv = 1
     selDialogOption = 1
-    currentDialogTreeId = 1
+    currentDialogTreeId = "1"
     menuOptionsMain = {"play", "volume", "quit"}
 
     mainMenuImage = love.graphics.newImage("assets/art/bgs/Intro title screen.png")
