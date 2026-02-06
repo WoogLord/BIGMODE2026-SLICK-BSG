@@ -17,19 +17,6 @@ function contains(tbl, searchStr, caseInsensitive)
     return false
 end
 
--- Emotion portrait selector
-function emotionPortraitSelector(_emotionStr)
-    if _emotionStr == "failure" then
-        return 2
-    elseif _emotionStr == "reset" then
-        return 3
-    elseif _emotionStr == "success" then
-        return 4
-    else
-        return 1 -- default to neutral
-    end
-end
-
 
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH), (player.mapTileY * tileWH)
@@ -197,9 +184,8 @@ function handleConversation()
     elseif conversationState == interactables[1].vanityName then
         currentDialogTreeNode = findDialogNode(gothGirlTree, currentDialogTreeId)
 
-        -- set portrait animation based on dialogue emotion
-        local emotion = currentDialogTreeNode.responses[1].nextDialog
-        interactables[1].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+        -- set portrait animation based on npcEmotion
+        interactables[1].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             gothGirlConvoState = currentDialogTreeNode.checkPoint
@@ -209,12 +195,21 @@ function handleConversation()
     elseif conversationState == interactables[2].vanityName then
         currentDialogTreeNode = findDialogNode(sororityGirlTree, currentDialogTreeId)
 
-        -- set portrait animation based on dialogue emotion
-        local emotion = currentDialogTreeNode.responses[1].nextDialog
-        interactables[2].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+        -- set portrait animation based on npcEmotion
+        interactables[2].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             sororityGirlConvoState = currentDialogTreeNode.checkPoint
+        end
+        --Influancer girl section
+    elseif conversationState == interactables[3].vanityName then
+        currentDialogTreeNode = findDialogNode(influencerGirlTree, currentDialogTreeId)
+
+        -- set portrait animation based on npcEmotion
+        interactables[3].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            influencerGirlConvoState = currentDialogTreeNode.checkPoint
         end
     end
 end
