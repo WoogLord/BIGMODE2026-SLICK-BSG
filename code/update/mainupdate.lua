@@ -17,6 +17,11 @@ function contains(tbl, searchStr, caseInsensitive)
     return false
 end
 
+--Random number generator
+function randomNumber(max)
+    return love.math.random(1, max)
+end
+
 
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH), (player.mapTileY * tileWH)
@@ -115,6 +120,7 @@ function startConversationWith(_interactableID)
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
+                jacketGuyConvoState = 1
                 if contains(InventoryBag, interactables[1].passingItems[1], true) then
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
@@ -126,6 +132,7 @@ function startConversationWith(_interactableID)
             if sororityGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif sororityGirlConvoState == 1 then
+                hairGuyConvoState = 1
                 if contains(InventoryBag, interactables[2].passingItems[1], true) then
                     currentDialogTreeId = interactables[2].passPoints[1]
                 else
@@ -167,6 +174,72 @@ function startConversationWith(_interactableID)
                     currentDialogTreeId = interactables[3].checkPoints[3]
                 end
             end
+        elseif conversationState == interactables[4].vanityName then
+            --NEEDS TO BE TESTED
+            if jacketGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif jacketGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif jacketGuyConvoState == 2 then
+                --logic to swap to no jacket guy
+            end
+        elseif conversationState == interactables[5].vanityName then
+            --NEEDS TO BE TESTED
+            if hairGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif hairGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif hairGuyConvoState == 2 then
+                currentDialogTreeId = "6"
+            end
+        elseif conversationState == interactables[6].vanityName then
+            --NEEDS TO BE TESTED
+            if shadesGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shadesGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shadesGuyConvoState == 2 then
+                currentDialogTreeId = "6"
+            end
+        elseif conversationState == interactables[7].vanityName then
+            --NEEDS TO BE TESTED
+            if absGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif absGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif absGuyConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[8].vanityName then
+            --NEEDS TO BE TESTED
+            if shoesGirlConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shoesGirlConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shoesGirlConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[9].vanityName then
+            --NEEDS TO BE TESTED
+            if shortsGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shortsGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shortsGuyConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[10].vanityName then
+            --NEEDS TO BE TESTED
+            if mewGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(4).tostring()
+            elseif mewGuyConvoState == 1 then
+                currentDialogTreeId = "5"
+            elseif mewGuyConvoState == 2 then
+                currentDialogTreeId = "9"
+            end
+        elseif conversationState == interactables[11].vanityName then
+            --NEEDS TO BE TESTED
+            currentDialogTreeId = "1" 
         end
     end
 end

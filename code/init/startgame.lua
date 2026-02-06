@@ -124,6 +124,15 @@ function init()
     sororityGirlConvoState = 0
     influencerGirlConvoState = 0
 
+    jacketGuyConvoState = 0
+    hairGuyConvoState = 0
+    shadesGuyConvoState = 0
+    absGuyConvoState = 0
+    shoesGirlConvoState = 0
+    shortsGuyConvoState = 0
+    mewGuyConvoState = 0
+    jacketGuyNOJacketConvoState = 0
+
     -- Interactables
     interactableHitbox = {w = 48, h = 48}
     interactables = {
@@ -228,8 +237,94 @@ function init()
         {id = "1c2b", npcEmotion = 3, npcText = "You're pushing your luck. Take my number and go before I change my mind.", responses = {{text = "-->", nextDialog = "success"}}},
     }
 
-    sororityGirlTree = {}
+    sororityGirlTree = {
+                {id = "1", npcText = " Wow, you fixed your hair. You don't look like you're 50 anymore.", npcEmotion = 1, responses = {{text = "That's too bad, I bet you're into older men.", nextDialog = " "}, {text = "I'm actually 24 and very good looking.", nextDialog = ""}}},
+                {id = "2", npcText = "Only if they have a lot of money.", npcEmotion = 1, responses = {{text = "I'm pretty loaded. I can show you a good time.", nextDialog = ""}, {text = "I've got 10 billion Elon shit coins if that counts.", nextDialog = ""}}},
+                {id = "3", npcText = " Oh yeah?? Why don't you show me and the girls. *multiple silhouettes of girls fade in *", npcEmotion = 1, responses = {{text = "I'm more of a minimalist. Less is more, you know.", nextDialog = ""}, {text = "Slide 1 Bet. *opens wallet* Slide 2 *you open your wallet and a small moth flies out. You see you have a singel 10 dollar bill* Heh............. Do one of you want a shot?", nextDialog = ""}, {text = "", nextDialog = ""}}},
+                {id = "4", npcText = " Less is more? I bet that's what you tell yourself whenever your pants are off.", npcEmotion = 1, responses = {{text = "Maybe I do. Sometimes you've got to let things breath.", nextDialog = ""}, {text = "Hey, hey. Three inches is average..... Some say maybe even a little big.", nextDialog = ""}}},
+                {id = "5", npcText = " I wish you'd breath less around me. You're ugly face is scaring my sisters. Go stick a bag on your head.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 1},
+                {id = "6", npcText = "Not for me. Bye.  ", npcEmotion = 3, responses = {{text = "-->", nextDialog = "reset"}}},
+                {id = "7", npcText = " Sounds great!  *she takes your $10 and gives it to her friend to make a run to the bar.*  Go touch grass.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+                {id = "8", npcText = "And how much is that worth?", npcEmotion = 1, responses = {{text = "About 4,424,297.84 Zimbabwe dollars.", nextDialog = ""}, {text = "It could get you like 3 or 4 drinks at the bar.", nextDialog = ""}}},
+                {id = "9", npcText = "How about you take all that money a get some sunglasses to hide that ugly face.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "reset"}}},
+                {id = "10", npcText = "Ha you look waaaaay older. Just not quite 50. A solid 45.  Why are you even talking to me? I'm trying to hang out with my sisters.", npcEmotion = 1, responses = {{text = "I knew you were in a sorority. You look like every other bitch here.", nextDialog = ""}, {text = "What sorority are you in?", nextDialog = ""}}},
+                {id = "11", npcText = "Slide 1: *multiple girls come into frame with only slight variations of their appearance* Slide 2 We all look nothing alike. *they say in unison. * Slide 3 Get out of here. You're Scaring away the good looking guys!", npcEmotion = 2, responses = {{text = "-->", nextDialog = "reset"}}},
+                {id = "12", npcText = "Take a guess!", npcEmotion = 1, responses = {{text = "Tau Iota Tau?", nextDialog = ""}, {text = "Delta Iota Kappa?", nextDialog = ""}, {text = "Sigma Beta?", nextDialog = ""}}},
+                {id = "13", npcText = "They're huge but no. We're smaller.", npcEmotion = 1, responses = {{text = "I give up. They seem all the same", nextDialog = ""}, {text = "You've got me stumped. Which one?", nextDialog = ""}}},
+                {id = "14", npcText = "No, but I really love that one.", npcEmotion = 1, responses = {{text = "I give up. They seem all the same", nextDialog = ""}, {text = "You've got me stumped. Which one?", nextDialog = ""}}},
+                {id = "15", npcText = "That's not true at all. We pay good money to have these friends. ", npcEmotion = 1, responses = {{text = "Yeah.... So you just pay for friends and that's it?", nextDialog = ""}}},
+                {id = "16", npcText = "*starts lightly sweating* Well uh.... no... We do charity too.", npcEmotion = 3, responses ={{text = "-->", nextDialog = "reset"}}},
+                {id ="17",npcText=" Sigma Beta! The sorority with the hottest girls and the wealthiest dads.",npcEmotion= 1,responses={{text=" I'm more interested in the dads now.", nextDialog=""},{text=" You guys are super hot. Give me your number and I can come to a function.", nextDialog=""}}},
+                {id ="18",npcText=" What the fuck. Get out of here. ", npcEmotion=2, responses={{text = "-->", nextDialog = "reset"}}},
+                {id ="19",npcText=" Ewww no. I wouldn't be caught dead giving my number to someone with that face.",npcEmotion=3,responses={{text="Hypothetically, if I were to fix it, would you give me your number?",nextDialog=""},{text="Oof. Its not like I can fix my face.",nextDialog=""}}},
+                {id ="20",npcText="With a body like that,? No way. You're way too fat. ",npcEmotion=1,responses={{text = "-->", nextDialog = "reset"}}, checkPoint = 1}, -- Checkpoint 1
+                {id ="21",npcText="True, but not my problem. Bye!",npcEmotion=1,responses={{text = "-->", nextDialog = "reset"}}, checkPoint = 1}, -- Checkpoint 1
+                {id ="22",npcText="Wow yes! I'm surprised you got it!  You're not half bad. If you had some sunglasses to cover that face I might give you my number. Slide 2 Sigma Beta see ya later!",npcEmotion=1,responses={{text = "-->", nextDialog = "reset"}}, checkPoint = 1},
+                {id ="23",npcText="*multiple girls come into frame with only slight variations of their appearance*",npcEmotion=1,responses={{text="-->",nextDialog="24"}}},
+                {id ="24",npcText="We all look nothing alike. *they say in unison.* ",npcEmotion=1 ,responses={{text="-->",nextDialog="25"}}},
+                {id ="25" ,npcText="Get out of here.You're Scaring away the good looking guys!" ,npcEmotion=2,responses={{text="-->",nextDialog="failure"}}}
+    }
 
-    influencerGirlTree = {}
+    influencerGirlTree = {}   
+    
+    jacketGuyTree = {
+        {id = "1", npcText = "You like the jacket bro? It's genuine Armadillo leather.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Chicks dig a guy bomber jacket.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "Not going to lie, its getting a little hot in here", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "Hey loser, your shirt looks like a piece of crap.", npcEmotion = 1, responses = {{text = "*you reach out and rip the jacket off his back*", nextDialog = "5"}}},
+        {id = "5", npcText = "Erm….. I guess you can have it. You’re probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+    }     
+    hairGuyTree = {
+        {id = "1", npcText = "Where are all the little mamas at?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "*You like the hair? Its thick, just how I like my women.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "No smoking, fire hazard over here.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "As a man with great hair I have a duty to help a brother in need.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "5"}}},
+        {id = "5", npcText = "Take this finasteride. It’ll turn your norwood 7 into a hollywood 10.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "6", npcText = "Nice locks my man.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }     
+    shadesGuyTree = {
+        {id = "1", npcText = "Want to buy some deathsticks?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Beat it kid. You’re scarring the huzz.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "There are two wolves inside all of us", npcEmotion = 1, responses = {{text = "One is gay", nextDialog = "reset"}, {text = "And the other is also gay", nextDialog = "reset"}}},
+        {id = "4", npcText = "If you’re trying to get some girls tonight I suggest you put on some shades", npcEmotion = 1, responses = {{text = "-->", nextDialog = "5"}}},
+        {id = "5", npcText = "Here, I have a spare pair. Girls love a dude with some mystery.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "6", npcText = "It may be hard to see, but you’ll look cool if you trip.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
+    absGuyTree = {
+        {id = "1", npcText = "Clear liquor only, I’m cutting right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "I heard if you bring 10 girls in, you get free drinks all night.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "I started body building for the ladies but I just end up staring at other dudes all day.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "What do you weigh, like 300 pounds? You need to hit the gym. Take this dumbbell and start pumping iron right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "5", npcText = "Damn dude, the cut went crazy. Like the physique ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
+    shoesGirlTree = {
+        {id = "1", npcText = "This song is fucking bop.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Do you like my outfit?? My shoes even match.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "Vip section? Nah I’m good. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "You look like you need a shoe game upgrade. Take these, it would totally go with your outfit", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "You look halfway decent now. Maybe some girls will pay attention to you now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
+    shortsGuyTree = {
+        {id = "1", npcText = "Not yet… Not yet…. *is pissing self*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Have you seen that goth baddie in the corner? I wish I could talk to her.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "Did you know piss is stored in the balls?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "Bro, did you shit your shorts??? They look fucking awful. Take these pants and get away from me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "At least you don’t smell like ass anymore….", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
+    mewGuyTree = {
+        {id = "1", npcText = "You don't get this beautiful by having a door slammed in your face.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Hmmm…. You have the most negative canthal tilt I’ve ever seen.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "Sorry, no time to chat. I’m jaw sculpting right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "Maybe I should try bone smashing….", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "5", npcText = "Wow you’re a sorry sight. I sensed you failed to rizz up that girl in the VIP section. I feel kinda bad…..", npcEmotion = 1, responses = {{text = "-->", nextDialog = "6"}}},
+        {id = "6", npcText = "For you right now. I’m mogging you that hard.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7"}}},
+        {id = "7", npcText = "Here take this. Its the looksmaxer’s holy book, The Book Of Mew.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "8"}}},
+        {id = "8", npcText = "Read it and you too will learn the way of the chad. *mews harder than you thought possible. *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "9", npcText = "Looking good. I bet the ladies are all over you now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "10"}}},
+        {id = "10", npcText = "Look at us, just a couple of chads on a night out. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
+    jacketGuyNOJacketTree = {
+        {id = "1", npcText = "N-n-nice jacket dude….", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+    }
 
 end
