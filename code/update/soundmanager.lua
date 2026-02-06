@@ -1,6 +1,5 @@
 function soundManager()
     musicManager()
-    sfxManager()
 end
 
 function musicManager()
@@ -37,6 +36,11 @@ function pickRandomTrack()
     return track
 end
 
-function sfxManager()
-    
+function sfxManager(_sfxToPlay, _inClubNeeded)
+    local hg = player.inClub and 1 or 0.001
+    if _inClubNeeded then _sfxToPlay:setFilter{type = "lowpass", highgain = hg}
+    else _sfxToPlay:setFilter{type = "lowpass", highgain = 1}
+    end
+    _sfxToPlay:setVolume(volumeMaster)
+    _sfxToPlay:play()
 end

@@ -10,7 +10,7 @@ function assignSpriteSheets()
     }
 
     -- everyone Else
-    interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
+    interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security-Sheet.png")
     interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
     interactables[3].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Influencer sprite-Sheet.png")
 
