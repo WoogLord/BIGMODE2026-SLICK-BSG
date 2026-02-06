@@ -85,8 +85,9 @@ function init()
     -- CONVERSATION SECTION
 
     gothGirlConvoState = 0
+    sororityGirlConvoState = 0
 
-    -- Interactables RICHARD THESE CONTAIN DIALOGUES
+    -- Interactables
     interactableHitbox = {w = 48, h = 48}
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}}
@@ -179,4 +180,7 @@ function init()
         {id = "1c2a", npcText = "Here! Give me a call sometime. I think I've had enough clubbing for one night.", responses = {{text = "-->", nextDialog = "success"}}},
         {id = "1c2b", npcText = "You're pushing your luck. Take my number and go before I change my mind.", responses = {{text = "-->", nextDialog = "success"}}},
     }
+
+    sororityGirlTree = {}
+
 end
