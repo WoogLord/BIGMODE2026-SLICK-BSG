@@ -351,14 +351,14 @@ function init()
         {id = "2", npcText = "Chicks dig a guy bomber jacket.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "Not going to lie, its getting a little hot in here", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "4", npcText = "Hey loser, your shirt looks like a piece of crap.", npcEmotion = 1, responses = {{text = "*you reach out and rip the jacket off his back*", nextDialog = "5"}}},
-        {id = "5", npcText = "Erm….. I guess you can have it. You’re probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "Erm….. I guess you can have it. You’re probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
     }     
     hairGuyTree = {
         {id = "1", npcText = "Where are all the little mamas at?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "*You like the hair? Its thick, just how I like my women.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "No smoking, fire hazard over here.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "4", npcText = "As a man with great hair I have a duty to help a brother in need.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "5"}}},
-        {id = "5", npcText = "Take this finasteride. It’ll turn your norwood 7 into a hollywood 10.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "Take this finasteride. It’ll turn your norwood 7 into a hollywood 10.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "6", npcText = "Nice locks my man.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }     
     shadesGuyTree = {
@@ -366,28 +366,28 @@ function init()
         {id = "2", npcText = "Beat it kid. You’re scarring the huzz.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "There are two wolves inside all of us", npcEmotion = 1, responses = {{text = "One is gay", nextDialog = "reset"}, {text = "And the other is also gay", nextDialog = "reset"}}},
         {id = "4", npcText = "If you’re trying to get some girls tonight I suggest you put on some shades", npcEmotion = 1, responses = {{text = "-->", nextDialog = "5"}}},
-        {id = "5", npcText = "Here, I have a spare pair. Girls love a dude with some mystery.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "Here, I have a spare pair. Girls love a dude with some mystery.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "6", npcText = "It may be hard to see, but you’ll look cool if you trip.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
     absGuyTree = {
         {id = "1", npcText = "Clear liquor only, I’m cutting right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "I heard if you bring 10 girls in, you get free drinks all night.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "I started body building for the ladies but I just end up staring at other dudes all day.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "4", npcText = "What do you weigh, like 300 pounds? You need to hit the gym. Take this dumbbell and start pumping iron right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "4", npcText = "What do you weigh, like 300 pounds? You need to hit the gym. Take this dumbbell and start pumping iron right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2    
         {id = "5", npcText = "Damn dude, the cut went crazy. Like the physique ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
     shoesGirlTree = {
         {id = "1", npcText = "This song is fucking bop.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "Do you like my outfit?? My shoes even match.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "Vip section? Nah I’m good. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "4", npcText = "You look like you need a shoe game upgrade. Take these, it would totally go with your outfit", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "4", npcText = "You look like you need a shoe game upgrade. Take these, it would totally go with your outfit", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "5", npcText = "You look halfway decent now. Maybe some girls will pay attention to you now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
     shortsGuyTree = {
         {id = "1", npcText = "Not yet… Not yet…. *is pissing self*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "Have you seen that goth baddie in the corner? I wish I could talk to her.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "Did you know piss is stored in the balls?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "4", npcText = "Bro, did you shit your shorts??? They look fucking awful. Take these pants and get away from me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "4", npcText = "Bro, did you shit your shorts??? They look fucking awful. Take these pants and get away from me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "5", npcText = "At least you don’t smell like ass anymore….", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
     mewGuyTree = {
@@ -398,7 +398,7 @@ function init()
         {id = "5", npcText = "Wow you’re a sorry sight. I sensed you failed to rizz up that girl in the VIP section. I feel kinda bad…..", npcEmotion = 1, responses = {{text = "-->", nextDialog = "6"}}},
         {id = "6", npcText = "For you right now. I’m mogging you that hard.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7"}}},
         {id = "7", npcText = "Here take this. Its the looksmaxer’s holy book, The Book Of Mew.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "8"}}},
-        {id = "8", npcText = "Read it and you too will learn the way of the chad. *mews harder than you thought possible. *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "8", npcText = "Read it and you too will learn the way of the chad. *mews harder than you thought possible. *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "9", npcText = "Looking good. I bet the ladies are all over you now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "10"}}},
         {id = "10", npcText = "Look at us, just a couple of chads on a night out. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
