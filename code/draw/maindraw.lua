@@ -19,11 +19,6 @@ function drawDebug()
         0,
         180
     )
-    love.graphics.print(
-        "currentDialogTreeNode ID: " .. tostring(currentDialogTreeNode),
-        0,
-        200
-    )
 end
 
 -- Top level state handler
@@ -245,7 +240,7 @@ function drawConversation()
     if charsToShow > #fullText then charsToShow = #fullText end
 
     local toShow = string.sub(fullText, 1, charsToShow)
-    love.graphics.printf(toShow, 160, currWinDim.h * 2 / 3 + 150, 1300, "left", 0, 1, 1)
+    love.graphics.printf(toShow, 160, currWinDim.h * 2 / 3 + 150, 1250, "left", 0, 1, 1)
 
     -- Response logic
     local delayAfterFinish = 0.4
@@ -291,9 +286,10 @@ function drawConversation()
                     love.graphics.setColor(1, 1, 1)
                 end
                 
-                love.graphics.printf(option.text, px, py, textLimit, "left", 0, scale, scale)
+                -- The +150 is a patch, not the best long term fix, but it prevents text from going outside of the chatbox when the text is long and wraps around. The textLimit variable is used to determine when to add line height to the next response option, but the actual limit for the text is a little higher than that to give it some padding on the right side of the chatbox.
+                love.graphics.printf(option.text, px, py, textLimit + 100, "left", 0, scale, scale)
 
-                 --Sets bump counter for subsequent dialog options if the current one is multi-line
+                -- Adds line height if text wraps
                 if getTextWidth > textLimit then
                     textHAdder = textHAdder + (textH / 2)
                 end

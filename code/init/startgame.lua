@@ -111,6 +111,7 @@ function init()
 
     gothGirlConvoState = 0
     sororityGirlConvoState = 0
+    influencerGirlConvoState = 0
 
     -- Interactables
     interactableHitbox = {w = 48, h = 48}
@@ -201,11 +202,11 @@ function init()
         {id = "45b", npcEmotion = 4, npcText = "HaHa. You're kinda funny.", responses = {{text = "I was being serious. You're a bitch.", nextDialog = "47a"}, {text = "Funny enough to get your number?", nextDialog = "47b"}}},
         {id = "47a", npcEmotion = 1, npcText = "Go be dick somewhere else then.", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "47b", npcEmotion = 1, npcText = "Ok, that was kinda slick. You're not getting my number yet though.", responses = {{text = "What will it take to get it?", nextDialog = "48a"}, {text = "Its because of my ugly ass shirt isn't it. ", nextDialog = "48a"}}},   
-        {id = "48a", npcEmotion = 3, npcText = "That shirt is gross. Get a jacket or something to cover it up. I cant been seen giving my number to someone looking like that.", responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = "1"}, --CHECKPOINT 1
+        {id = "48a", npcEmotion = 3, npcText = "That shirt is gross. Get a jacket or something to cover it up. I cant been seen giving my number to someone looking like that.", responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 1}, --CHECKPOINT 1
         {id = "44b", npcEmotion = 1, npcText = "Definitely copper. I value conductivity way too much.", responses = {{text = "Why would you want a fan to be conductive? It doesn't affect the airflow.", nextDialog = "49a"}, {text = "I think I'm in love.", nextDialog = "49b"}}},
         {id = "49a", npcEmotion = 1, npcText = "True but I use the electric field it creates to protect me from 5G wifi.", responses = {{text = "I carry this totem of Jakub around so the hyperboreans don't slaughter me when they return.", nextDialog = "50a"}, {text = "Understandable. Have a nice day", nextDialog = "failure"}}},
         {id = "50a", npcEmotion = 4, npcText = "Wow. You believe in hyperborea too! Do you want my number?", responses = {{text = "100%. What is it?", nextDialog = "51a"}, {text = "Nah, I rather just smash tonight and never see you again.", nextDialog = "51b"}}},
-        {id = "51a", npcEmotion = 1, npcText = "Well actually, I don't want anyone seeing me giving you my number. You look awful. Go get a jacket to cover that horrible shirt.", responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = "1"}, --CHECKPOINT Setter for 1
+        {id = "51a", npcEmotion = 1, npcText = "Well actually, I don't want anyone seeing me giving you my number. You look awful. Go get a jacket to cover that horrible shirt.", responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = 1}, --CHECKPOINT Setter for 1
         {id = "51b", npcEmotion = 2, npcText = "And just like that, you fucked yourself", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "49b", npcEmotion = 4, npcText = "Woah. Calm down. Lets slow down. I'm Layla.", responses = {{text = "Pretty name for a pretty girl.", nextDialog = "8a"}, {text = "Yeah, I don't need your name, I just need your number. ", nextDialog = "8b"}}},
         {id = "52a", npcEmotion = 3, npcText = "You talk a big game but you look like ass.", responses = {{text = "At least I don't smell like ass.", nextDialog = "53a"}, {text = "I'll have you know I'm a hit with the ladies. I have loads of gal pals.", nextDialog = "36a"}}},
@@ -217,5 +218,7 @@ function init()
     }
 
     sororityGirlTree = {}
+
+    influencerGirlTree = {}
 
 end
