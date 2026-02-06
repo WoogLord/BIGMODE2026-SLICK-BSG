@@ -11,6 +11,7 @@ function init()
     alphaTween = 0
     introWindUpTime = 1
     isInBossFight = false
+    defeatScreen = love.graphics.newImage("assets/art/ui/defeat.png")
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"

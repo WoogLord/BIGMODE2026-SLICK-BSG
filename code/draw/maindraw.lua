@@ -418,7 +418,11 @@ function drawPauseMenu()
 end
 
 function drawDefeat()
-    love.graphics.print("You are forever bitchless", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.draw(defeatScreen,0,0,0,gfxScale,gfxScale)
+    love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
+    love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1)
+    love.graphics.print("You are forever bitchless", (currWinDim.w / 2) - #("You are forever bitchless"), currWinDim.h / 3, 0, 2, 2)
 end
 
 function drawVictory()
