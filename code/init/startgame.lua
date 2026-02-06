@@ -11,6 +11,7 @@ function init()
     alphaTween = 0
     introWindUpTime = 1
 
+
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
@@ -21,7 +22,7 @@ function init()
     player = {
         isFlippedLeft = false
         , facing = "Right"
-        , mapTileX = 0, mapTileY = 0
+        , mapTileX = 1, mapTileY = 15.5
         , mapTrueX = 0, mapTrueY = 0
         , lastMapTileX = 0, lastMapTileY = 0 
         , speed = 25
@@ -117,7 +118,7 @@ function init()
     interactableHitbox = {w = 48, h = 48}
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (9 * tileWH), mapTrueY = (13 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}, tileH = 32, tileW = 32}
-        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (23 * tileWH), mapTrueY = (19 * tileWH), tileH = 32, tileW = 32}
+        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (19 * tileWH), mapTrueY = (18 * tileWH), tileH = 32, tileW = 32}
         , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (28 * tileWH), mapTrueY = (22 * tileWH), tileH = 32, tileW = 32}
         , {id = 4, name = "jacketGuy", vanityName = "Axel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         , {id = 5, name = "hairGuy", vanityName = "Monoxydillian", mapTrueX = (12 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}
@@ -128,7 +129,7 @@ function init()
         , {id = 10, name = "mewGuy", vanityName = "Yakub", mapTrueX = (7 * tileWH), mapTrueY = (4 * tileWH), tileH = 32, tileW = 32}
         , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         -- bonus fellas
-        , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
+        , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25.5 * tileWH), tileH = 32, tileW = 32}
     }
 
     -- Conversation Trees
