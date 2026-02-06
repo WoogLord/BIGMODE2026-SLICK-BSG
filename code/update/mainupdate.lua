@@ -301,6 +301,7 @@ function handleDialogSelection()
     if selectedOption == nil then return end
 
     if selectedOption.nextDialog == "failure" then
+        defeatTimer = 0
         conversationState = ""
         currentDialogTreeNode = nil
         gameState = "defeat"
