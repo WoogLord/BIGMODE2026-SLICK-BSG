@@ -20,6 +20,9 @@ local animsF require "code.draw.animmanager"
 local uiF require "code.draw.ui"
 
 function love.load()
+    love.window.setTitle("One Night Window")
+    icon = love.image.newImageData("assets/icon.png")
+    love.window.setIcon(icon)
     init()
     initUI()
     assignSpriteSheets()
@@ -29,12 +32,15 @@ end
 
 function love.update(dt)
     love.timer.sleep(1/60)
+    defeatTimer = defeatTimer + dt
+    bossFightTimer = bossFightTimer + dt
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
+    defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
     gameManager()    
     speedManager(dt)
     doFloaters()
     animationManager(dt)
-    soundManager()
+    soundManager(dt)
     playerControls()
 end
 

@@ -14,16 +14,8 @@ function drawDebug()
     love.graphics.print("Current player.isColliding: " .. tostring(player.isColliding), 0, 120)
     love.graphics.print("Current interactingWith: " .. tostring(interactingWith), 0, 140)
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
-    love.graphics.print(
-        tostring(interactables[1].portrait.anim.animations[1][1]),
-        0,
-        180
-    )
-    love.graphics.print(
-        "currentDialogTreeNode ID: " .. tostring(currentDialogTreeNode),
-        0,
-        200
-    )
+    love.graphics.print(tostring(interactables[1].portrait.anim.animations[1][1]), 0, 180)
+    love.graphics.print("In boss fight?"..tostring(isInBossFight), 0, 200)
 end
 
 -- Top level state handler
@@ -79,7 +71,11 @@ end
 
 function drawPlay()
     if playState == "exploring" then
-        drawExploring()
+        if isInBossFight then 
+            drawBossFight()
+        else
+            drawExploring()
+        end
     elseif playState == "pause" then
         drawExploring()
         drawPauseMenu()
@@ -94,13 +90,27 @@ function drawExploring()
     drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
 
     -- terrain + scenery
-    love.graphics.draw(bg_01_nightclub
-    , drawnMapOffsetX, drawnMapOffsetY
-    , 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_floor_tiles, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_WALLS, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_DJ_Stairs, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_DJ_Stage, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Top, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Mid, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Bot, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Characters_01, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Characters_02, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Furniture, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_BathroomShadow, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Items_01_Props, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_BIGGIE, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+
+    love.graphics.setColor(1, 1, 1, 0.45)
+    love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.setColor(1, 1, 1, 1)
 
     if isDebug then
         love.graphics.setColor(1, 1, 1, 0.5)
-        love.graphics.draw(bg_01_collision
+        love.graphics.draw(currentCollisionDraw
         , drawnMapOffsetX, drawnMapOffsetY
         , 0, gfxScale, gfxScale)
     end
@@ -163,7 +173,15 @@ function drawInteractables()
                 , interactableHitbox.w * gfxScale, interactableHitbox.h * gfxScale)
         end
         love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+        if _ == 4 or _ == 11 then
+            if contains(InventoryBag, "jacket", false) then
+                love.graphics.draw(interactables[11].spriteSheet, interactables[11].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+            else
+                love.graphics.draw(interactables[4].spriteSheet, interactables[4].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+            end
+        else
+            love.graphics.draw(interacts.spriteSheet, interacts.anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
+        end
     end
 end
 
@@ -212,9 +230,9 @@ function drawConversation()
     end
 
     if interactables[interactingWith].portraitFrame then
-        -- love.graphics.draw(interactables[interactingWith].portraitFrame
-        --     , currWinDim.w * 18 / 24, currWinDim.h * 31 / 48,
-        --     0, portScale, portScale)
+        love.graphics.draw(interactables[interactingWith].portraitFrame
+            , (currWinDim.w * 18 / 24) - (20), (currWinDim.h * 31 / 48) - (20),
+            0, portScale, portScale)
     else
         -- default portraitFrame
     end
@@ -245,7 +263,7 @@ function drawConversation()
     if charsToShow > #fullText then charsToShow = #fullText end
 
     local toShow = string.sub(fullText, 1, charsToShow)
-    love.graphics.printf(toShow, 160, currWinDim.h * 2 / 3 + 150, 1300, "left", 0, 1, 1)
+    love.graphics.printf(toShow, 160, currWinDim.h * 2 / 3 + 150, 1250, "left", 0, 1, 1)
 
     -- Response logic
     local delayAfterFinish = 0.4
@@ -291,9 +309,10 @@ function drawConversation()
                     love.graphics.setColor(1, 1, 1)
                 end
                 
-                love.graphics.printf(option.text, px, py, textLimit, "left", 0, scale, scale)
+                -- The +150 is a patch, not the best long term fix, but it prevents text from going outside of the chatbox when the text is long and wraps around. The textLimit variable is used to determine when to add line height to the next response option, but the actual limit for the text is a little higher than that to give it some padding on the right side of the chatbox.
+                love.graphics.printf(option.text, px, py, textLimit + 100, "left", 0, scale, scale)
 
-                 --Sets bump counter for subsequent dialog options if the current one is multi-line
+                -- Adds line height if text wraps
                 if getTextWidth > textLimit then
                     textHAdder = textHAdder + (textH / 2)
                 end
@@ -350,8 +369,12 @@ function drawInventory()
             local y = (currWinDim.h / 2) - (baseRecHeight / 2) + (yCalc - 1) * inventoryCellSize
             love.graphics.rectangle("fill", x, y, inventoryCellSize, inventoryCellSize)
             love.graphics.setColor(.212, .203, .154, 1) -- Set color highlighted item text
-            love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0, 1.5, 1.5)
-            love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0, 1.5, 1.5)
+            if option.name then
+                love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0, 1.5, 1.5)    
+            end
+            if option.description then
+                love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0, 1.5, 1.5)    
+            end
         end
     end
 
@@ -395,9 +418,29 @@ function drawPauseMenu()
 end
 
 function drawDefeat()
-    love.graphics.print("You are forever bitchless", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+    local isStupidDraw = false
+    love.graphics.setColor(1, 1, 1, defeatAlphaTween)
+    if isStupidDraw then
+        love.graphics.draw(defeatScreen,0,0,0,gfxScale,gfxScale)
+        love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
+        love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1)
+        love.graphics.print("You are forever bitchless", (currWinDim.w / 2) - #("You are forever bitchless"), currWinDim.h / 3, 0, 2, 2)
+    else
+        love.graphics.draw(defeatScreen,0,0,0,gfxScale,gfxScale)
+        love.graphics.draw(player.spriteSheet, player.anim.animations[3][3]
+            , (currWinDim.w / 2) - (gfxScale * 3 * tileWH / 2), (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
+            , math.rad(270), gfxScale * 3, gfxScale * 3)
+        love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, defeatAlphaTween)
+        love.graphics.print("You are forever bitchless"
+            , (currWinDim.w / 2) - #"You are forever bitchless"*(mainMenuFont:getHeight() * 2 / 3), currWinDim.h / 3
+            , 0, 2, 2)
+    end
 end
 
 function drawVictory()
     love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+end
+
+function drawBossFight()
+    love.graphics.draw(bossFightIntroMovie, 0, 0, 0, 1, 1)
 end

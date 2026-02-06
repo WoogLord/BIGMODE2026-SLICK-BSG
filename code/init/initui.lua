@@ -17,5 +17,7 @@ function initUI()
         , outline = love.graphics.newImage("assets/art/nineslices/nineslice_chatbox_outline.png")
     }   
 
+    love.math.setRandomSeed(os.time())
+
     
 end

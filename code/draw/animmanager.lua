@@ -16,12 +16,12 @@ function AnimClass:new(
     return tAC
 end
 
-function AnimClass:BuildAnimations(_spriteSheet, _tileSize)
+function AnimClass:BuildAnimations(_spriteSheet, _tileSizeW, _tileSizeH)
     for i = 1, #self.animState, 1 do
         self.animations[i] = self.animations[i] or {} 
         for j = 1, self.frames[i], 1  do
             self.animations[i][j] = love.graphics.newQuad(
-                _tileSize*(j-1), (i-1) * _tileSize, _tileSize, _tileSize, _spriteSheet:getDimensions()
+                _tileSizeW*(j-1), (i-1) * _tileSizeH, _tileSizeW, _tileSizeH, _spriteSheet:getDimensions()
             )
         end
     end
@@ -31,26 +31,32 @@ playerAnimationArray = AnimClass:new(
     {
         "IdleDown", "IdleUp", "IdleRight"
         , "WalkDown", "WalkUp", "WalkRight"
+        , "ItemGet"
     }
     , {
         4, 4, 4
         , 4, 4, 4
+        , 4
     }
     , {
         {}, {}, {}
         , {}, {}, {}
+        , {}
     }
     , {
         4, 4, 4
         , 4, 4, 4
+        , 4
     }
     , {
         false, false, false
         , false, false, false
+        , false
     }
     , {
         false, false, false
         , false, false, false
+        , false
     }
 )
 
@@ -63,6 +69,7 @@ portraitAnimationArray = AnimClass:new(
     , {false, false, false, false}
 )
 
+jacketGuyAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 
 function animationManager(_dt)

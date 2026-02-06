@@ -17,17 +17,9 @@ function contains(tbl, searchStr, caseInsensitive)
     return false
 end
 
--- Emotion portrait selector
-function emotionPortraitSelector(_emotionStr)
-    if _emotionStr == "failure" then
-        return 2
-    elseif _emotionStr == "reset" then
-        return 3
-    elseif _emotionStr == "success" then
-        return 4
-    else
-        return 1 -- default to neutral
-    end
+--Random number generator
+function randomNumber(max)
+    return love.math.random(1, max)
 end
 
 
@@ -38,6 +30,11 @@ function gameManager()
 
     handleCollision()
     handleConversation()
+
+    if isInBossFight == true and not bossFightIntroMovie:isPlaying() then
+        bossFightGameState()
+    end
+    -- if bossFightIntroMovie:isPlaying() then isInBossFight = true else isInBossFight = false end
 end
 
 function handleMainMenuButton(_buttonPressed)
@@ -68,13 +65,13 @@ function checkCollision(_a, _b)
         and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
 end
 
-function isRedPixel(_x, _y, _w, _h) -- the red being whatever we need to check
+function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check
     _x = math.floor(_x)
     _y = math.floor(_y)
-    if _x < 0 or _y < 0 or (_x + _w) >= bg_01_collisionData:getWidth() or (_y + _h) >= bg_01_collisionData:getHeight() then return true end
+    if _x < 0 or _y < 0 or (_x + _w) >= _collisionData:getWidth() or (_y + _h) >= _collisionData:getHeight() then return true end
     for w = 0, _w - 1, 1 do
         for h = 0, _h - 1, 1 do
-            local r, g, b, a = bg_01_collisionData:getPixel(_x + w, _y + h)
+            local r, g, b, a = _collisionData:getPixel(_x + w, _y + h)
             if r == (192 / 255) and g == (33 / 255) and b == (33 / 255) and a > 0 then
                 return true
             end
@@ -83,7 +80,7 @@ function isRedPixel(_x, _y, _w, _h) -- the red being whatever we need to check
 end
 
 function handleCollision()
-    if isRedPixel(player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+    if isRedPixel(currentCollisionData, player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
@@ -91,6 +88,12 @@ function handleCollision()
     else
         player.isColliding = false
         lastPositionSave()
+    end
+    if isRedPixel(bg_Collision_InClub_Data, player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+        , player.hitbox.w, player.hitbox.h) then
+        player.inClub = true
+    else
+        player.inClub = false
     end
 end
 
@@ -114,18 +117,132 @@ function startConversationWith(_interactableID)
     else 
         print(interactables[_interactableID].vanityName)
         conversationState = interactables[_interactableID].vanityName
- 
+
         -- Goth girl section
         if conversationState == interactables[1].vanityName then
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                if contains(InventoryBag, interactables[1].passingItems[1], true) then -- when convoState is 1 this still is returning the wrong value, but I tested and it worked??
+                jacketGuyConvoState = 1
+                if contains(InventoryBag, interactables[1].passingItems[1], true) then
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
                     currentDialogTreeId = interactables[1].checkPoints[1]
                 end
             end
+        -- Sorority girl section
+        elseif conversationState == interactables[2].vanityName then
+            if sororityGirlConvoState == 0 then
+                currentDialogTreeId = "1"
+            elseif sororityGirlConvoState == 1 then
+                hairGuyConvoState = 1
+                if contains(InventoryBag, interactables[2].passingItems[1], true) then
+                    currentDialogTreeId = interactables[2].passPoints[1]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[1]
+                end
+            elseif sororityGirlConvoState == 2 then
+                if contains(InventoryBag, interactables[2].passingItems[2], true) then
+                    currentDialogTreeId = interactables[2].passPoints[2]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[2]
+                end
+            elseif sororityGirlConvoState == 3 then
+                if contains(InventoryBag, interactables[2].passingItems[3], true) then
+                    currentDialogTreeId = interactables[2].passPoints[3]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[3]
+                end
+            end
+        -- Influancer girl section
+        elseif conversationState == interactables[3].vanityName then
+            if influencerGirlConvoState == 0 then
+                currentDialogTreeId = "1"
+            elseif influencerGirlConvoState == 1 then
+                if contains(InventoryBag, interactables[3].passingItems[1], true) then
+                    currentDialogTreeId = interactables[3].passPoints[1]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[1]
+                end
+            elseif influencerGirlConvoState == 2 then
+                if contains(InventoryBag, interactables[3].passingItems[2], true) then
+                    currentDialogTreeId = interactables[3].passPoints[2]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[2]
+                end
+            elseif influencerGirlConvoState == 3 then
+                if contains(InventoryBag, interactables[3].passingItems[3], true) then
+                    currentDialogTreeId = interactables[3].passPoints[3]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[3]
+                end
+            end
+        elseif conversationState == interactables[4].vanityName then
+            --NEEDS TO BE TESTED
+            if jacketGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif jacketGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif jacketGuyConvoState == 2 then
+                --logic to swap to no jacket guy
+            end
+        elseif conversationState == interactables[5].vanityName then
+            --NEEDS TO BE TESTED
+            if hairGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif hairGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif hairGuyConvoState == 2 then
+                currentDialogTreeId = "6"
+            end
+        elseif conversationState == interactables[6].vanityName then
+            --NEEDS TO BE TESTED
+            if shadesGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shadesGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shadesGuyConvoState == 2 then
+                currentDialogTreeId = "6"
+            end
+        elseif conversationState == interactables[7].vanityName then
+            --NEEDS TO BE TESTED
+            if absGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif absGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif absGuyConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[8].vanityName then
+            --NEEDS TO BE TESTED
+            if shoesGirlConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shoesGirlConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shoesGirlConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[9].vanityName then
+            --NEEDS TO BE TESTED
+            if shortsGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(3).tostring()
+            elseif shortsGuyConvoState == 1 then
+                currentDialogTreeId = "4"
+            elseif shortsGuyConvoState == 2 then
+                currentDialogTreeId = "5"
+            end
+        elseif conversationState == interactables[10].vanityName then
+            --NEEDS TO BE TESTED
+            if mewGuyConvoState == 0 then
+                currentDialogTreeId = randomNumber(4).tostring()
+            elseif mewGuyConvoState == 1 then
+                currentDialogTreeId = "5"
+            elseif mewGuyConvoState == 2 then
+                currentDialogTreeId = "9"
+            end
+        elseif conversationState == interactables[11].vanityName then
+            --NEEDS TO BE TESTED
+            currentDialogTreeId = "1" 
         end
     end
 end
@@ -151,9 +268,8 @@ function handleConversation()
     elseif conversationState == interactables[1].vanityName then
         currentDialogTreeNode = findDialogNode(gothGirlTree, currentDialogTreeId)
 
-        -- set portrait animation based on dialogue emotion
-        local emotion = currentDialogTreeNode.responses[1].nextDialog
-        interactables[1].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+        -- set portrait animation based on npcEmotion
+        interactables[1].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             gothGirlConvoState = currentDialogTreeNode.checkPoint
@@ -163,12 +279,21 @@ function handleConversation()
     elseif conversationState == interactables[2].vanityName then
         currentDialogTreeNode = findDialogNode(sororityGirlTree, currentDialogTreeId)
 
-        -- set portrait animation based on dialogue emotion
-        local emotion = currentDialogTreeNode.responses[1].nextDialog
-        interactables[2].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+        -- set portrait animation based on npcEmotion
+        interactables[2].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             sororityGirlConvoState = currentDialogTreeNode.checkPoint
+        end
+        --Influancer girl section
+    elseif conversationState == interactables[3].vanityName then
+        currentDialogTreeNode = findDialogNode(influencerGirlTree, currentDialogTreeId)
+
+        -- set portrait animation based on npcEmotion
+        interactables[3].portrait.anim.currAnimState = currentDialogTreeNode.npcEmotion
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            influencerGirlConvoState = currentDialogTreeNode.checkPoint
         end
     end
 end
@@ -179,6 +304,7 @@ function handleDialogSelection()
     if selectedOption == nil then return end
 
     if selectedOption.nextDialog == "failure" then
+        defeatTimer = 0
         conversationState = ""
         currentDialogTreeNode = nil
         gameState = "defeat"
@@ -193,9 +319,25 @@ function handleDialogSelection()
 
     if selectedOption.nextDialog == "success" then
         gothGirlConvoState = 2 --ending number
+        conversationState = ""
+        currentDialogTreeNode = nil
         return
     end
 
     currentDialogTreeId = selectedOption.nextDialog
     selDialogOption = 1
+end
+
+-- CUTSCENES/MOVIES AND BOSSFIGHT
+function bossFight()
+    bossFightTimer = 0
+    if bossFightIntroMovie then
+        isInBossFight = true
+        bossFightIntroMovie:play()
+    end
+end
+
+function bossFightGameState()
+    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(influencerCurrentHP / influencerMaxHP, 25)) -- scales with missing hp
+    playerTotalDamage = playerBaseDamage * math.floor(bossFightTimer, 5) -- scales with time
 end
