@@ -32,7 +32,10 @@ end
 
 function love.update(dt)
     love.timer.sleep(1/60)
+    defeatTimer = defeatTimer + dt
+    bossFightTimer = bossFightTimer + dt
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
+    defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
     gameManager()    
     speedManager(dt)
     doFloaters()
