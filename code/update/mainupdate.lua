@@ -17,6 +17,20 @@ function contains(tbl, searchStr, caseInsensitive)
     return false
 end
 
+-- Emotion portrait selector
+function emotionPortraitSelector(_emotionStr)
+    if _emotionStr == "failure" then
+        return 2
+    elseif _emotionStr == "reset" then
+        return 3
+    elseif _emotionStr == "success" then
+        return 4
+    else
+        return 1 -- default to neutral
+    end
+end
+
+
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH), (player.mapTileY * tileWH)
     player.hitbox.x = currWinDim.w / 2 - (tileWH / 2) + (9 * gfxScale)
@@ -106,7 +120,7 @@ function startConversationWith(_interactableID)
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                if contains(InventoryBag, interactables[1].passingItems[1], true) then
+                if contains(InventoryBag, interactables[1].passingItems[1], true) then -- when convoState is 1 this still is returning the wrong value, but I tested and it worked??
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
                     currentDialogTreeId = interactables[1].checkPoints[1]
@@ -137,8 +151,24 @@ function handleConversation()
     elseif conversationState == interactables[1].vanityName then
         currentDialogTreeNode = findDialogNode(gothGirlTree, currentDialogTreeId)
 
+        -- set portrait animation based on dialogue emotion
+        local emotion = currentDialogTreeNode.responses[1].nextDialog
+        interactables[1].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+
         if currentDialogTreeNode["checkPoint"] ~= nil then
             gothGirlConvoState = currentDialogTreeNode.checkPoint
+        end
+
+        --Sorority girl section
+    elseif conversationState == interactables[2].vanityName then
+        currentDialogTreeNode = findDialogNode(sororityGirlTree, currentDialogTreeId)
+
+        -- set portrait animation based on dialogue emotion
+        local emotion = currentDialogTreeNode.responses[1].nextDialog
+        interactables[2].portrait.anim.currAnimState = emotionPortraitSelector(emotion)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            sororityGirlConvoState = currentDialogTreeNode.checkPoint
         end
     end
 end
