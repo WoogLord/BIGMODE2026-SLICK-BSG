@@ -31,7 +31,10 @@ function gameManager()
     handleCollision()
     handleConversation()
 
-    if bossFightIntroMovie:isPlaying() then isInBossFight = true else isInBossFight = false end
+    if isInBossFight == true and not bossFightIntroMovie:isPlaying() then
+        bossFightGameState()
+    end
+    -- if bossFightIntroMovie:isPlaying() then isInBossFight = true else isInBossFight = false end
 end
 
 function handleMainMenuButton(_buttonPressed)
@@ -327,7 +330,14 @@ end
 
 -- CUTSCENES/MOVIES AND BOSSFIGHT
 function bossFight()
+    bossFightTimer = 0
     if bossFightIntroMovie then
+        isInBossFight = true
         bossFightIntroMovie:play()
     end
+end
+
+function bossFightGameState()
+    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(influencerCurrentHP / influencerMaxHP, 25)) -- scales with missing hp
+    playerTotalDamage = playerBaseDamage * math.floor(bossFightTimer, 5) -- scales with time
 end

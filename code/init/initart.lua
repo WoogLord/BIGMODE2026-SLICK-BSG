@@ -85,15 +85,27 @@ function assignPortraits()
     interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla Sprite Sheet_FINAL.png")}
     interactables[2].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Sorority Sprite Sheet_FINAL.png")}
     interactables[3].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Starchild Sprite Sheet_FINAL.png")}
+    for i = 4, #interactables, 1 do
+        interactables[i].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Nothing_Portrait_SpriteSheet.png")}    
+    end
 
     portraitArr = {
         interactables[1].portrait,
         interactables[2].portrait,
         interactables[3].portrait,
+        interactables[4].portrait,
+        interactables[5].portrait,
+        interactables[6].portrait,
+        interactables[7].portrait,
+        interactables[8].portrait,
+        interactables[9].portrait,
+        interactables[10].portrait,
+        interactables[11].portrait,
+        interactables[12].portrait,
     }
 
     -- portrait assignment for animations
-    for i, portrait in pairs(portraitArr) do
+    for j, portrait in pairs(portraitArr) do
         portrait.anim = portraitAnimationArray
         portrait.anim:BuildAnimations(portrait.spriteSheet, 360, 360)
         portrait.anim.currAnimState = 1
@@ -105,5 +117,8 @@ function assignPortraits()
     interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Goth_girl_portrait Frame.png")
     interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Sorority portrait Frame.png")
     interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait Frame.png")
+    for k = 4, #interactables, 1 do
+        interactables[k].portraitFrame = love.graphics.newImage("assets/art/portraits/Nothing_Portrait_Frame.png")    
+    end
 
 end

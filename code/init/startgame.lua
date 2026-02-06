@@ -10,11 +10,20 @@ function init()
     updownFloating = 0
     alphaTween = 0
     introWindUpTime = 1
-    isInBossFight = false
+    
+    -- defeat screen
     defeatScreen = love.graphics.newImage("assets/art/ui/defeat.png")
     defeatAlphaTween = 0
     defeatTimer = 0
     defeatWindUpTime = 5
+
+    -- Bossfight shit
+    isInBossFight = false
+    influencerMaxHP = 250
+    influencerCurrentHP = 250
+    influencerBaseHeal = 1
+    playerBaseDamage = 1
+    bossFightTimer = 0
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
