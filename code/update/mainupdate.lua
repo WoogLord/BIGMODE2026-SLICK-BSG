@@ -130,15 +130,15 @@ function startConversationWith(_interactableID)
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
             if sororityGirlConvoState == 0 then
-                currentDialogTreeId = "1"
+                currentDialogTreeId = "1z"
             elseif sororityGirlConvoState == 1 then
-                hairGuyConvoState = 1
                 if contains(InventoryBag, interactables[2].passingItems[1], true) then
                     currentDialogTreeId = interactables[2].passPoints[1]
                 else
                     currentDialogTreeId = interactables[2].checkPoints[1]
                 end
             elseif sororityGirlConvoState == 2 then
+                hairGuyConvoState = 1
                 if contains(InventoryBag, interactables[2].passingItems[2], true) then
                     currentDialogTreeId = interactables[2].passPoints[2]
                 else
@@ -314,10 +314,36 @@ function handleDialogSelection()
     end
 
     if selectedOption.nextDialog == "success" then
-        gothGirlConvoState = 2 --ending number
+        -- Goth girl section
+        if conversationState == interactables[1].vanityName then
+            if gothGirlConvoState == 1 then
+                jacketGuyConvoState = 1
+            end
+        -- Sorority girl section
+        elseif conversationState == interactables[2].vanityName then
+            if sororityGirlConvoState == 1 and gothGirlConvoState == 2 then
+                hairGuyConvoState = 1 
+            elseif sororityGirlConvoState == 2 then
+                shadesGuyConvoState = 1
+            elseif sororityGirlConvoState == 3 then
+                absGuyConvoState = 1
+            elseif sororityGirlConvoState == 4 then
+                -- HAVE SORORITY GIRLS MOVE OUT OF WAY HERE
+            end
+        --Influancer girl section
+        elseif conversationState == interactables[3].vanityName then
+            if influencerGirlConvoState == 1 then
+                shoesGirlConvoState = 1 
+            elseif influencerGirlConvoState == 2 then
+                shortsGuyConvoState = 1
+            elseif influencerGirlConvoState == 3 then
+                mewGuyConvoState = 1
+            elseif influencerGirlConvoState == 4 then
+            -- TRIGGER BOSS FIGHT HERE
+            end
+        end
         conversationState = ""
         currentDialogTreeNode = nil
-        return
     end
 
     currentDialogTreeId = selectedOption.nextDialog
