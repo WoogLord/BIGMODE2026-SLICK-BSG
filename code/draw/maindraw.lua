@@ -19,6 +19,11 @@ function drawDebug()
         0,
         180
     )
+    love.graphics.print(
+        "currentDialogTreeNode ID: " .. tostring(currentDialogTreeNode),
+        0,
+        200
+    )
 end
 
 -- Top level state handler
