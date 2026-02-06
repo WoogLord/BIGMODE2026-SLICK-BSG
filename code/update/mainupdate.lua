@@ -114,16 +114,62 @@ function startConversationWith(_interactableID)
     else 
         print(interactables[_interactableID].vanityName)
         conversationState = interactables[_interactableID].vanityName
- 
+
         -- Goth girl section
         if conversationState == interactables[1].vanityName then
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                if contains(InventoryBag, interactables[1].passingItems[1], true) then -- when convoState is 1 this still is returning the wrong value, but I tested and it worked??
+                if contains(InventoryBag, interactables[1].passingItems[1], true) then
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
                     currentDialogTreeId = interactables[1].checkPoints[1]
+                end
+            end
+        -- Sorority girl section
+        elseif conversationState == interactables[2].vanityName then
+            if sororityGirlConvoState == 0 then
+                currentDialogTreeId = "1"
+            elseif sororityGirlConvoState == 1 then
+                if contains(InventoryBag, interactables[2].passingItems[1], true) then
+                    currentDialogTreeId = interactables[2].passPoints[1]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[1]
+                end
+            elseif sororityGirlConvoState == 2 then
+                if contains(InventoryBag, interactables[2].passingItems[2], true) then
+                    currentDialogTreeId = interactables[2].passPoints[2]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[2]
+                end
+            elseif sororityGirlConvoState == 3 then
+                if contains(InventoryBag, interactables[2].passingItems[3], true) then
+                    currentDialogTreeId = interactables[2].passPoints[3]
+                else
+                    currentDialogTreeId = interactables[2].checkPoints[3]
+                end
+            end
+        -- Influancer girl section
+        elseif conversationState == interactables[3].vanityName then
+            if influencerGirlConvoState == 0 then
+                currentDialogTreeId = "1"
+            elseif influencerGirlConvoState == 1 then
+                if contains(InventoryBag, interactables[3].passingItems[1], true) then
+                    currentDialogTreeId = interactables[3].passPoints[1]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[1]
+                end
+            elseif influencerGirlConvoState == 2 then
+                if contains(InventoryBag, interactables[3].passingItems[2], true) then
+                    currentDialogTreeId = interactables[3].passPoints[2]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[2]
+                end
+            elseif influencerGirlConvoState == 3 then
+                if contains(InventoryBag, interactables[3].passingItems[3], true) then
+                    currentDialogTreeId = interactables[3].passPoints[3]
+                else
+                    currentDialogTreeId = interactables[3].checkPoints[3]
                 end
             end
         end
@@ -193,6 +239,8 @@ function handleDialogSelection()
 
     if selectedOption.nextDialog == "success" then
         gothGirlConvoState = 2 --ending number
+        conversationState = ""
+        currentDialogTreeNode = nil
         return
     end
 
