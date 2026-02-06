@@ -9,6 +9,7 @@ function init()
     globalSpriteTimer = 0
     updownFloating = 0
     alphaTween = 0
+    introWindUpTime = 1
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
@@ -90,6 +91,7 @@ function init()
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}}
         , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
+        , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (10 * tileWH), mapTrueY = (6 * tileWH)}
     }
 
     -- Conversation Trees
