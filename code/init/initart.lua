@@ -23,7 +23,7 @@ function assignSpriteSheets()
     interactables[10].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Mewing Man Sprite-Sheet.png")
     -- Juice NPCs
     interactables[11].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Leather Jacket guy WO-Sheet.png")
-
+    interactables[12].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
 
     -- add everyone else to animation array
     for i, interacts in pairs(interactables) do
@@ -38,15 +38,33 @@ end
 
 function assignLayerArt()
     -- bgs
-    bg_01_nightclub = love.graphics.newImage("assets/art/bgs/bg_01_master - All layers.png")
-
-    -- top
-    bg_01_topLayer = love.graphics.newImage("assets/art/bgs/bg_01_master - All layers.png")
+    bg_floor_tiles = love.graphics.newImage("assets/art/bgs/bg_floor_tiles.png")
+    bg_WALLS = love.graphics.newImage("assets/art/bgs/bg_WALLS.png")
+    bg_DJ_Stairs = love.graphics.newImage("assets/art/bgs/bg_DJ_Stairs.png")
+    bg_DJ_Stage = love.graphics.newImage("assets/art/bgs/bg_DJ_Stage.png")
+    bg_DJ_Opacity_45 = love.graphics.newImage("assets/art/bgs/bg_DJ_Opacity_45.png")
+    bg_Sorority_Top = love.graphics.newImage("assets/art/bgs/bg_Sorority_Top.png")
+    bg_Sorority_Mid = love.graphics.newImage("assets/art/bgs/bg_Sorority_Mid.png")
+    bg_Sorority_Bot = love.graphics.newImage("assets/art/bgs/bg_Sorority_Bot.png")
+    bg_Characters_01 = love.graphics.newImage("assets/art/bgs/bg_Characters_01.png")
+    bg_Characters_02 = love.graphics.newImage("assets/art/bgs/bg_Characters_02.png")
+    bg_Furniture = love.graphics.newImage("assets/art/bgs/bg_Furniture.png")
+    bg_BathroomShadow = love.graphics.newImage("assets/art/bgs/bg_BathroomShadow.png")
+    bg_Items_01_Props = love.graphics.newImage("assets/art/bgs/bg_Items_01_Props.png")
+    bg_BIGGIE = love.graphics.newImage("assets/art/bgs/bg_BIGGIE.png")
 
     -- collision
     -- debug
-    bg_01_collision = love.graphics.newImage("assets/art/bgs/bg_01_master - Collision.png")
-    bg_01_collisionData = love.image.newImageData("assets/art/bgs/bg_01_master - Collision.png")
+    bg_Collision_PreSorortiy = love.graphics.newImage("assets/art/bgs/bg_Collision_PreSorortiy.png")
+    bg_Collision_PostSorortiy = love.graphics.newImage("assets/art/bgs/bg_Collision_PostSorortiy.png")
+    bg_Collision_InClub = love.graphics.newImage("assets/art/bgs/bg_Collision_InClub.png")
+
+    bg_Collision_PreSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PreSorortiy.png")
+    bg_Collision_PostSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PostSorortiy.png")
+    bg_Collision_InClub_Data = love.image.newImageData("assets/art/bgs/bg_Collision_InClub.png")
+
+    currentCollisionDraw = bg_Collision_PreSorortiy
+    currentCollisionData = bg_Collision_PreSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")
@@ -84,8 +102,8 @@ function assignPortraits()
     end
     
     -- portrait Frame
-    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
-    interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
-    interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
+    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Goth_girl_portrait Frame.png")
+    interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Sorority portrait Frame.png")
+    interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait Frame.png")
 
 end

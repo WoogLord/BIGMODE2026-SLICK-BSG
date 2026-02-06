@@ -89,13 +89,27 @@ function drawExploring()
     drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
 
     -- terrain + scenery
-    love.graphics.draw(bg_01_nightclub
-    , drawnMapOffsetX, drawnMapOffsetY
-    , 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_floor_tiles, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_WALLS, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_DJ_Stairs, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_DJ_Stage, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Top, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Mid, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Sorority_Bot, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Characters_01, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Characters_02, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Furniture, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_BathroomShadow, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_Items_01_Props, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.draw(bg_BIGGIE, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+
+    love.graphics.setColor(1, 1, 1, 0.45)
+    love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
+    love.graphics.setColor(1, 1, 1, 1)
 
     if isDebug then
         love.graphics.setColor(1, 1, 1, 0.5)
-        love.graphics.draw(bg_01_collision
+        love.graphics.draw(currentCollisionDraw
         , drawnMapOffsetX, drawnMapOffsetY
         , 0, gfxScale, gfxScale)
     end
