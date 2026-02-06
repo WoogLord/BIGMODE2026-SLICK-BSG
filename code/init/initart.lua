@@ -102,8 +102,8 @@ function assignPortraits()
     end
     
     -- portrait Frame
-    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
-    interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
-    interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
+    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Goth_girl_portrait Frame.png")
+    interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Sorority portrait Frame.png")
+    interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait Frame.png")
 
 end
