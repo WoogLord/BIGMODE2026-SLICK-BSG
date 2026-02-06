@@ -126,6 +126,8 @@ function init()
         , {id = 9, name = "shortsGuy", vanityName = "Marc", mapTrueX = (18 * tileWH), mapTrueY = (5 * tileWH), tileH = 32, tileW = 32}
         , {id = 10, name = "mewGuy", vanityName = "Yakub", mapTrueX = (7 * tileWH), mapTrueY = (4 * tileWH), tileH = 32, tileW = 32}
         , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
+        -- bonus fellas
+        , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
     }
 
     -- Conversation Trees

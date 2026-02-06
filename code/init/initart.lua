@@ -23,7 +23,7 @@ function assignSpriteSheets()
     interactables[10].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Mewing Man Sprite-Sheet.png")
     -- Juice NPCs
     interactables[11].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Leather Jacket guy WO-Sheet.png")
-
+    interactables[12].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
 
     -- add everyone else to animation array
     for i, interacts in pairs(interactables) do
