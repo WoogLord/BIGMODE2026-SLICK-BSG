@@ -43,7 +43,7 @@ function drawMainMenu()
 
     love.graphics.draw(mainMenuImage, 0, 0, 0, gfxScale, gfxScale)
 
-    if globalSpriteTimer > 5 then
+    if globalSpriteTimer > introWindUpTime then
         for i, option in ipairs(menuOptionsMain) do
             if i == selOptionMain then
                 love.graphics.setColor(1, 0, 0) -- Highlight selected option in red
@@ -199,15 +199,17 @@ function drawConversation()
     end
 
     if interactables[interactingWith].portrait.spriteSheet then
-        love.graphics.draw(interactables[interactingWith].portrait.spriteSheet, currWinDim.w * 18 / 24,
-            currWinDim.h * 31 / 48, 0, portScale, portScale)
+        love.graphics.draw(interactables[interactingWith].portrait.spriteSheet, interactables[interactingWith].portrait.anim.currentAnim
+            , currWinDim.w * 18 / 24, currWinDim.h * 31 / 48
+            , 0, portScale, portScale)
     else
         -- default portrait
     end
 
     if interactables[interactingWith].portraitFrame then
-        love.graphics.draw(interactables[interactingWith].portraitFrame, currWinDim.w * 18 / 24, currWinDim.h * 31 / 48,
-            0, portScale, portScale)
+        -- love.graphics.draw(interactables[interactingWith].portraitFrame
+        --     , currWinDim.w * 18 / 24, currWinDim.h * 31 / 48,
+        --     0, portScale, portScale)
     else
         -- default portraitFrame
     end

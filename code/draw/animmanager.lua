@@ -53,7 +53,15 @@ playerAnimationArray = AnimClass:new(
         , false, false, false
     }
 )
-portraitAnimationArray = AnimClass:new({"IdleDown"}, {1}, {{}}, {4}, {false}, {false})
+
+portraitAnimationArray = AnimClass:new(
+    {"neutral", "angry", "disgust", "happy"}
+    , {1, 1, 1, 1}
+    , {{}, {}, {}, {}}
+    , {4, 4, 4, 4}
+    , {false, false, false, false}
+    , {false, false, false, false}
+)
 
 everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 

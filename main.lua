@@ -29,7 +29,7 @@ end
 
 function love.update(dt)
     love.timer.sleep(1/60)
-    alphaTween = math.min((globalSpriteTimer) / 5, 1)
+    alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
     gameManager()    
     speedManager(dt)
     doFloaters()
