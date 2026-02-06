@@ -56,7 +56,9 @@ function init()
     needNextTrack = true
     lastPlayedMusic = nil
     lastPlayedAnnouncement = nil
-    currentSongDuration = 0
+    currentAnnouncement = nil
+    currentSongDuration = 0 -- make this 999 if you dont want announcer to fire immediately
+    currentSongTimePlayedFor = 0
     -- titleMusic = love.audio.newSource("assets/music/Title_theme_outside.mp3", "stream", true)
     titleMusic = love.audio.newSource("assets/music/Title_theme_outside.mp3", "stream", true)
     musicClubTracks = {
@@ -65,6 +67,11 @@ function init()
         -- mus_03_rave2
         , mus_04_funkyRave = love.audio.newSource("assets/music/Funky_Rave.mp3", "stream", false)
         , mus_05_rave3_no_L = love.audio.newSource("assets/music/rave_3_no_L.mp3", "stream", false)
+    }
+    musicClubTracksData = {
+        mus_01_aye = {bpm = 108, dropBeatStart = 100, dropBeatEnd = 110}
+        , mus_04_funkyRave = {bpm = 126, dropBeatStart = 100, dropBeatEnd = 110}
+        , mus_05_rave3_no_L = {bpm = 132, dropBeatStart = 100, dropBeatEnd = 110}
     }
     flattenedMusicClubTracks = {}
     for _, src in pairs(musicClubTracks) do
@@ -80,6 +87,11 @@ function init()
         , seymour = love.audio.newSource("assets/sfx/sillyvoicelines/Seymour.mp3", "stream", false)
         , sock = love.audio.newSource("assets/sfx/sillyvoicelines/Sock.mp3", "stream", false)
     }
+    flattenedAnnouncements = {}
+    for _, src in pairs(sillyVoiceLines) do
+        src:setLooping(false)
+        flattenedAnnouncements[#flattenedAnnouncements+1] = src
+    end
     sfxSources = {
           menuSelection = love.audio.newSource("assets/sfx/regular ah soundeffects/Menu_interaction.mp3", "stream", false)
         , menuOK = love.audio.newSource("assets/sfx/regular ah soundeffects/SFX_7.wav", "stream", false)
@@ -129,7 +141,7 @@ function init()
         {id = "9a", npcText = "No haha. You're short, fat, and you've got the hair of a 50 year old. You could use some work. ", responses = {{text = "But I can make you smile. That's what counts. ", nextDialog = "10a" }, {text = "I'm just trying to get you number and subsiquently hit. Are you letting me or not?", nextDialog = "19a"}}},
         {id = "10a", npcText = "That's definitely part of it. I'll give you that. ", responses = {{text = "How about I get your number and I can make you laugh over dinner?", nextDialog = "47b"}}}, 
         {id = "3b", npcText = ".............", responses = {{text = "*shit pants*", nextDialog = "reset"}, {text = "MY MOM.", nextDialog = "11a"}}},
-        {id = "11a", npcText = "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.", responses = {{text = "-->", nextDialog = "27b"}}},
+        {id = "11a", npcText = "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.", responses = {{text = "-->", nextDialog = "27b"}}},
         {id = "4b", npcText = "Do I look like I have a fucking father figure?", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "5b", npcText = "It's Ok. I've just had a really rough night. ", responses = {{text = "What happened?", nextDialog = "23a"}, {text = "Are we talking like a P80 or more of a P320?", nextDialog = "12b"}}},
         {id = "6b", npcText = "You know what?! LEAVE ME ALONE", responses = {{text = "-->", nextDialog = "failure"}}},
@@ -193,7 +205,7 @@ function init()
         {id = "50a", npcText = "Wow. You believe in hyperborea too! Do you want my number?", responses = {{text = "100%. What is it?", nextDialog = "51a"}, {text = "Nah, I rather just smash tonight and never see you again.", nextDialog = "51b"}}},
         {id = "51a", npcText = "Well actually, I don't want anyone seeing me giving you my number. You look awful. Go get a jacket to cover that horrible shirt.", responses = {{text = "-->", nextDialog = "reset"}}, checkPoint = "1"}, --CHECKPOINT Setter for 1
         {id = "51b", npcText = "And just like that, you fucked yourself", responses = {{text = "-->", nextDialog = "failure"}}},
-        {id = "49b", npcText = "Woah. Calm down. Lets slow down. I'm Layla.", responses = {{text = "Pretty name for a pretty girl.", nextDialog = "8a"}, {text = "Yeah, I don't need your name, I just need your number. Yeah, I don't need your name, I just need your number. ", nextDialog = "8b"}}},
+        {id = "49b", npcText = "Woah. Calm down. Lets slow down. I'm Layla.", responses = {{text = "Pretty name for a pretty girl.", nextDialog = "8a"}, {text = "Yeah, I don't need your name, I just need your number. ", nextDialog = "8b"}}},
         {id = "52a", npcText = "You talk a big game but you look like ass.", responses = {{text = "At least I don't smell like ass.", nextDialog = "53a"}, {text = "I'll have you know I'm a hit with the ladies. I have loads of gal pals.", nextDialog = "36a"}}},
         {id = "53a", npcText = "I mean, I guess. Thats like, the bare minimum.", responses = {{text = "-->", nextDialog = "reset"}}},
         -- post checkpoint 1

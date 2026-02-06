@@ -1,8 +1,8 @@
-function soundManager()
-    musicManager()
+function soundManager(dt)
+    musicManager(dt)
 end
 
-function musicManager()
+function musicManager(dt)
     local hg = player.inClub and 1 or 0.001
     if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} end
 
@@ -13,12 +13,18 @@ function musicManager()
         needNextTrack = true
     elseif gameState == "play" then
         titleMusic:stop()
-
+        if currentAnnouncement then else currentAnnouncement = pickRandomAnnouncement() end
+        currentSongTimePlayedFor = currentSongTimePlayedFor + dt
+        if currentSongTimePlayedFor > currentSongDuration - 4 and currentAnnouncement and not currentAnnouncement:isPlaying() then
+            currentAnnouncement = pickRandomAnnouncement()
+            sfxManager(currentAnnouncement, true)
+        end
         if needNextTrack then
             currentTrack = pickRandomTrack()
             lastPlayedMusic = currentTrack
             currentTrack:setVolume(volumeMaster)
             currentSongDuration = currentTrack:getDuration()
+            currentSongTimePlayedFor = 0
             currentTrack:play()
             needNextTrack = false
         end
@@ -34,6 +40,14 @@ function pickRandomTrack()
         track = flattenedMusicClubTracks[math.random(#flattenedMusicClubTracks)]
     until track ~= lastPlayedMusic
     return track
+end
+
+function pickRandomAnnouncement()
+    local announcement
+    repeat
+        announcement = flattenedAnnouncements[math.random(#flattenedAnnouncements)]
+    until announcement ~= lastPlayedAnnouncement
+    return announcement
 end
 
 function sfxManager(_sfxToPlay, _inClubNeeded)
