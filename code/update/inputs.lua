@@ -5,10 +5,13 @@ function love.keypressed(key)
     -- ui -- mainMenu
     if gameState == "mainmenu" and globalSpriteTimer > introWindUpTime then
         if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+            sfxManager(sfxSources.menuSelection, false)
             selOptionMain = math.min(selOptionMain + 1 , #menuOptionsMain)
         elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+            sfxManager(sfxSources.menuSelection, false)
             selOptionMain = math.max(selOptionMain - 1 , 1)
-        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+        elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
+            sfxManager(sfxSources.menuOK, false)
             if menuOptionsMain[selOptionMain] == "play" then
                 gameState = "play"
                 playState = "exploring"
@@ -16,8 +19,10 @@ function love.keypressed(key)
                 love.event.quit()
             end
         elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] and menuOptionsMain[selOptionMain] == "volume" then
+            sfxManager(sfxSources.menuSelection, false)
             volumeMaster = math.max(volumeMaster - 0.1, 0)
         elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] and menuOptionsMain[selOptionMain] == "volume" then
+            sfxManager(sfxSources.menuSelection, false)
             volumeMaster = math.min(volumeMaster + 0.1, 1.0)
         end
     end
@@ -39,11 +44,14 @@ function love.keypressed(key)
                 end
             elseif conversationState ~= "" then --Conversation logic
                 if key == INPUTS_ARR.pause then playState = "pause"
-                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then               
+                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
+                    sfxManager(sfxSources.menuOK, false)               
                     handleDialogSelection()
                 elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                    sfxManager(sfxSources.menuSelection, false)
                     selDialogOption = math.min(selDialogOption + 1 , #currentDialogTreeNode.responses)
                 elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then
+                    sfxManager(sfxSources.menuSelection, false)
                     selDialogOption = math.max(selDialogOption - 1 , 1)
                 elseif key == INPUTS_ARR.cancel then -- UPDATE LATER
                     conversationState = ""
@@ -54,7 +62,7 @@ function love.keypressed(key)
                 if key == INPUTS_ARR.pause then playState = "pause"
                 -- Inventory logic
                 elseif key == INPUTS_ARR.inventory then inventoryHandler = not inventoryHandler
-                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] then
+                elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
                     interactingWith = handleInteraction()
                     if interactingWith ~= 0 then
                         startConversationWith(interactingWith)

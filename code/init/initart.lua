@@ -2,22 +2,34 @@ function assignSpriteSheets()
     -- player
     player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
     player.anim = playerAnimationArray
-    player.anim:BuildAnimations(player.spriteSheet, tileWH)
+    player.anim:BuildAnimations(player.spriteSheet, tileWH, tileWH)
     player.anim.currAnimState = 3
 
     thingsBeingAnimated = {
         player.anim
     }
 
-    -- everyone Else
+    -- girls
     interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security-Sheet.png")
-    interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
+    interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl-Sheet.png")
     interactables[3].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Influencer sprite-Sheet.png")
+    -- item NPCs
+    interactables[4].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Leather Jacket guy-Sheet.png")
+    interactables[5].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Hair guy for game-Sheet.png")
+    interactables[6].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Kamina Shades Sprite-Sheet.png")
+    interactables[7].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Abs npc Sprite-Sheet.png")
+    interactables[8].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Girl with Blue hair sprite-Sheet.png")
+    interactables[9].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Shorts NPC Sprite-Sheet.png")
+    interactables[10].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Mewing Man Sprite-Sheet.png")
+    -- Juice NPCs
+    interactables[11].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Leather Jacket guy WO-Sheet.png")
+
 
     -- add everyone else to animation array
     for i, interacts in pairs(interactables) do
-        interacts.anim = everyoneElseAnimationArray
-        interacts.anim:BuildAnimations(interacts.spriteSheet, tileWH)
+        if i == 4 or i == 11 then interacts.anim = jacketGuyAnimationArray else interacts.anim = everyoneElseAnimationArray end
+        print(interacts.tileW..interacts.tileH)
+        interacts.anim:BuildAnimations(interacts.spriteSheet, interacts.tileW, interacts.tileH)
         interacts.anim.currAnimState = 1
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
@@ -52,9 +64,9 @@ function assignPortraits()
     }
 
     -- portraits
-    interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla_Sprite_Sheet_2.png")}
-    interactables[2].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Sorority_Big_Sprite_Sheet.png")}
-    interactables[3].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Starchild_Sprite_Sheet.png")}
+    interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla Sprite Sheet_FINAL.png")}
+    interactables[2].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Sorority Sprite Sheet_FINAL.png")}
+    interactables[3].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Starchild Sprite Sheet_FINAL.png")}
 
     portraitArr = {
         interactables[1].portrait,
@@ -65,13 +77,15 @@ function assignPortraits()
     -- portrait assignment for animations
     for i, portrait in pairs(portraitArr) do
         portrait.anim = portraitAnimationArray
-        portrait.anim:BuildAnimations(portrait.spriteSheet, 360)
+        portrait.anim:BuildAnimations(portrait.spriteSheet, 360, 360)
         portrait.anim.currAnimState = 1
         table.insert(thingsBeingAnimated, portrait.anim)
         print(thingsBeingAnimated[i])
     end
     
     -- portrait Frame
-    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/360360.png")
+    interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
+    interactables[2].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
+    interactables[3].portraitFrame = love.graphics.newImage("assets/art/portraits/Influencer portrait.png")
 
 end

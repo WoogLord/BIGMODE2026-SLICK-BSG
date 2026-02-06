@@ -41,6 +41,7 @@ function sfxManager(_sfxToPlay, _inClubNeeded)
     if _inClubNeeded then _sfxToPlay:setFilter{type = "lowpass", highgain = hg}
     else _sfxToPlay:setFilter{type = "lowpass", highgain = 1}
     end
+    _sfxToPlay:stop()
     _sfxToPlay:setVolume(volumeMaster)
     _sfxToPlay:play()
 end

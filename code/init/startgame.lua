@@ -15,7 +15,7 @@ function init()
         fullscreen = "f", debug = "f3", pause = "escape"
         , up = {"w","up"}, left = {"a","left"}, down = {"s","down"}, right = {"d","right"}
         , jump = " "
-        , select = {"return", "z"}, cancel = "x"
+        , select = {"return", "z", "e"}, cancel = "x"
         , inventory = "i"
     }
     player = {
@@ -71,6 +71,19 @@ function init()
         src:setLooping(false)
         flattenedMusicClubTracks[#flattenedMusicClubTracks+1] = src
     end
+    sillyVoiceLines = {
+        fogMachine = love.audio.newSource("assets/sfx/sillyvoicelines/FogMachine.mp3", "stream", false)
+        , help = love.audio.newSource("assets/sfx/sillyvoicelines/Help.mp3", "stream", false)
+        , insanity = love.audio.newSource("assets/sfx/sillyvoicelines/Insanity.mp3", "stream", false)
+        , meatwad = love.audio.newSource("assets/sfx/sillyvoicelines/Meatwad.mp3", "stream", false)
+        , piss = love.audio.newSource("assets/sfx/sillyvoicelines/Piss.mp3", "stream", false)
+        , seymour = love.audio.newSource("assets/sfx/sillyvoicelines/Seymour.mp3", "stream", false)
+        , sock = love.audio.newSource("assets/sfx/sillyvoicelines/Sock.mp3", "stream", false)
+    }
+    sfxSources = {
+          menuSelection = love.audio.newSource("assets/sfx/regular ah soundeffects/Menu_interaction.mp3", "stream", false)
+        , menuOK = love.audio.newSource("assets/sfx/regular ah soundeffects/SFX_7.wav", "stream", false)
+    }
     credits = 0 -- mus_06_rave3_w_L
     
       -- Inventory Object
@@ -90,9 +103,17 @@ function init()
     -- Interactables
     interactableHitbox = {w = 48, h = 48}
     interactables = {
-        {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}}
-        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
-        , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (10 * tileWH), mapTrueY = (6 * tileWH)}
+        {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (9 * tileWH), mapTrueY = (13 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}, tileH = 32, tileW = 32}
+        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (23 * tileWH), mapTrueY = (19 * tileWH), tileH = 32, tileW = 32}
+        , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (28 * tileWH), mapTrueY = (22 * tileWH), tileH = 32, tileW = 32}
+        , {id = 4, name = "jacketGuy", vanityName = "Axel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
+        , {id = 5, name = "hairGuy", vanityName = "Monoxydillian", mapTrueX = (12 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}
+        , {id = 6, name = "shadesGuy", vanityName = "Kamina", mapTrueX = (16 * tileWH), mapTrueY = (17 * tileWH), tileH = 32, tileW = 32}
+        , {id = 7, name = "absGuy", vanityName = "Greaser", mapTrueX = (22 * tileWH), mapTrueY = (12 * tileWH), tileH = 32, tileW = 32}
+        , {id = 8, name = "shoesGirl", vanityName = "Rebecca", mapTrueX = (20 * tileWH), mapTrueY = (23 * tileWH), tileH = 32, tileW = 32}
+        , {id = 9, name = "shortsGuy", vanityName = "Marc", mapTrueX = (18 * tileWH), mapTrueY = (5 * tileWH), tileH = 32, tileW = 32}
+        , {id = 10, name = "mewGuy", vanityName = "Yakub", mapTrueX = (7 * tileWH), mapTrueY = (4 * tileWH), tileH = 32, tileW = 32}
+        , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
     }
 
     -- Conversation Trees
