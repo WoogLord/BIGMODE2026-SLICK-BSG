@@ -9,6 +9,7 @@ function init()
     globalSpriteTimer = 0
     updownFloating = 0
     alphaTween = 0
+    introWindUpTime = 1
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
@@ -90,6 +91,7 @@ function init()
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (5 * tileWH), mapTrueY = (5 * tileWH), checkPoints = {"48a"}, passPoints = {"1c1"}, passingItems = {"jacket"}}
         , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (7 * tileWH), mapTrueY = (6 * tileWH)}
+        , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (10 * tileWH), mapTrueY = (6 * tileWH)}
     }
 
     -- Conversation Trees
@@ -104,15 +106,15 @@ function init()
         {id = "8a", npcText = "*Blushes* Thanks. You're kinda ugly but at least you're sweet", responses = {{text = "Ugly? You just mean my shirt right??", nextDialog = "9a" }, {text = "So what are you doing in this corner by yourself?", nextDialog = "19a"}}},
         {id = "9a", npcText = "No haha. You're short, fat, and you've got the hair of a 50 year old. You could use some work. ", responses = {{text = "But I can make you smile. That's what counts. ", nextDialog = "10a" }, {text = "I'm just trying to get you number and subsiquently hit. Are you letting me or not?", nextDialog = "19a"}}},
         {id = "10a", npcText = "That's definitely part of it. I'll give you that. ", responses = {{text = "How about I get your number and I can make you laugh over dinner?", nextDialog = "47b"}}}, 
-        {id = "3b", npcText = ".............", responses = {{text = "*shit pants*", nextDialog = "1"}, {text = "MY MOM.", nextDialog = "11a"}}},
+        {id = "3b", npcText = ".............", responses = {{text = "*shit pants*", nextDialog = "reset"}, {text = "MY MOM.", nextDialog = "11a"}}},
         {id = "11a", npcText = "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.", responses = {{text = "-->", nextDialog = "27b"}}},
-        {id = "4b", npcText = "Do I look like I have a fucking father figure?", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "4b", npcText = "Do I look like I have a fucking father figure?", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "5b", npcText = "It's Ok. I've just had a really rough night. ", responses = {{text = "What happened?", nextDialog = "23a"}, {text = "Are we talking like a P80 or more of a P320?", nextDialog = "12b"}}},
         {id = "6b", npcText = "You know what?! LEAVE ME ALONE", responses = {{text = "-->", nextDialog = "failure"}}},
-        {id = "8b", npcText = "I knew you were a fucking clown.", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "8b", npcText = "I knew you were a fucking clown.", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "12b", npcText = "What the fuck does that even mean?", responses = {{text = "Never mind. *laughs nervously* What happened?", nextDialog = "23a"}, {text = "Clearly you know nothing about sandpaper. ", nextDialog = "13a"}}},
         {id = "13a", npcText = "What the fuck is wrong with you. No, I don't know anything about sandpaper.", responses = {{text = "You said your night was rough. So I asked how rough using sandpaper grit levels. ", nextDialog = "14a"}, {text = "Sorry, its all the meth that I'm on.", nextDialog = "14b"}}},
-        {id = "14a", npcText = ".....................................", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "14a", npcText = ".....................................", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "14b", npcText = "What is wrong with you?? I just want to be left alone.What is wrong with you?? I just want to be left alone.", responses = {{text = "Is it because you're goth?", nextDialog = "15a"}, {text = "What's wrong? Maybe I can help.", nextDialog = "23a"}}},
         {id = "15a", npcText = "NO ITS NOT BECAUSE I'M GOTH YOU IDIOT.", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "2b", npcText = "Oh, I'm hostile??!! Who just approaches a random girl in the club when she's by herself???", responses = {{text = "I mean... most guys? Its a club", nextDialog = "16a"}, {text = "Guys who like lonely girls.", nextDialog = "16b"}}},
@@ -136,22 +138,22 @@ function init()
         {id = "28a", npcText = "Yeah. I tend to bite people's heads off. Tonight has just been rough.", responses = {{text = "Are we talking like a P80 or more of a P320?.", nextDialog = "29a"}}},
         {id = "29a", npcText = "What the fuck does that even mean?", responses = {{text = "Never mind. *laughs nervously* What happened?", nextDialog = "23a"}, {text = "Clearly you know nothing about sandpaper.", nextDialog = "30a"}}},
         {id = "30a", npcText = "What the fuck is wrong with you. No, I don't know anything about sandpaper.", responses = {{text = "You said your night was rough. So I asked how rough using sandpaper grit levels.", nextDialog = "31a"}, {text = "Sorry, its all the meth that I'm on. ", nextDialog = "31b"}}},
-        {id = "31a", npcText = ".....................................", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "31a", npcText = ".....................................", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "31b", npcText = "What is wrong with you?? I just want to be left alone.", responses = {{text = "Is it because you're goth?", nextDialog = "32a"}, {text = "What's wrong? Maybe I can help.", nextDialog = "23a"}}},
         {id = "28b", npcText = "I'm not really sure. There's some influencer girl but I've never heard of her.", responses = {{text = "Meh, who cares. I'm happy hanging with you.", nextDialog = "8a"}, {text = "Damn. I better get in there. I love Egirls.", nextDialog = "33a"}}},
         {id = "33a", npcText = "You love Egirls huh? Yeah, get the fuck out of here.", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "26b", npcText = "I'm 24. I like terrible horror movies and I like guys who can make me laugh.", responses = {{text = "Oh yeah. Watch this. *does a series of comedic dance moves*", nextDialog = "25b"}, {text = "Are pity laughs acceptable? I get a lot of those.Are pity laughs acceptable? I get a lot of those.", nextDialog = "34a"}}},
-        {id = "34a", npcText = "Nope.....", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "34a", npcText = "Nope.....", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "25b", npcText = "Hahaha. Ok Stop! You're embarrassing yourself", responses = {{text = "What do you mean? Those were more normal dance moves.", nextDialog = "35a"}, {text = "It made you laugh so it was worth it.", nextDialog = "35b"}}},
         {id = "35a", npcText = "Haha sure. You know, you're not a bad guy after all.", responses = {{text = "How about I get your number and we can hang out in the future? I promise to make you laugh more.", nextDialog = "47b"}}},
         {id = "35b", npcText = "That was actually kind of sweet.", responses = {{text = "How about I get your number and we can hang out in the future? I promise to make you laugh more.", nextDialog = "47b"}}},
         {id = "22b", npcText = "That's pretty cool. You've got some connections in this place.", responses = {{text = "It's nothing huge. He's just a server in the VIP area.", nextDialog = "23a"}, {text = "Meh, I'm mostly here for the ladies.", nextDialog = "36a"}}},
         {id = "36a", npcText = "Oh yeah? How many phone number have you got tonight?", responses = {{text = "Zero", nextDialog = "37a"}, {text = "Three", nextDialog = "37b"}, {text = "One..... after I get yours.", nextDialog = "47b"}}},
-        {id = "37a", npcText = "Probably because you have no game and you have that weird stain on your crotch", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "37a", npcText = "Probably because you have no game and you have that weird stain on your crotch", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "37b", npcText = "Big shot over here. I bet they're all fake.", responses = {{text = "Oh yeah? How about I call one.", nextDialog = "38a"}, {text = "How about you give me yours and I'll have 3 fake ones and one real.", nextDialog = "38b"}}},
         {id = "38a", npcText = "Be my guest.", responses = {{text = "*call a girls phone number*", nextDialog = "39a"}, {npcText = "Why would I want to call another girl when I have you right in front of me?", nextDialog = "39b"}}},
         {id = "39a", npcText = "", responses = {{text = "*You realize you were bluffing and are now awkwardly staring at your phone. You put your phone in your pocket embarrassed. How could you be so foolish", nextDialog = "40a"}}},
-        {id = "40a", npcText = "Ha! That's what I thought. What a loser.", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "40a", npcText = "Ha! That's what I thought. What a loser.", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "39b", npcText = "*Blushes* Thanks. You're kinda ugly but at least you're sweet", responses = {{text = "Ugly? You just mean my shirt right??", nextDialog = "41a"}}},
         {id = "41a", npcText = "No haha. You're short, fat, and you've got the hair of a 50 year old. You could use some work.", responses = {{text = "But I can make you smile. That's what counts.", nextDialog = "42a"}, {text = "I'm just trying to get you number and subsequently hit. Are you letting me or not?", nextDialog = "19a"}}},
         {id = "42a", npcText = "That's definitely part of it. I'll give you that.", responses = {{text = "How about I get your number and I can make you laugh over dinner?", nextDialog = "47b"}}},
@@ -171,7 +173,7 @@ function init()
         {id = "51b", npcText = "And just like that, you fucked yourself", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "49b", npcText = "Woah. Calm down. Lets slow down. I'm Layla.", responses = {{text = "Pretty name for a pretty girl.", nextDialog = "8a"}, {text = "Yeah, I don't need your name, I just need your number. Yeah, I don't need your name, I just need your number. ", nextDialog = "8b"}}},
         {id = "52a", npcText = "You talk a big game but you look like ass.", responses = {{text = "At least I don't smell like ass.", nextDialog = "53a"}, {text = "I'll have you know I'm a hit with the ladies. I have loads of gal pals.", nextDialog = "36a"}}},
-        {id = "53a", npcText = "I mean, I guess. Thats like, the bare minimum.", responses = {{text = "-->", nextDialog = "1"}}},
+        {id = "53a", npcText = "I mean, I guess. Thats like, the bare minimum.", responses = {{text = "-->", nextDialog = "reset"}}},
         -- post checkpoint 1
         {id = "1c1", npcText = "Wow, you look so much better. You almost look cool.....", responses = {{text = "So.... about the number?", nextDialog = "1c2a"}, {text = "You want to head back to my place now?", nextDialog = "1c2b"}}},
         {id = "1c2a", npcText = "Here! Give me a call sometime. I think I've had enough clubbing for one night.", responses = {{text = "-->", nextDialog = "success"}}},

@@ -2,20 +2,22 @@ function assignSpriteSheets()
     -- player
     player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
     player.anim = playerAnimationArray
-    player.anim:BuildAnimations(player.spriteSheet)
+    player.anim:BuildAnimations(player.spriteSheet, tileWH)
     player.anim.currAnimState = 3
-
-    -- everyone Else
-    interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
-    interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
 
     thingsBeingAnimated = {
         player.anim
     }
 
+    -- everyone Else
+    interactables[1].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Goth girl security.png")
+    interactables[2].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Frat girl.png")
+    interactables[3].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Influencer sprite-Sheet.png")
+
+    -- add everyone else to animation array
     for i, interacts in pairs(interactables) do
         interacts.anim = everyoneElseAnimationArray
-        interacts.anim:BuildAnimations(interacts.spriteSheet)
+        interacts.anim:BuildAnimations(interacts.spriteSheet, tileWH)
         interacts.anim.currAnimState = 1
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
@@ -50,8 +52,26 @@ function assignPortraits()
     }
 
     -- portraits
-    interactables[1].portrait = love.graphics.newImage("assets/art/portraits/360360.png")
+    interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla_Sprite_Sheet_2.png")}
+    interactables[2].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Sorority_Big_Sprite_Sheet.png")}
+    interactables[3].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Starchild_Sprite_Sheet.png")}
 
+    portraitArr = {
+        interactables[1].portrait,
+        interactables[2].portrait,
+        interactables[3].portrait,
+    }
+
+    -- portrait assignment for animations
+    for i, portrait in pairs(portraitArr) do
+        portrait.anim = portraitAnimationArray
+        portrait.anim:BuildAnimations(portrait.spriteSheet, 360)
+        portrait.anim.currAnimState = 1
+        table.insert(thingsBeingAnimated, portrait.anim)
+        print(thingsBeingAnimated[i])
+    end
+    
     -- portrait Frame
     interactables[1].portraitFrame = love.graphics.newImage("assets/art/portraits/360360.png")
+
 end

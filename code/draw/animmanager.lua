@@ -16,12 +16,12 @@ function AnimClass:new(
     return tAC
 end
 
-function AnimClass:BuildAnimations(_spriteSheet)
+function AnimClass:BuildAnimations(_spriteSheet, _tileSize)
     for i = 1, #self.animState, 1 do
         self.animations[i] = self.animations[i] or {} 
         for j = 1, self.frames[i], 1  do
             self.animations[i][j] = love.graphics.newQuad(
-                tileWH*(j-1), (i-1) * tileWH, tileWH, tileWH, _spriteSheet:getDimensions()
+                _tileSize*(j-1), (i-1) * _tileSize, _tileSize, _tileSize, _spriteSheet:getDimensions()
             )
         end
     end
@@ -53,6 +53,16 @@ playerAnimationArray = AnimClass:new(
         , false, false, false
     }
 )
+
+portraitAnimationArray = AnimClass:new(
+    {"neutral", "angry", "disgust", "happy"}
+    , {1, 1, 1, 1}
+    , {{}, {}, {}, {}}
+    , {4, 4, 4, 4}
+    , {false, false, false, false}
+    , {false, false, false, false}
+)
+
 everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 
 function animationManager(_dt)
@@ -70,9 +80,9 @@ function animationManager(_dt)
 
         if thing.isLocal[thing.currAnimState] then
             localSpriteTimer = localSpriteTimer + _dt
-            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(localSpriteTimer*timing % 4)]
+            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(localSpriteTimer*timing % thing.frames[thing.currAnimState])]
         else
-            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(globalSpriteTimer*timing % 4)]
+            thing.currentAnim = thing.animations[thing.currAnimState][math.ceil(globalSpriteTimer*timing % thing.frames[thing.currAnimState])]
         end
     end
 end
