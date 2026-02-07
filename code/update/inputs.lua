@@ -36,6 +36,13 @@ function love.keypressed(key)
                 if key == INPUTS_ARR.cancel then
                     influencerCurrentHP = math.max(influencerCurrentHP - playerTotalDamage, 0)
                 end
+            elseif isGettingItem then
+                if key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
+                    -- exit get item state
+                    table.insert(InventoryBag, currentItemBeingGot)
+                    -- currentItemBeingGotInt = #InventoryBag + 1
+                    isGettingItem = false
+                end
             elseif inventoryHandler then --Inventory Logic
                 if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
                     selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
@@ -131,7 +138,7 @@ function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
 end
 
 function playerControls()
-    if gameState == "play" and playState == "exploring" and not inventoryHandler and conversationState == "" then
+    if gameState == "play" and playState == "exploring" and not inventoryHandler and conversationState == "" and not isGettingItem then
         --== MOVEMENT ==--
         if player.facing == "Down" then player.anim.currAnimState = 1 player.isFlippedLeft = false
         elseif player.facing == "Up" then player.anim.currAnimState = 2 player.isFlippedLeft = false

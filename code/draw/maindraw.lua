@@ -21,6 +21,8 @@ function drawDebug()
     love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, 0, 300)
     love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal, 0, 320)
     love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 340)
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.print("itemGetSfxDelayTimer: "..itemGetSfxDelayTimer..", itemGetSfxDelayTime: "..itemGetSfxDelayTime..", isPlayingDelayedSfx: "..tostring(isPlayingDelayedSfx), 0, 360)
 end
 
 -- Top level state handler
@@ -89,6 +91,7 @@ function drawPlay()
         else
             drawExploring()
         end
+        if isGettingItem then drawGettingItem() end
     elseif playState == "pause" then
         drawExploring()
         drawPauseMenu()
@@ -158,7 +161,7 @@ function drawPlayer(_x, _y, _rotate)
     local plY = _y
 
     love.graphics.draw(player.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
-    if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
+    if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
     else love.graphics.draw(playerFatbody.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
     if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
     if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
@@ -206,7 +209,7 @@ function drawInteractableButton()
     for _, interacts in pairs(interactables) do
         local iX, iY = (interacts.mapTrueX * gfxScale) + drawnMapOffsetX,
             (interacts.mapTrueY * gfxScale) + drawnMapOffsetY
-        if checkCollision(player, interacts) then
+        if checkCollision(player, interacts) and not isGettingItem then
             love.graphics.setColor(0.5, 0.5, 0.5, 1)
             love.graphics.setFont(mainMenuFont)
             love.graphics.print("PRESS", iX - (tileWH * gfxScale * 2 / 3),
@@ -425,7 +428,7 @@ function drawInventory()
     local tFrames = player.anim.animations[1][math.ceil(globalSpriteTimer*player.anim.framesPerSecond[1] % player.anim.frames[1])]
     -- local tFrames = player.anim.animations[1][1]
     love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
-    if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
+    if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
     else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
     if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
     if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
@@ -490,7 +493,7 @@ function drawDefeat()
         -- love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
         -- drawPlayer()
         love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
-        if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
+        if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
         else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
         if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
         if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
@@ -509,7 +512,7 @@ function drawDefeat()
         plY = (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
         local rot = math.rad(270)
         love.graphics.draw(player.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
-        if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
+        if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
         else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
         if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
         if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
@@ -577,4 +580,16 @@ function drawBossFight()
     if bossFightIntroMovie:isPlaying() then 
         love.graphics.draw(bossFightIntroMovie, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     else end
+end
+
+function drawGettingItem()
+    local flipOffset = player.isFlippedLeft and (tileWH * gfxScale) or 0
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(mainMenuFont)
+    love.graphics.print("You got the",currWinDim.w / 2 - (#tostring("You got the") * mainMenuFont:getHeight()), currWinDim.h / 7 , 0, gfxScale, gfxScale)
+    love.graphics.print(currentItemBeingGot,currWinDim.w / 2 - (#tostring(currentItemBeingGot) * mainMenuFont:getHeight()), currWinDim.h / 4 , 0, gfxScale, gfxScale)
+    love.graphics.draw(player.items[currentItemBeingGotInt]
+        , currWinDim.w / 2 - (tileWH / 2) + (8 * gfxScale) + flipOffset
+        , currWinDim.h / 2 - (tileWH / 2) + (updownFloating * gfxScale) - (14 * gfxScale)
+        , 0, gfxScale, gfxScale)
 end
