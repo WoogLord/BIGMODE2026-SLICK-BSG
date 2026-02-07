@@ -153,7 +153,15 @@ function init()
     -- Inventory Object
     -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
     InventoryBag = {}
-
+    InventoryImages = {
+        ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png"), name = "Bigmode Blazer", description = "A stylish leather jacket"}
+        , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pill bottles for hair.png"), name = "Bald-Be-Gone TM", description = "A bottle of hair growth solution"}
+        , ["Heavenly Shades"] = {image = love.graphics.newImage("assets/art/Nightclubitems/gurren lagan glasses.png"), name = "Heavenly Shades", description = "Glasses that make you look cool"}
+        , ["Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Bowflex Sprite.png"), name = "Bowflex", description = "A fitness machine that makes you strong"}
+        , ["Agarthan Fjordans"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Shoe sprite for one night.png"), name = "Agarthan Fjordans", description = "Shoes that make you feel like a king"}
+        , ["Slick Slacks"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pants for one night.png"), name = "Slick Slacks", description = "Pants that make you feel like a gentleman"}
+        , ["Book of Mew"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Book of Mew.png"), name = "Book of Mew", description = "A mysterious book that emanates a strange energy"}
+    }
     -- Inventory variables
     inventoryScale = 3
     inventoryCellSize = 32 * inventoryScale
@@ -227,7 +235,7 @@ function init()
         {id = "2c", npcEmotion = 3, npcText = "Ummmm... I guess your right. Your shirt is kinda cringe though. Get a slick jacket and maybe the girls in here will pay you more attention.", responses = {{text = "But I've already got the girl's attention I'm interested in.", nextDialog = "18a"}}},
         {id = "18a", npcEmotion = 2, npcText = "Get the fuck out of here. I don't even know you.", responses = {{text = "Ask me anything. You can get to know me.", nextDialog = "19a"}, {text = "Come on. I like heavy metal. I think about sorrow often. I've never even walked into a church.", nextDialog = "19b"}}},
         {id = "19a", npcEmotion = 1, npcText = "Are you so desperate to talk to a girl you need to pick the lonely one in the corner?", responses = {{text = "So you ARE lonely. I knew it. give me a chance. Its better than being alone.", nextDialog = "20a"}, {text = "I am desperate yes.", nextDialog = "20b"}}},
-        {id = "20a", npcEmotion = 1, npcText = "I would rather be alone than with some dooface who's trying to get in my pants.", responses = {{text = "I mean.... Would you let me in?", nextDialog = "21a"}}},
+        {id = "20a", npcEmotion = 1, npcText = "I would rather be alone than with some doofus who's trying to get in my pants.", responses = {{text = "I mean.... Would you let me in?", nextDialog = "21a"}}},
         {id = "21a", npcEmotion = 2, npcText = "NO! GET THE FUCK OUT OF HERE!", responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "20b", npcEmotion = 4, npcText = "*chuckles* At least you're honest. Are you here alone?", responses = {{text = "Woah is that a smile?? And yes. I'm new to town.", nextDialog = "22a"}, {text = "A friend of mine works here so kinda, but not really", nextDialog = "22b"}}},
         {id = "22a", npcEmotion = 1, npcText = "I've lived here for years but this is the first time I've been clubbing.", responses = {{text = "Look at us. Both trying new things on our own. ", nextDialog = "23a"}, {text = "are you more the type to stay at home and chill with friends?", nextDialog = "23a"}}},
