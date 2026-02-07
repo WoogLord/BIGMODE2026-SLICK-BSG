@@ -180,16 +180,18 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[4].vanityName then
             --NEEDS TO BE TESTED
             if jacketGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif jacketGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif jacketGuyConvoState == 2 then
+
                 --logic to swap to no jacket guy
+                currentDialogTreeId = "4" --REMOVE
             end
         elseif conversationState == interactables[5].vanityName then
             --NEEDS TO BE TESTED
             if hairGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif hairGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif hairGuyConvoState == 2 then
@@ -198,7 +200,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[6].vanityName then
             --NEEDS TO BE TESTED
             if shadesGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shadesGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shadesGuyConvoState == 2 then
@@ -207,7 +209,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[7].vanityName then
             --NEEDS TO BE TESTED
             if absGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif absGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif absGuyConvoState == 2 then
@@ -216,7 +218,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[8].vanityName then
             --NEEDS TO BE TESTED
             if shoesGirlConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shoesGirlConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shoesGirlConvoState == 2 then
@@ -225,7 +227,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[9].vanityName then
             --NEEDS TO BE TESTED
             if shortsGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shortsGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shortsGuyConvoState == 2 then
@@ -234,7 +236,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[10].vanityName then
             --NEEDS TO BE TESTED
             if mewGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(4).tostring()
+                currentDialogTreeId = tostring(math.random(4))
             elseif mewGuyConvoState == 1 then
                 currentDialogTreeId = "5"
             elseif mewGuyConvoState == 2 then
@@ -295,6 +297,48 @@ function handleConversation()
         if currentDialogTreeNode["checkPoint"] ~= nil then
             influencerGirlConvoState = currentDialogTreeNode.checkPoint
         end
+    elseif conversationState == interactables[4].vanityName then
+        currentDialogTreeNode = findDialogNode(jacketGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            jacketGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[5].vanityName then
+        currentDialogTreeNode = findDialogNode(hairGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            hairGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[6].vanityName then
+        currentDialogTreeNode = findDialogNode(shadesGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shadesGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[7].vanityName then
+        currentDialogTreeNode = findDialogNode(absGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            absGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[8].vanityName then
+        currentDialogTreeNode = findDialogNode(shoesGirlTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shoesGirlConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[9].vanityName then
+        currentDialogTreeNode = findDialogNode(shortsGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shortsGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[10].vanityName then
+        currentDialogTreeNode = findDialogNode(mewGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            mewGuyConvoState = currentDialogTreeNode.checkPoint
+        end
     end
 end
 
@@ -322,6 +366,7 @@ function handleDialogSelection()
         if conversationState == interactables[1].vanityName then
             if gothGirlConvoState == 1 then
                 jacketGuyConvoState = 1
+                gothGirlConvoState = 2
             end
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
@@ -346,35 +391,37 @@ function handleDialogSelection()
             -- TRIGGER BOSS FIGHT HERE
             end
         elseif conversationState == interactables[4].vanityName then
-                if jacketGuyConvoState == 1 then   
-                    InventoryBag[1] = "Jacket"
-                    --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
-                end
-            elseif conversationState == interactables[5].vanityName then
-                if hairGuyConvoState == 1 then   
-                    InventoryBag[2] = "Finasteride Hair Gel"
-                    
-                end    
-            elseif conversationState == interactables[6].vanityName then
-                if shadesGuyConvoState == 1 then   
-                    InventoryBag[3] = "Sunglasses"
-                end    
-            elseif conversationState == interactables[7].vanityName then
-                if absGuyConvoState == 1 then   
-                    InventoryBag[4] = "Bowflex"
-                end    
-            elseif conversationState == interactables[8].vanityName then
-                if shoesGirlConvoState == 1 then   
-                    InventoryBag[5] = "Pants"
-                end
-            elseif conversationState == interactables[9].vanityName then
-                if shortsGuyConvoState == 1 then   
-                    InventoryBag[6] = "Shoes"
-                end
-            elseif conversationState == interactables[10].vanityName then
-                if mewGuyConvoState == 1 then   
-                    InventoryBag[7] = "Book of Mew"
-                end
+            outter = "yes"
+            if jacketGuyConvoState == 1 then   
+                inner = "yes"
+                table.insert(InventoryBag, "Jacket")
+                --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
+            end
+        elseif conversationState == interactables[5].vanityName then
+            if hairGuyConvoState == 1 then   
+                InventoryBag[2] = "Finasteride Hair Gel"
+                
+            end    
+        elseif conversationState == interactables[6].vanityName then
+            if shadesGuyConvoState == 1 then   
+                InventoryBag[3] = "Sunglasses"
+            end    
+        elseif conversationState == interactables[7].vanityName then
+            if absGuyConvoState == 1 then   
+                InventoryBag[4] = "Bowflex"
+            end    
+        elseif conversationState == interactables[8].vanityName then
+            if shoesGirlConvoState == 1 then   
+                InventoryBag[5] = "Pants"
+            end
+        elseif conversationState == interactables[9].vanityName then
+            if shortsGuyConvoState == 1 then   
+                InventoryBag[6] = "Shoes"
+            end
+        elseif conversationState == interactables[10].vanityName then
+            if mewGuyConvoState == 1 then   
+                InventoryBag[7] = "Book of Mew"
+            end
         end
         conversationState = ""
         currentDialogTreeNode = nil

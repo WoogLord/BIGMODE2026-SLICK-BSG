@@ -16,6 +16,9 @@ function drawDebug()
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
     love.graphics.print(tostring(interactables[1].portrait.anim.animations[1][1]), 0, 180)
     love.graphics.print("In boss fight?"..tostring(isInBossFight), 0, 200)
+    love.graphics.print("inner: "..inner..", outter: "..outter, 0, 220)
+    love.graphics.print("States " .. "goth:".. gothGirlConvoState .. ", sorority:" .. sororityGirlConvoState .. ", Influ:" .. influencerGirlConvoState .. ", Jacket:" .. jacketGuyConvoState .. ", abs:" .. absGuyConvoState .. ", shoes:" .. shoesGirlConvoState .. ", shorts:" .. shortsGuyConvoState .. ", mew:" .. mewGuyConvoState .. ", jacket2:" .. jacketGuyNOJacketConvoState, 0, 240)
+    love.graphics.print("InventoryBag: " .. table.concat(InventoryBag, ", "), 0, 260)
 end
 
 -- Top level state handler
