@@ -378,6 +378,9 @@ function handleDialogSelection()
                 absGuyConvoState = 1
             elseif sororityGirlConvoState == 4 then
                 -- HAVE SORORITY GIRLS MOVE OUT OF WAY HERE
+                currentCollisionDraw = bg_Collision_PostSorortiy
+                currentCollisionData = bg_Collision_PostSorortiy_Data
+                sororityDrawYOffset = -7.5 * tileWH
             end
         --Influancer girl section
         elseif conversationState == interactables[3].vanityName then
@@ -389,6 +392,7 @@ function handleDialogSelection()
                 mewGuyConvoState = 1
             elseif influencerGirlConvoState == 4 then
             -- TRIGGER BOSS FIGHT HERE
+                bossFightInit()
             end
         elseif conversationState == interactables[4].vanityName then
             if jacketGuyConvoState == 1 then   

@@ -31,7 +31,7 @@ function love.keypressed(key)
 
     if gameState == "play" then
         if playState == "exploring" then
-            if key == INPUTS_ARR.bossFightDebug then bossFightInit() end
+            -- if key == INPUTS_ARR.bossFightDebug then bossFightInit() end
             if isInBossFight then 
                 if key == INPUTS_ARR.cancel then
                     influencerCurrentHP = math.max(influencerCurrentHP - playerTotalDamage, 0)

@@ -190,6 +190,7 @@ function init()
         -- bonus fellas
         , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25.5 * tileWH), tileH = 32, tileW = 32}
     }
+    sororityDrawYOffset = 0
 
     -- Conversation Trees
     gothGirlTree = {

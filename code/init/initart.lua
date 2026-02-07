@@ -68,8 +68,8 @@ function assignLayerArt()
     bg_Collision_PostSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PostSorortiy.png")
     bg_Collision_InClub_Data = love.image.newImageData("assets/art/bgs/bg_Collision_InClub.png")
 
-    currentCollisionDraw = bg_Collision_PreSorortiy
-    currentCollisionData = bg_Collision_PreSorortiy_Data
+    currentCollisionDraw = bg_Collision_PostSorortiy
+    currentCollisionData = bg_Collision_PostSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")
@@ -85,6 +85,20 @@ function assignPortraits()
         fill = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_fill.png")
         , outline = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_outline.png")
     }
+    interactables[2].chatbox = {
+        fill = love.graphics.newImage("assets/art/ui/Frat girl chatbox_fill.png")
+        , outline = love.graphics.newImage("assets/art/ui/Frat girl chatbox_outline.png")
+    }
+    interactables[3].chatbox = {
+        fill = love.graphics.newImage("assets/art/ui/Influencer Textbox_fill.png")
+        , outline = love.graphics.newImage("assets/art/ui/Influencer Textbox_outline.png")
+    }
+    for m = 4, #interactables, 1 do 
+        interactables[m].chatbox = {
+            fill = love.graphics.newImage("assets/art/ui/Npc Sprite textbox_fill.png")
+            , outline = love.graphics.newImage("assets/art/ui/Npc Sprite textbox_outline.png")
+        }
+    end
 
     -- portraits
     interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla Sprite Sheet_FINAL.png")}
