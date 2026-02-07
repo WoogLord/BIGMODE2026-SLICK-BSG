@@ -389,12 +389,15 @@ function drawInventory()
             local x = (currWinDim.w / 2) - (baseRecWidth / 2) + (xCalc - 1) * inventoryCellSize
             local y = (currWinDim.h / 2) - (baseRecHeight / 2) + (yCalc - 1) * inventoryCellSize
             love.graphics.rectangle("fill", x, y, inventoryCellSize, inventoryCellSize)
-            love.graphics.setColor(.212, .203, .154, 1) -- Set color highlighted item text
-            if option.name then
-                love.graphics.print(option.name, (currWinDim.w / 2), (currWinDim.h / 2) - 130, 0, 1.5, 1.5)    
+            love.graphics.setColor(255/255, 255/255, 255/255, 1) -- Set color highlighted item text
+            local font = love.graphics.getFont()
+            if InventoryImages[option].name then
+                local textW = font:getWidth(InventoryImages[option].name) * 1.5
+                love.graphics.print(InventoryImages[option].name, (currWinDim.w / 2) - (textW / 3), (currWinDim.h / 2) - 170, 0, 1.5, 1.5)    
             end
-            if option.description then
-                love.graphics.print(option.description, (currWinDim.w / 2) - 50, (currWinDim.h / 2) + 110, 0, 1.5, 1.5)    
+            if InventoryImages[option].description then
+                local textW = font:getWidth(InventoryImages[option].description) * 1
+                love.graphics.print(InventoryImages[option].description, (currWinDim.w / 2) - (textW / 3), (currWinDim.h / 2) + 120, 0, 1, 1)    
             end
         end
     end
@@ -416,8 +419,7 @@ function drawInventory()
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
 
                 -- RICHARD, i added this shit here (player.anim.animations[1][1]) to get rid of the spritesheet dupe issue you had
-                
-                -- love.graphics.draw(player.item.image, player.anim.animations[1][1], x, y, 0, inventoryScale, inventoryScale)
+                love.graphics.draw(InventoryImages[item].image, x, y, 0, inventoryScale, inventoryScale)
             end
         end
     end
