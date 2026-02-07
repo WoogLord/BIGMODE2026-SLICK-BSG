@@ -391,36 +391,34 @@ function handleDialogSelection()
             -- TRIGGER BOSS FIGHT HERE
             end
         elseif conversationState == interactables[4].vanityName then
-            outter = "yes"
             if jacketGuyConvoState == 1 then   
-                inner = "yes"
                 table.insert(InventoryBag, "Jacket")
                 --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
             end
         elseif conversationState == interactables[5].vanityName then
             if hairGuyConvoState == 1 then   
-                InventoryBag[2] = "Finasteride Hair Gel"
+                table.insert(InventoryBag, "Finasteride Hair Gel")
                 
             end    
         elseif conversationState == interactables[6].vanityName then
             if shadesGuyConvoState == 1 then   
-                InventoryBag[3] = "Sunglasses"
+                table.insert(InventoryBag, "Sunglasses")
             end    
         elseif conversationState == interactables[7].vanityName then
             if absGuyConvoState == 1 then   
-                InventoryBag[4] = "Bowflex"
+                table.insert(InventoryBag, "Bowflex")
             end    
         elseif conversationState == interactables[8].vanityName then
             if shoesGirlConvoState == 1 then   
-                InventoryBag[5] = "Pants"
+                table.insert(InventoryBag, "Pants")
             end
         elseif conversationState == interactables[9].vanityName then
             if shortsGuyConvoState == 1 then   
-                InventoryBag[6] = "Shoes"
+                table.insert(InventoryBag, "Shoes")
             end
         elseif conversationState == interactables[10].vanityName then
             if mewGuyConvoState == 1 then   
-                InventoryBag[7] = "Book of Mew"
+                table.insert(InventoryBag, "Book of Mew")
             end
         end
         conversationState = ""
