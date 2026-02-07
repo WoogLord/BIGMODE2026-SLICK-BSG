@@ -462,7 +462,7 @@ function handleDialogSelection()
         elseif conversationState == interactables[7].vanityName then
             if absGuyConvoState == 2 then   
                 currentItemBeingGotInt = 4
-                getItemHandler("Miniature Bowflex")
+                getItemHandler("Miniature Broflex")
             end    
         elseif conversationState == interactables[8].vanityName then
             if shoesGirlConvoState == 2 then   
