@@ -397,10 +397,16 @@ function drawInventory()
             local font = love.graphics.getFont()
             if InventoryImages[option].name then
                 local textW = font:getWidth(InventoryImages[option].name) * 1.5
+                love.graphics.setColor(0.2, 0.2, 0.2)
+                love.graphics.print(InventoryImages[option].name, (currWinDim.w / 2) - (textW / 3) + gfxScale, (currWinDim.h / 2) - 170, 0, 1.5, 1.5)    
+                love.graphics.setColor(1, 1, 1)
                 love.graphics.print(InventoryImages[option].name, (currWinDim.w / 2) - (textW / 3), (currWinDim.h / 2) - 170, 0, 1.5, 1.5)    
             end
             if InventoryImages[option].description then
                 local textW = font:getWidth(InventoryImages[option].description) * 1
+                love.graphics.setColor(0.2, 0.2, 0.2)
+                love.graphics.print(InventoryImages[option].description, (currWinDim.w / 2) - (textW / 3) + gfxScale, (currWinDim.h / 2) + 120, 0, 1, 1)    
+                love.graphics.setColor(1, 1, 1)
                 love.graphics.print(InventoryImages[option].description, (currWinDim.w / 2) - (textW / 3), (currWinDim.h / 2) + 120, 0, 1, 1)    
             end
         end
