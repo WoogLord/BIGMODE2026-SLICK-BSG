@@ -4,7 +4,7 @@ function init()
     playState = ""
     conversationState = ""
     inventoryHandler = false
-    gfxScale = 3
+    gfxScale = 4
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     globalSpriteTimer = 0
@@ -109,9 +109,12 @@ function init()
     mainMenuFont = love.graphics.newFont(32 / 4 * gfxScale)
     debugFont = love.graphics.newFont(16/ 4 * gfxScale)
     buttonFont = love.graphics.newFont(24/ 4 * gfxScale)
+    npcDialogueFont = love.graphics.newFont(48 / 4 * gfxScale)
+    responseFont = love.graphics.newFont(36 / 4 * gfxScale)
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
+    gfxScale = math.floor((screenW - 1) / 480)
     currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
     isFullScreen = false
@@ -173,7 +176,7 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
 
     -- Inventory Object
-    InventoryBag = {}
+    InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
     -- InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
@@ -186,7 +189,7 @@ function init()
     }
     -- Inventory variables
     inventoryScale = 3
-    inventoryCellSize = 32 * inventoryScale
+    inventoryCellSize = 32 * inventoryScale * gfxScale / 4
     inventoryCols = 5
     inventoryRows = 2
 
