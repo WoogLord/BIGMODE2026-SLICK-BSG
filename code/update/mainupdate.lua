@@ -1,7 +1,7 @@
 -- UTILITY FUNCTIONS
 
 -- Generic contains function: checks whether a table contains the given string.
--- Usage: `local has = contains(InventoryBag, "Jacket", true)`
+-- Usage: `local has = contains(InventoryBag, "Bigmode Blazer", true)`
 -- third arg `caseInsensitive` is optional (default false)
 function contains(tbl, searchStr, caseInsensitive)
     if not tbl or not searchStr then return false end
@@ -53,16 +53,19 @@ function allTheFullscreenChangeStuff()
     local cw, ch = love.graphics.getDimensions()
     currWinDim.w, currWinDim.h = cw, ch
     local recalcRatio = (currWinDim.w / priorWinDim.w)
+    gfxScale = gfxScale * recalcRatio
+    portScale = portScale * recalcRatio
     -- use the recalcRatio like below:
     -- PLAYER_STATS_ARR.x, PLAYER_STATS_ARR.y = PLAYER_STATS_ARR.x * recalcRatio, PLAYER_STATS_ARR.y * recalcRatio
 end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * 3 / 6)                  -- x min
-        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w * 3 / 6)) -- x max
-        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * 3 / 6)                 -- y min
-        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
+    local collRescale =  3 / 6 * gfxScale / 4
+    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * collRescale)                  -- x min
+        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w *collRescale)) -- x max
+        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * collRescale)                 -- y min
+        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * collRescale)) -- y max
 end
 
 function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check
@@ -80,7 +83,7 @@ function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we
 end
 
 function handleCollision()
-    if isRedPixel(currentCollisionData, player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+    if isRedPixel(currentCollisionData, player.mapTrueX - (tileWH / 2) + (6 * gfxScale * gfxScale) / 4, player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
@@ -89,7 +92,7 @@ function handleCollision()
         player.isColliding = false
         lastPositionSave()
     end
-    if isRedPixel(bg_Collision_InClub_Data, player.mapTrueX - (tileWH / 2) + (6 * gfxScale), player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+    if isRedPixel(bg_Collision_InClub_Data, player.mapTrueX - (tileWH / 2) + (6 * gfxScale * gfxScale) / 4, player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
         player.inClub = true
     else
@@ -104,6 +107,13 @@ end
 
 function handleInteraction()
     for _, interacts in pairs(interactables) do
+        if _ == 4 or _ == 11 then
+            if contains(InventoryBag, "Bigmode Blazer", false) then
+                if checkCollision(player, interactables[11]) then return interacts.id end
+            else if checkCollision(player, interactables[4]) then return interacts.id end
+            end
+        end
+
         if checkCollision(player, interacts) then return interacts.id end
     end
     return 0
@@ -123,19 +133,19 @@ function startConversationWith(_interactableID)
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                jacketGuyConvoState = 1
                 if contains(InventoryBag, interactables[1].passingItems[1], true) then
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
                     currentDialogTreeId = interactables[1].checkPoints[1]
                 end
+            elseif gothGirlConvoState == 2 then
+                    currentDialogTreeId = interactables[1].checkPoints[2]
             end
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
             if sororityGirlConvoState == 0 then
-                currentDialogTreeId = "1"
+                currentDialogTreeId = "1z"
             elseif sororityGirlConvoState == 1 then
-                hairGuyConvoState = 1
                 if contains(InventoryBag, interactables[2].passingItems[1], true) then
                     currentDialogTreeId = interactables[2].passPoints[1]
                 else
@@ -153,6 +163,8 @@ function startConversationWith(_interactableID)
                 else
                     currentDialogTreeId = interactables[2].checkPoints[3]
                 end
+            elseif sororityGirlConvoState == 4 then
+                    currentDialogTreeId = interactables[2].checkPoints[4]
             end
         -- Influancer girl section
         elseif conversationState == interactables[3].vanityName then
@@ -176,20 +188,25 @@ function startConversationWith(_interactableID)
                 else
                     currentDialogTreeId = interactables[3].checkPoints[3]
                 end
+            elseif influencerGirlConvoState == 4 then
+                currentDialogTreeId = interactables[3].checkPoints[4]
             end
         elseif conversationState == interactables[4].vanityName then
             --NEEDS TO BE TESTED
             if jacketGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif jacketGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif jacketGuyConvoState == 2 then
+
                 --logic to swap to no jacket guy
+                conversationState = interactables[11].vanityName
+                currentDialogTreeId = "1"
             end
         elseif conversationState == interactables[5].vanityName then
             --NEEDS TO BE TESTED
             if hairGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif hairGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif hairGuyConvoState == 2 then
@@ -198,7 +215,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[6].vanityName then
             --NEEDS TO BE TESTED
             if shadesGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shadesGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shadesGuyConvoState == 2 then
@@ -207,7 +224,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[7].vanityName then
             --NEEDS TO BE TESTED
             if absGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif absGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif absGuyConvoState == 2 then
@@ -216,7 +233,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[8].vanityName then
             --NEEDS TO BE TESTED
             if shoesGirlConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shoesGirlConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shoesGirlConvoState == 2 then
@@ -225,7 +242,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[9].vanityName then
             --NEEDS TO BE TESTED
             if shortsGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(3).tostring()
+                currentDialogTreeId = tostring(math.random(3))
             elseif shortsGuyConvoState == 1 then
                 currentDialogTreeId = "4"
             elseif shortsGuyConvoState == 2 then
@@ -234,7 +251,7 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[10].vanityName then
             --NEEDS TO BE TESTED
             if mewGuyConvoState == 0 then
-                currentDialogTreeId = randomNumber(4).tostring()
+                currentDialogTreeId = tostring(math.random(4))
             elseif mewGuyConvoState == 1 then
                 currentDialogTreeId = "5"
             elseif mewGuyConvoState == 2 then
@@ -243,6 +260,8 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[11].vanityName then
             --NEEDS TO BE TESTED
             currentDialogTreeId = "1" 
+        elseif conversationState == interactables[12].vanityName then
+            currentDialogTreeId = "1"
         end
     end
 end
@@ -295,6 +314,60 @@ function handleConversation()
         if currentDialogTreeNode["checkPoint"] ~= nil then
             influencerGirlConvoState = currentDialogTreeNode.checkPoint
         end
+    elseif conversationState == interactables[4].vanityName then
+        currentDialogTreeNode = findDialogNode(jacketGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            jacketGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[5].vanityName then
+        currentDialogTreeNode = findDialogNode(hairGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            hairGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[6].vanityName then
+        currentDialogTreeNode = findDialogNode(shadesGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shadesGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[7].vanityName then
+        currentDialogTreeNode = findDialogNode(absGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            absGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[8].vanityName then
+        currentDialogTreeNode = findDialogNode(shoesGirlTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shoesGirlConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[9].vanityName then
+        currentDialogTreeNode = findDialogNode(shortsGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            shortsGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[10].vanityName then
+        currentDialogTreeNode = findDialogNode(mewGuyTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            mewGuyConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[11].vanityName then
+        currentDialogTreeNode = findDialogNode(jacketGuyNOJacketTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            jacketGuyNOJacketConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[12].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
     end
 end
 
@@ -304,6 +377,8 @@ function handleDialogSelection()
     if selectedOption == nil then return end
 
     if selectedOption.nextDialog == "failure" then
+        player.mapTileX = 1
+        player.mapTileY = 15.5 -- TODO REMOVE
         defeatTimer = 0
         conversationState = ""
         currentDialogTreeNode = nil
@@ -318,10 +393,82 @@ function handleDialogSelection()
     end
 
     if selectedOption.nextDialog == "success" then
-        gothGirlConvoState = 2 --ending number
+        -- Goth girl section
+        if conversationState == interactables[1].vanityName then
+            if gothGirlConvoState == 1 and contains(InventoryBag, interactables[1].passingItems[1], true) then
+                gothGirlConvoState = 2
+            elseif gothGirlConvoState == 1 then jacketGuyConvoState = 1
+            end
+        -- Sorority girl section
+        elseif conversationState == interactables[2].vanityName then
+            if sororityGirlConvoState == 1 and gothGirlConvoState == 2 then
+                hairGuyConvoState = 1 
+            elseif sororityGirlConvoState == 2 and contains(InventoryBag, interactables[2].passingItems[1], true) then
+                shadesGuyConvoState = 1
+            elseif sororityGirlConvoState == 3 and contains(InventoryBag, interactables[2].passingItems[2], true) then
+                absGuyConvoState = 1
+            elseif sororityGirlConvoState == 4 and contains(InventoryBag, interactables[2].passingItems[3], true) then
+                -- HAVE SORORITY GIRLS MOVE OUT OF WAY HERE
+                currentCollisionDraw = bg_Collision_PostSorortiy
+                currentCollisionData = bg_Collision_PostSorortiy_Data
+                sororityDrawYOffset = -7.5 * tileWH
+            end
+        --Influancer girl section
+        elseif conversationState == interactables[3].vanityName then
+            if influencerGirlConvoState == 1 then
+                shoesGirlConvoState = 1 
+            elseif influencerGirlConvoState == 2 and contains(InventoryBag, interactables[3].passingItems[1], true) then
+                shortsGuyConvoState = 1
+            elseif influencerGirlConvoState == 3 and contains(InventoryBag, interactables[3].passingItems[2], true) then
+                mewGuyConvoState = 1
+            elseif influencerGirlConvoState == 4 and contains(InventoryBag, interactables[3].passingItems[3], true) then
+            -- TRIGGER BOSS FIGHT HERE
+                bossFightInit()
+            elseif influencerGirlConvoState == 5 then
+                gameState = "victory"
+            end
+        elseif conversationState == interactables[4].vanityName then
+            if jacketGuyConvoState == 2 then   
+                currentItemBeingGotInt = 1
+                getItemHandler("Bigmode Blazer")
+                -- table.insert(InventoryBag, "Bigmode Blazer")
+                isJackenStolen = true
+                --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
+            end
+        elseif conversationState == interactables[5].vanityName then
+            if hairGuyConvoState == 2 then   
+                currentItemBeingGotInt = 2
+                getItemHandler("Bald-Be-Gone TM")
+            end    
+        elseif conversationState == interactables[6].vanityName then
+            if shadesGuyConvoState == 2 then   
+                currentItemBeingGotInt = 3
+                getItemHandler("Heavenly Shades")
+            end    
+        elseif conversationState == interactables[7].vanityName then
+            if absGuyConvoState == 2 then   
+                currentItemBeingGotInt = 4
+                getItemHandler("Miniature Bowflex")
+            end    
+        elseif conversationState == interactables[8].vanityName then
+            if shoesGirlConvoState == 2 then   
+                currentItemBeingGotInt = 5
+                getItemHandler("Agarthan Fjordans")
+            end
+        elseif conversationState == interactables[9].vanityName then
+            if shortsGuyConvoState == 2 then   
+                currentItemBeingGotInt = 6
+                getItemHandler("Slick Slacks")
+            end
+        elseif conversationState == interactables[10].vanityName then
+            if mewGuyConvoState == 2 then   
+                currentItemBeingGotInt = 7
+                getItemHandler("Book of Mew")
+                -- table.insert(InventoryBag, "Book of Mew")
+            end
+        end
         conversationState = ""
         currentDialogTreeNode = nil
-        return
     end
 
     currentDialogTreeId = selectedOption.nextDialog
@@ -329,15 +476,45 @@ function handleDialogSelection()
 end
 
 -- CUTSCENES/MOVIES AND BOSSFIGHT
-function bossFight()
+function bossFightInit()
     bossFightTimer = 0
     if bossFightIntroMovie then
         isInBossFight = true
+        bossFightIntroMovie:getSource():setVolume(volumeMaster)
         bossFightIntroMovie:play()
     end
 end
 
 function bossFightGameState()
-    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(influencerCurrentHP / influencerMaxHP, 25)) -- scales with missing hp
-    playerTotalDamage = playerBaseDamage * math.floor(bossFightTimer, 5) -- scales with time
+    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(math.ceil((1 - influencerCurrentHP / influencerMaxHP) * 5), 5)) -- scales with missing hp
+    playerTotalDamage = playerBaseDamage * math.floor(math.min(math.max((bossFightTimer - 10) / 5, 1), 10)) -- scales with time
+
+    if influencerHealTimer > (0.48 / 4) then
+        influencerCurrentHP = math.min(influencerMaxHP - 5, influencerTotalHeal + influencerCurrentHP)
+        influencerHealTimer = 0
+    end
+
+    if influencerCurrentHP == 0 then
+        influencerHealTimer = 0
+        if bossFightFadeOutTimer >  bossFightFadeOutWindDownTime + 5 then
+            isInBossFight = false
+        end
+    else
+        bossFightFadeOutTimer = 0
+        bossFightAlphaTween = 0
+    end
+end
+
+function getItemHandler(_item)
+    isGettingItem = true
+    currentItemBeingGot = _item
+    player.anim.currAnimState = 7
+    delayedSfx = player.itemSfx[currentItemBeingGotInt]
+    
+    local youGotSfx
+    if currentItemBeingGotInt == 4 then youGotSfx = player.itemSfx[9] else youGotSfx = player.itemSfx[8] end
+    sfxManager(youGotSfx, false)
+    itemGetSfxDelayTimer = youGotSfx:getDuration("seconds")
+    itemGetSfxDelayTime = 0
+    isPlayingDelayedSfx = true
 end

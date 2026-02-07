@@ -1,9 +1,18 @@
 function assignSpriteSheets()
     -- player
-    player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
+    player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_base-Sheet.png")
     player.anim = playerAnimationArray
     player.anim:BuildAnimations(player.spriteSheet, tileWH, tileWH)
     player.anim.currAnimState = 3
+
+    playerFatbody = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_fatbody-Sheet.png")} 
+    playerAbs = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_abs-Sheet.png")} 
+    playerJacket = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_jacket-Sheet.png")}
+    playerShoes = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_shoes-Sheet.png")}
+    playerShades = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_shades-Sheet.png")}
+    playerHair = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_hair-Sheet.png")}
+    playerMew = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_mew-Sheet.png")}
+    playerPants = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_pants-Sheet.png")}
 
     thingsBeingAnimated = {
         player.anim
@@ -34,6 +43,11 @@ function assignSpriteSheets()
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
     end
+
+    table.insert(thingsBeingAnimated, bossFightBG.anim)
+    table.insert(thingsBeingAnimated, bossFightStaticClash.anim)
+    table.insert(thingsBeingAnimated, bossFightBeamElectricity.anim)
+    table.insert(thingsBeingAnimated, bossFightElectricity.anim)
 end
 
 function assignLayerArt()
@@ -80,6 +94,20 @@ function assignPortraits()
         fill = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_fill.png")
         , outline = love.graphics.newImage("assets/art/ui/gothGirl_chatbox_outline.png")
     }
+    interactables[2].chatbox = {
+        fill = love.graphics.newImage("assets/art/ui/Frat girl chatbox_fill.png")
+        , outline = love.graphics.newImage("assets/art/ui/Frat girl chatbox_outline.png")
+    }
+    interactables[3].chatbox = {
+        fill = love.graphics.newImage("assets/art/ui/Influencer Textbox_fill.png")
+        , outline = love.graphics.newImage("assets/art/ui/Influencer Textbox_outline.png")
+    }
+    for m = 4, #interactables, 1 do 
+        interactables[m].chatbox = {
+            fill = love.graphics.newImage("assets/art/ui/Npc Sprite textbox_fill.png")
+            , outline = love.graphics.newImage("assets/art/ui/Npc Sprite textbox_outline.png")
+        }
+    end
 
     -- portraits
     interactables[1].portrait = {spriteSheet = love.graphics.newImage("assets/art/portraits/Layla Sprite Sheet_FINAL.png")}

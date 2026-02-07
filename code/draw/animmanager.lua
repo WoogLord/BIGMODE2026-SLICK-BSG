@@ -71,6 +71,8 @@ portraitAnimationArray = AnimClass:new(
 
 jacketGuyAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
 everyoneElseAnimationArray = AnimClass:new({"IdleDown"}, {4}, {{}}, {4}, {false}, {false})
+bossFightPixelAnimationArray = AnimClass:new({"MainAnim"}, {4}, {{}}, {4}, {false}, {false})
+bossFightVectorAnimationArray = AnimClass:new({"MainAnim"}, {4}, {{}}, {4}, {false}, {false})
 
 function animationManager(_dt)
     globalSpriteTimer = globalSpriteTimer + _dt
