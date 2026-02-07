@@ -7,10 +7,8 @@ function drawDebug()
     love.graphics.print("Current playState: " .. playState, 0, 20)
     love.graphics.print("Current inventoryHandler: " .. tostring(inventoryHandler), 0, 40)
     love.graphics.print("Current player.mapTileX: " .. player.mapTileX .. ", player.mapTileY: " .. player.mapTileY, 0, 60)
-    love.graphics.print(
-        "Current player.lastMapTileX: " .. player.lastMapTileX .. ", player.lastMapTileY: " .. player.lastMapTileY, 0, 80)
-    love.graphics.print("Current player.mapTrueX: " .. player.mapTrueX .. ", player.mapTrueY: " .. player.mapTrueY, 0,
-        100)
+    love.graphics.print("Current player.lastMapTileX: " .. player.lastMapTileX .. ", player.lastMapTileY: " .. player.lastMapTileY, 0, 80)
+    love.graphics.print("Current player.mapTrueX: " .. player.mapTrueX .. ", player.mapTrueY: " .. player.mapTrueY, 0, 100)
     love.graphics.print("Current player.isColliding: " .. tostring(player.isColliding), 0, 120)
     love.graphics.print("Current interactingWith: " .. tostring(interactingWith), 0, 140)
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
@@ -493,6 +491,7 @@ function drawBossFight()
     love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
 
+    -- love.graphics.
 
     love.graphics.setColor(1,1,1,1 )
     -- rendered on top so movie plays

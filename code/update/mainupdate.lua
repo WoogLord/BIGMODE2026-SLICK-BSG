@@ -434,7 +434,7 @@ function bossFightInit()
     bossFightTimer = 0
     if bossFightIntroMovie then
         isInBossFight = true
-        -- bossFightIntroMovie:setVolume(volumeMaster)
+        bossFightIntroMovie:getSource():setVolume(volumeMaster)
         bossFightIntroMovie:play()
     end
 end
