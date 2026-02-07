@@ -442,5 +442,15 @@ function drawVictory()
 end
 
 function drawBossFight()
-    love.graphics.draw(bossFightIntroMovie, 0, 0, 0, 1, 1)
+    love.graphics.setColor(1,1,1,1 )
+    love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
+    -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
+
+
+
+
+    -- rendered on top so movie plays
+    if bossFightIntroMovie:isPlaying() then 
+        love.graphics.draw(bossFightIntroMovie, 0, 0, 0, gfxScale / 4, gfxScale / 4)
+    else end
 end

@@ -339,5 +339,7 @@ end
 
 function bossFightGameState()
     influencerTotalHeal = influencerBaseHeal * math.floor(math.min(influencerCurrentHP / influencerMaxHP, 25)) -- scales with missing hp
-    playerTotalDamage = playerBaseDamage * math.floor(bossFightTimer, 5) -- scales with time
+    playerTotalDamage = playerBaseDamage * math.floor(math.min((bossFightTimer - 10) / 5, 5)) -- scales with time
+
+    influencerCurrentHP = math.min(influencerMaxHP, influencerTotalHeal + influencerCurrentHP)
 end

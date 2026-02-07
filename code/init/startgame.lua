@@ -20,10 +20,12 @@ function init()
     -- Bossfight shit
     isInBossFight = false
     influencerMaxHP = 250
-    influencerCurrentHP = 250
+    influencerCurrentHP = influencerMaxHP - 5
     influencerBaseHeal = 1
     playerBaseDamage = 1
     bossFightTimer = 0
+    bossFightStatics = love.graphics.newImage("assets/art/bossfightstuff/frame_11_final.png")
+    bossFightHisCore = love.graphics.newImage("assets/art/bossfightstuff/ref sheet.png")
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"
