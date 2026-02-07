@@ -118,6 +118,7 @@ function init()
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
     gfxScale = math.floor((screenW - 1) / 480)
+    portScale = 1 / 4 * gfxScale
     currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
     isFullScreen = false
@@ -174,13 +175,14 @@ function init()
         , menuOK = love.audio.newSource("assets/sfx/regular ah soundeffects/SFX_7.wav", "stream", false)
     }
     credits = 0 -- mus_06_rave3_w_L
+    bossFightMusic = love.audio.newSource("assets/music/spam.mp3", "stream", false)
     
     -- Movies
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
 
     -- Inventory Object
-    InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
-    -- InventoryBag = {}
+    -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
         , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item02_hair.png"), name = "Bald-Be-Gone TM", description = "Beautiful hair in a bottle."}

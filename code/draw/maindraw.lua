@@ -587,16 +587,21 @@ function drawBossFight()
         love.graphics.draw(bossFightSpliceRightKame, (redStart * gfxScale / 4) - (j * gfxScale), tY, 0, gfxScale, bfResize)
     end
 
-    love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall], 210 * gfxScale / 4, tY, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightRightKame.spriteSheet, bossFightRightKame.anim.animations[1][bossFightFrameStall], 760 * gfxScale / 4, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall]
+        , 210 * gfxScale / 4, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightRightKame.spriteSheet, bossFightRightKame.anim.animations[1][bossFightFrameStall]
+        , 760 * gfxScale / 4, tY, 0, bfResize, bfResize)
 
     local clashOffset = (500 * gfxScale / 4) - (pxDiff / 2) + (pxDiff * playerHP / influencerMaxHP)
-    love.graphics.draw(bossFightStaticClash.spriteSheet, bossFightStaticClash.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightBeamElectricity.spriteSheet, bossFightBeamElectricity.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightElectricity.spriteSheet, bossFightElectricity.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightStaticClash.spriteSheet, bossFightStaticClash.anim.currentAnim
+        , clashOffset, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightBeamElectricity.spriteSheet, bossFightBeamElectricity.anim.currentAnim
+        , clashOffset, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightElectricity.spriteSheet, bossFightElectricity.anim.currentAnim
+        , clashOffset, tY, 0, bfResize, bfResize)
 
     love.graphics.setColor(1,1,1,0.8 * (1-bossFightAlphaTween))
-    love.graphics.draw(bossFightHeart, 0, 0, 0, gfxScale / 4, gfxScale / 4)
+    love.graphics.draw(bossFightHeart, 0, 0, 0, gfxScale, gfxScale)
 
     love.graphics.setColor(1,1,1,1)
     -- rendered on top so movie plays
