@@ -228,7 +228,7 @@ end
 
 function drawConversation()
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setFont(mainMenuFont)
+    love.graphics.setFont(npcDialogueFont)
 
     -- use each girls text bubble
     if interactables[interactingWith].chatbox then
@@ -283,11 +283,13 @@ function drawConversation()
     if charsToShow > #fullText then charsToShow = #fullText end
 
     local toShow = string.sub(fullText, 1, charsToShow)
+    love.graphics.setFont(npcDialogueFont)
     love.graphics.printf(toShow
         , 160 * gfxScale / 4
-        , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h * gfxScale / 4)
-        , (1250 / 1920 * currWinDim.w) / (gfxScale / 4)
+        , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h)
+        , (1250 / 1920 * currWinDim.w)
         , "left", 0, gfxScale / 4, gfxScale / 4)
+    love.graphics.setFont(responseFont)
 
     -- Response logic
     local delayAfterFinish = 0.4
@@ -354,12 +356,13 @@ function drawInventory()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setFont(mainMenuFont)
 
+    inventoryCellSize = 32 * inventoryScale * gfxScale / 4
     -- Base rectangle
     local baseRecWidth = inventoryCellSize * inventoryCols
     local baseRecHeight = inventoryCellSize * inventoryRows
     love.graphics.setColor(.8, .7, .3, 1)
     love.graphics.rectangle("fill", (currWinDim.w / 2) - (baseRecWidth / 2), (currWinDim.h / 2) - (baseRecHeight / 2),
-        baseRecWidth + 100, baseRecHeight, 10, 10)
+        baseRecWidth + (100 * gfxScale / 4), baseRecHeight, 10, 10)
 
     -- Inventory grid
     love.graphics.setColor(.212, .203, .154, 1) -- Set color for the grid lines
@@ -415,7 +418,7 @@ function drawInventory()
     love.graphics.setColor(.8, .5, .3, 1) -- Set color for the outline
     love.graphics.setLineWidth(8)
     love.graphics.rectangle("line", (currWinDim.w / 2) - (baseRecWidth / 2) - 3,
-        (currWinDim.h / 2) - (baseRecHeight / 2) - 3, baseRecWidth + 103, baseRecHeight + 3, 10, 10)
+        (currWinDim.h / 2) - (baseRecHeight / 2) - 3, baseRecWidth + (103 * gfxScale / 4), baseRecHeight + 3, 10, 10)
 
     -- Inventory items
     love.graphics.reset()
@@ -427,14 +430,14 @@ function drawInventory()
                 local x = (currWinDim.w / 2) - (inventoryCellSize * inventoryCols / 2) + (col - 1) * inventoryCellSize
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
                 
-                love.graphics.draw(InventoryImages[item].image, x, y, 0, inventoryScale, inventoryScale)
+                love.graphics.draw(InventoryImages[item].image, x, y, 0, inventoryScale * gfxScale / 4, inventoryScale * gfxScale / 4)
             end
         end
     end
 
     -- Show player
     love.graphics.reset()
-    local plX, plY = currWinDim.w / 2 + 225, currWinDim.h / 2 - 55
+    local plX, plY = currWinDim.w / 2 + (225 * gfxScale / 4), currWinDim.h / 2 - (55  * gfxScale / 4)
     local tFrames = player.anim.animations[1][math.ceil(globalSpriteTimer*player.anim.framesPerSecond[1] % player.anim.frames[1])]
     -- local tFrames = player.anim.animations[1][1]
     love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
