@@ -154,13 +154,13 @@ function init()
     -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
     InventoryBag = {}
     InventoryImages = {
-        ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png"), name = "Bigmode Blazer", description = "A stylish leather jacket"}
-        , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pill bottles for hair.png"), name = "Bald-Be-Gone TM", description = "A bottle of hair growth solution"}
-        , ["Heavenly Shades"] = {image = love.graphics.newImage("assets/art/Nightclubitems/gurren lagan glasses.png"), name = "Heavenly Shades", description = "Glasses that make you look cool"}
-        , ["Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Bowflex Sprite.png"), name = "Bowflex", description = "A fitness machine that makes you strong"}
-        , ["Agarthan Fjordans"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Shoe sprite for one night.png"), name = "Agarthan Fjordans", description = "Shoes that make you feel like a king"}
-        , ["Slick Slacks"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pants for one night.png"), name = "Slick Slacks", description = "Pants that make you feel like a gentleman"}
-        , ["Book of Mew"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Book of Mew.png"), name = "Book of Mew", description = "A mysterious book that emanates a strange energy"}
+        ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
+        , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pill bottles for hair.png"), name = "Bald-Be-Gone TM", description = "Beautiful hair in a bottle."}
+        , ["Heavenly Shades"] = {image = love.graphics.newImage("assets/art/Nightclubitems/gurren lagan glasses.png"), name = "Heavenly Shades", description = "Makes it a little hard to see."}
+        , ["Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Bowflex Sprite.png"), name = "Bowflex", description = "Somehow, you got abs."}
+        , ["Agarthan Fjordans"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Shoe sprite for one night.png"), name = "Agarthan Fjordans", description = "Strong shoe game = strong woo game"}
+        , ["Slick Slacks"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Pants for one night.png"), name = "Slick Slacks", description = "Better than crapped briefs."}
+        , ["Book of Mew"] = {image = love.graphics.newImage("assets/art/Nightclubitems/Book of Mew.png"), name = "Book of Mew", description = "Written by Yakub himself."}
     }
     -- Inventory variables
     inventoryScale = 3
@@ -322,7 +322,7 @@ function init()
         {id = "22", npcText = "Wow yes! I'm surprised you got it! You're not half bad. If you had some sunglasses to cover that face I might give you my number.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "30"}}},
         {id = "23", npcText = "*Multiple girls come into sight with only slight variations of their appearance*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "24"}}},
         {id = "24", npcText = "We all look nothing alike. *they say in unison. *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "25"}}},
-        {id = "25", npcText = "Get out of here. You're Scaring away the good looking guys!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
+        {id = "25", npcText = "Get out of here. You're scaring away the good looking guys!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "27", npcText = "*You open your wallet and a small moth flies out. You see you have a singel 10 dollar bill* Heh............. Do one of you want a shot?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7"}}},
         {id = "28", npcText = "We all look nothing alike. *They say in unison.*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "29"}}},
         {id = "29", npcText = "Get out of here. You're Scaring away the good looking guys!", npcEmotion = 2, responses = {{text = "-->", nextDialog = "failure"}}},
@@ -340,7 +340,7 @@ function init()
         {id = "10a", npcText = "Ok Squidward. With a body like that, I can't see you doing interpretative dance. How much do you weigh? ", npcEmotion = 1, responses = {{text = "Listen, that doesn't matter. Just let me hit and I'll be on my way. ", nextDialog = "11a"}, {text = "Like 280 pounds, but most of it's muscle. ", nextDialog = "12a"}}},
         {id = "11a", npcText = "Ew! What the fuck. I almost liked you for a second.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "12a", npcText = "Yeah right. I can believe the 280 but you're at least 40% body fat. Get out of here, you're embarrassing me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}},checkPoint = 3}, --CHECKPOINT 3
-        {id = "13a", npcText = "Ugg bit of cliche. Do you really think I've never heard that one?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2a"}}},
+        {id = "13a", npcText = "Ugg bit of a cliche. Do you really think I've never heard that one?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2a"}}},
         {id = "14a", npcText = "Ummmmm...... What the fuck was that?", npcEmotion = 3, responses = {{text = "A Nollie Backside kickflip. What else could it be? ", nextDialog = "15a"}, {text = "Yikes. Risky play, forget about that.", nextDialog = "20a"}}},
         {id = "15a", npcText = "Damn, I thought it was a backside heelflip. I didn't know you skate. ", npcEmotion = 1, responses = {{text = "Yeah, I'm a bit of a flat ground demon. Don't let my weight fool you.", nextDialog = "16a"}, {text = "I actually don't. I'm literally a poser.", nextDialog = "19a"}}},
         {id = "16a", npcText = "You are on the bigger side for a skater. But I do love a guy with some moves.", npcEmotion = 1, responses = {{text = "Oh really? Give me your number and maybe I can show you some other kinds of moves. If you know what I mean.", nextDialog = "17a"}, {text = "Love? How formal. I humbly request your phone number.", nextDialog = "18a"}}},
@@ -390,7 +390,7 @@ function init()
         {id = "17", npcText = "Never!!!!!!!!!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "18"}}},
         {id = "18", npcText = "HYYYAAAAAAAAAAAAAAA!!!!!!!!!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 4},
             -- part 2 post checkpoint 4 -- LAST OF THE GAME
-        {id = "1a", npcText = "You know what lil nigga, take my number!  It's 561-398-3755", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 5},
+        {id = "1a", npcText = "You know what, take my number!  It's 561-398-3755", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 5},
     }   
     
     jacketGuyTree = {
