@@ -36,6 +36,13 @@ function love.keypressed(key)
                 if key == INPUTS_ARR.cancel then
                     influencerCurrentHP = math.max(influencerCurrentHP - playerTotalDamage, 0)
                 end
+            elseif isGettingItem then
+                if key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
+                    -- exit get item state
+                    table.insert(InventoryBag, currentItemBeingGot)
+                    -- currentItemBeingGotInt = #InventoryBag + 1
+                    isGettingItem = false
+                end
             elseif inventoryHandler then --Inventory Logic
                 if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
                     selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
@@ -118,20 +125,20 @@ function love.keypressed(key)
     end
 end
 
--- handle inputs - mouse
-function isMouseOverButton(_button)
-    local mx, my = love.mouse.getPosition()
-    return mx > _button.x and mx < _button.x + _button.w and my > _button.y and my < _button.y + _button.h
-end
+-- -- handle inputs - mouse
+-- function isMouseOverButton(_button)
+--     local mx, my = love.mouse.getPosition()
+--     return mx > _button.x and mx < _button.x + _button.w and my > _button.y and my < _button.y + _button.h
+-- end
 
-function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
-    if gameState == "mainmenu" then
-        handleMainMenuButton(_buttonPressed)
-    end
-end
+-- function love.mousepressed(_x, _y, _buttonPressed, _isTouch, _presses)
+--     if gameState == "mainmenu" then
+--         handleMainMenuButton(_buttonPressed)
+--     end
+-- end
 
 function playerControls()
-    if gameState == "play" and playState == "exploring" and not inventoryHandler and conversationState == "" then
+    if gameState == "play" and playState == "exploring" and not inventoryHandler and conversationState == "" and not isGettingItem then
         --== MOVEMENT ==--
         if player.facing == "Down" then player.anim.currAnimState = 1 player.isFlippedLeft = false
         elseif player.facing == "Up" then player.anim.currAnimState = 2 player.isFlippedLeft = false
@@ -143,35 +150,35 @@ function playerControls()
         if (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
             player.anim.currAnimState = 5 player.facing = "Up" player.isFlippedLeft = false
-            player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
-            player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY - (4 * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX - (4 * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2])) then
             player.anim.currAnimState = 6 player.facing = "Left" player.isFlippedLeft = true
-            player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
-            player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY + (4 * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX - (4 * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
             player.anim.currAnimState = 4 player.facing = "Down" player.isFlippedLeft = false
-            player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
-            player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY + (4 * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX + (4 * moveSpeed / tileWH)
         elseif (love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2])) 
             and (love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2])) then
             player.anim.currAnimState = 6 player.facing = "Right" player.isFlippedLeft = false
-            player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
-            player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY - (4 * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX + (4 * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.up[1]) or love.keyboard.isDown(INPUTS_ARR.up[2]) then
             player.anim.currAnimState = 5 player.facing = "Up" player.isFlippedLeft = false
-            player.mapTileY = player.mapTileY - (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY - (4 * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.left[1]) or love.keyboard.isDown(INPUTS_ARR.left[2]) then
             player.anim.currAnimState = 6 player.facing = "Left" player.isFlippedLeft = true
-            player.mapTileX = player.mapTileX - (gfxScale * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX - (4 * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.down[1]) or love.keyboard.isDown(INPUTS_ARR.down[2]) then
             player.anim.currAnimState = 4 player.facing = "Down" player.isFlippedLeft = false
-            player.mapTileY = player.mapTileY + (gfxScale * moveSpeed / tileWH)
+            player.mapTileY = player.mapTileY + (4 * moveSpeed / tileWH)
         elseif love.keyboard.isDown(INPUTS_ARR.right[1]) or love.keyboard.isDown(INPUTS_ARR.right[2]) then
             player.anim.currAnimState = 6 player.facing = "Right" player.isFlippedLeft = false
-            player.mapTileX = player.mapTileX + (gfxScale * moveSpeed / tileWH)
+            player.mapTileX = player.mapTileX + (4 * moveSpeed / tileWH)
         end
     end
 end

@@ -4,7 +4,7 @@ function init()
     playState = ""
     conversationState = ""
     inventoryHandler = false
-    gfxScale = 4
+    gfxScale = 3
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     globalSpriteTimer = 0
@@ -41,6 +41,15 @@ function init()
     bossFightFadeOutWindDownTime = 3
     bossFightAlphaTween = 1
 
+    -- item get
+    isGettingItem = false
+    currentItemBeingGot = ""
+    currentItemBeingGotInt = 1
+    itemGetSfxDelayTimer = 5
+    itemGetSfxDelayTime = 0
+    isPlayingDelayedSfx = false
+    delayedSfx = nil
+
     bossFightArtArray = {
         bossFightStaticClash, bossFightLeftKame, bossFightRightKame, bossFightBeamElectricity, bossFightElectricity
     }
@@ -69,13 +78,24 @@ function init()
         , lastMapTileX = 0, lastMapTileY = 0 
         , speed = 25
         , items = {
-            jacket = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png")}
-            , hair = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Pill bottles for hair.png")}
-            , shades = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/gurren lagan glasses.png")}
-            , abs = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Bowflex Sprite.png")}
-            , shoes = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Shoe sprite for one night.png")}
-            , pants = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Pants for one night.png")}
-            , mew = {isAcquired = false, spriteRef = love.graphics.newImage("assets/art/Nightclubitems/Book of Mew.png")}
+            love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item02_hair.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item03_shades.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item04_abs.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item05_shoes.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item06_pants.png")
+            , love.graphics.newImage("assets/art/Nightclubitems/item07_mew.png")
+        }
+        , itemSfx = {
+            love.audio.newSource("assets/sfx/sillyvoicelines/item01_jacket.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item02_hair.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item03_shades.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item04_abs.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item05_shoes.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item06_pants.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/item07_mew.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_01.mp3", "stream", false)
+            , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_02.mp3", "stream", false)
         }
         , hitbox = {w = 14, h = 14}
         , isColliding = false
@@ -90,7 +110,7 @@ function init()
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
-    currWinDim = {w = 1920, h = 1080}
+    currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
     isFullScreen = false
     love.window.setFullscreen(isFullScreen)
@@ -151,7 +171,7 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/mangaPanel_test.ogv")
 
     -- Inventory Object
-    -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
     InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/leatheer jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
@@ -190,7 +210,7 @@ function init()
     interactableHitbox = {w = 48, h = 48}
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (9 * tileWH), mapTrueY = (13 * tileWH), checkPoints = {"48a", "1d"}, passPoints = {"1c1"}, passingItems = {"Bigmode Blazer"}, tileH = 32, tileW = 32}
-        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (19 * tileWH), mapTrueY = (18 * tileWH), checkPoints = {"2z", "1", "36a", "1c"}, passPoints = {"1", "1a", "1b"}, passingItems = {"Bald-Be-Gone TM", "Heavenly Shades", "Bowflex"}, tileH = 32, tileW = 32}
+        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (19 * tileWH), mapTrueY = (18 * tileWH), checkPoints = {"2z", "1", "36a", "1c"}, passPoints = {"1", "1a", "1b"}, passingItems = {"Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex"}, tileH = 32, tileW = 32}
         , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (28 * tileWH), mapTrueY = (22 * tileWH), checkPoints = {"1", "3", "5", "1a"}, passPoints = {"3", "5", "10"}, passingItems = {"Agarthan Fjordans", "Slick Slacks", "Book of Mew"}, tileH = 32, tileW = 32}
         , {id = 4, name = "jacketGuy", vanityName = "Axel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         , {id = 5, name = "hairGuy", vanityName = "Monoxydillian", mapTrueX = (12 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}

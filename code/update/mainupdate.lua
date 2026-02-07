@@ -53,16 +53,19 @@ function allTheFullscreenChangeStuff()
     local cw, ch = love.graphics.getDimensions()
     currWinDim.w, currWinDim.h = cw, ch
     local recalcRatio = (currWinDim.w / priorWinDim.w)
+    gfxScale = gfxScale * recalcRatio
+    portScale = portScale * recalcRatio
     -- use the recalcRatio like below:
     -- PLAYER_STATS_ARR.x, PLAYER_STATS_ARR.y = PLAYER_STATS_ARR.x * recalcRatio, PLAYER_STATS_ARR.y * recalcRatio
 end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * 3 / 6)                  -- x min
-        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w * 3 / 6)) -- x max
-        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * 3 / 6)                 -- y min
-        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
+    local collRescale =  3 / 6 * gfxScale / 4
+    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * collRescale)                  -- x min
+        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w *collRescale)) -- x max
+        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * collRescale)                 -- y min
+        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * collRescale)) -- y max
 end
 
 function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check
@@ -426,33 +429,42 @@ function handleDialogSelection()
             end
         elseif conversationState == interactables[4].vanityName then
             if jacketGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Bigmode Blazer")
+                currentItemBeingGotInt = 1
+                getItemHandler("Bigmode Blazer")
+                -- table.insert(InventoryBag, "Bigmode Blazer")
                 isJackenStolen = true
                 --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
             end
         elseif conversationState == interactables[5].vanityName then
             if hairGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Bald-Be-Gone TM")
+                currentItemBeingGotInt = 2
+                getItemHandler("Bald-Be-Gone TM")
             end    
         elseif conversationState == interactables[6].vanityName then
             if shadesGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Heavenly Shades")
+                currentItemBeingGotInt = 3
+                getItemHandler("Heavenly Shades")
             end    
         elseif conversationState == interactables[7].vanityName then
             if absGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Bowflex")
+                currentItemBeingGotInt = 4
+                getItemHandler("Miniature Bowflex")
             end    
         elseif conversationState == interactables[8].vanityName then
             if shoesGirlConvoState == 2 then   
-                table.insert(InventoryBag, "Agarthan Fjordans")
+                currentItemBeingGotInt = 5
+                getItemHandler("Agarthan Fjordans")
             end
         elseif conversationState == interactables[9].vanityName then
             if shortsGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Slick Slacks")
+                currentItemBeingGotInt = 6
+                getItemHandler("Slick Slacks")
             end
         elseif conversationState == interactables[10].vanityName then
             if mewGuyConvoState == 2 then   
-                table.insert(InventoryBag, "Book of Mew")
+                currentItemBeingGotInt = 7
+                getItemHandler("Book of Mew")
+                -- table.insert(InventoryBag, "Book of Mew")
             end
         end
         conversationState = ""
@@ -491,4 +503,18 @@ function bossFightGameState()
         bossFightFadeOutTimer = 0
         bossFightAlphaTween = 0
     end
+end
+
+function getItemHandler(_item)
+    isGettingItem = true
+    currentItemBeingGot = _item
+    player.anim.currAnimState = 7
+    delayedSfx = player.itemSfx[currentItemBeingGotInt]
+    
+    local youGotSfx
+    if currentItemBeingGotInt == 4 then youGotSfx = player.itemSfx[9] else youGotSfx = player.itemSfx[8] end
+    sfxManager(youGotSfx, false)
+    itemGetSfxDelayTimer = youGotSfx:getDuration("seconds")
+    itemGetSfxDelayTime = 0
+    isPlayingDelayedSfx = true
 end

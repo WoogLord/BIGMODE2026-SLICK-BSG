@@ -36,6 +36,7 @@ function love.update(dt)
     bossFightTimer = bossFightTimer + dt
     bossFightFadeOutTimer = bossFightFadeOutTimer + dt
     influencerHealTimer = influencerHealTimer + dt
+    itemGetSfxDelayTime = itemGetSfxDelayTime + dt
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
     defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
     bossFightAlphaTween = math.min(bossFightFadeOutTimer / bossFightFadeOutWindDownTime, 1)

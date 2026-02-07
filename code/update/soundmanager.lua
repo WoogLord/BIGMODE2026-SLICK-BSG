@@ -1,5 +1,13 @@
 function soundManager(dt)
     musicManager(dt)
+    if isPlayingDelayedSfx and delayedSfx then
+        if itemGetSfxDelayTime > itemGetSfxDelayTimer  then 
+            if not delayedSfx:isPlaying() then
+                sfxManager(delayedSfx, false)
+            end
+            isPlayingDelayedSfx = false
+        end        
+    end
 end
 
 function musicManager(dt)
