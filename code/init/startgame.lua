@@ -77,7 +77,8 @@ function init()
         , facing = "Right"
         , mapTileX = 1, mapTileY = 15.5
         , mapTrueX = 0, mapTrueY = 0
-        , lastMapTileX = 0, lastMapTileY = 0 
+        , lastMapTileX = 1, lastMapTileY = 15.5 
+        , lastMapTrueX = 0, lastMapTrueY = 0
         , speed = 25
         , items = {
             love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png")
@@ -99,10 +100,12 @@ function init()
             , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_01.mp3", "stream", false)
             , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_02.mp3", "stream", false)
         }
-        , hitbox = {w = 14, h = 14}
+        , hitbox = {w = 14, h = 14, tileX = 0, tileY = 0}
         , isColliding = false
         , inClub = false
     }
+    player.mapTrueX, player.mapTrueY = (player.mapTileX * 32), (player.mapTileY * 32)
+    player.lastMapTrueX, player.lastMapTrueY = player.mapTrueX, player.mapTrueY
     floater = {}
     
     -- fonts

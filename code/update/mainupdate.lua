@@ -25,8 +25,10 @@ end
 
 function gameManager()
     player.mapTrueX, player.mapTrueY = (player.mapTileX * tileWH), (player.mapTileY * tileWH)
-    player.hitbox.x = currWinDim.w / 2 - (tileWH / 2) + (9 * gfxScale)
-    player.hitbox.y = currWinDim.h / 2 - (tileWH / 2) + (18 * gfxScale)
+    player.hitbox.x = (currWinDim.w / 2) + ((9) * gfxScale / 4) - (tileWH / 2)
+    player.hitbox.y = (currWinDim.h / 2) + ((18) * gfxScale / 4) - (tileWH / 2)
+    player.hitbox.tileX, player.hitbox.tileY = player.hitbox.x / tileWH, player.hitbox.y / tileWH
+    -- interactableHitbox.w, interactableHitbox.h = interactableHitbox.w * gfxScale / 4, interactableHitbox.h * gfxScale / 4 
 
     handleCollision()
     handleConversation()
@@ -61,7 +63,7 @@ end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    local collRescale =  3 / 6 * gfxScale / 4
+    local collRescale =  gfxScale / 4
     return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * collRescale)                  -- x min
         and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w *collRescale)) -- x max
         and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * collRescale)                 -- y min
@@ -69,9 +71,10 @@ function checkCollision(_a, _b)
 end
 
 function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check
+    print("redPicel checking x: ".._x..", y: ".._y..", w: ".._w..", h: ".._h)
     _x = math.floor(_x)
     _y = math.floor(_y)
-    if _x < 0 or _y < 0 or (_x + _w) >= _collisionData:getWidth() or (_y + _h) >= _collisionData:getHeight() then return true end
+    if _x < 0 or _y < 0 or (_x + _w - 1) >= _collisionData:getWidth() or (_y + _h - 1) >= _collisionData:getHeight() then return true end
     for w = 0, _w - 1, 1 do
         for h = 0, _h - 1, 1 do
             local r, g, b, a = _collisionData:getPixel(_x + w, _y + h)
@@ -80,14 +83,16 @@ function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we
             end
         end
     end
+    return false
 end
 
 function handleCollision()
     if isRedPixel(currentCollisionData 
         -- , drawnMapOffsetX
-        , player.mapTrueX - (tileWH / 2) + (6 * gfxScale)
-        , player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
-        , player.hitbox.w, player.hitbox.h) then
+        , player.mapTrueX + (tileWH * 1 / 3) -- this is for visual representation
+        , player.mapTrueY + (tileWH * 4 / 7)
+        , player.hitbox.w
+        , player.hitbox.h) then
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
         player.mapTrueX, player.mapTrueY = player.lastMapTrueX, player.lastMapTrueY
@@ -96,8 +101,8 @@ function handleCollision()
         lastPositionSave()
     end
     if isRedPixel(bg_Collision_InClub_Data
-        , player.mapTrueX - (tileWH / 2) + (6 * gfxScale)
-        , player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+        , player.mapTrueX + (tileWH * 1 / 3) -- this is for visual representation
+        , player.mapTrueY + (tileWH * 4 / 7)
         , player.hitbox.w, player.hitbox.h) then
         player.inClub = true
     else
