@@ -7,12 +7,12 @@ function assignSpriteSheets()
 
     playerFatbody = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_fatbody-Sheet.png")} 
     playerAbs = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_abs-Sheet.png")} 
-    playerJacket = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Jacket-Sheet.png")}
-    playerShoes = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Shoes-Sheet.png")}
-    playerShades = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Shades-Sheet.png")}
-    playerHair = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Hair-Sheet.png")}
-    playerMew = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Mew-Sheet.png")}
-    playerPants = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Pants-Sheet.png")}
+    playerJacket = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_jacket-Sheet.png")}
+    playerShoes = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_shoes-Sheet.png")}
+    playerShades = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_shades-Sheet.png")}
+    playerHair = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_hair-Sheet.png")}
+    playerMew = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_mew-Sheet.png")}
+    playerPants = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_pants-Sheet.png")}
 
     thingsBeingAnimated = {
         player.anim
