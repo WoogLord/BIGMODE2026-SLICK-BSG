@@ -1,9 +1,18 @@
 function assignSpriteSheets()
     -- player
-    player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player-sheet.png")
+    player.spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_base-Sheet.png")
     player.anim = playerAnimationArray
     player.anim:BuildAnimations(player.spriteSheet, tileWH, tileWH)
     player.anim.currAnimState = 3
+
+    playerFatbody = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_fatbody-Sheet.png")} 
+    playerAbs = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_abs-Sheet.png")} 
+    playerJacket = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Jacket-Sheet.png")}
+    playerShoes = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Shoes-Sheet.png")}
+    playerShades = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Shades-Sheet.png")}
+    playerHair = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Hair-Sheet.png")}
+    playerMew = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Mew-Sheet.png")}
+    playerPants = {spriteSheet = love.graphics.newImage("assets/art/spritesheets/player_Pants-Sheet.png")}
 
     thingsBeingAnimated = {
         player.anim
@@ -68,8 +77,8 @@ function assignLayerArt()
     bg_Collision_PostSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PostSorortiy.png")
     bg_Collision_InClub_Data = love.image.newImageData("assets/art/bgs/bg_Collision_InClub.png")
 
-    currentCollisionDraw = bg_Collision_PostSorortiy
-    currentCollisionData = bg_Collision_PostSorortiy_Data
+    currentCollisionDraw = bg_Collision_PreSorortiy
+    currentCollisionData = bg_Collision_PreSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")

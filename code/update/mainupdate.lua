@@ -1,7 +1,7 @@
 -- UTILITY FUNCTIONS
 
 -- Generic contains function: checks whether a table contains the given string.
--- Usage: `local has = contains(InventoryBag, "Jacket", true)`
+-- Usage: `local has = contains(InventoryBag, "Bigmode Blazer", true)`
 -- third arg `caseInsensitive` is optional (default false)
 function contains(tbl, searchStr, caseInsensitive)
     if not tbl or not searchStr then return false end
@@ -104,6 +104,13 @@ end
 
 function handleInteraction()
     for _, interacts in pairs(interactables) do
+        if _ == 4 or _ == 11 then
+            if contains(InventoryBag, "Bigmode Blazer", false) then
+                if checkCollision(player, interactables[11]) then return interacts.id end
+            else if checkCollision(player, interactables[4]) then return interacts.id end
+            end
+        end
+
         if checkCollision(player, interacts) then return interacts.id end
     end
     return 0
@@ -123,12 +130,13 @@ function startConversationWith(_interactableID)
             if gothGirlConvoState == 0 then
                 currentDialogTreeId = "1"
             elseif gothGirlConvoState == 1 then
-                jacketGuyConvoState = 1
                 if contains(InventoryBag, interactables[1].passingItems[1], true) then
                     currentDialogTreeId = interactables[1].passPoints[1]
                 else
                     currentDialogTreeId = interactables[1].checkPoints[1]
                 end
+            elseif gothGirlConvoState == 2 then
+                    currentDialogTreeId = interactables[1].checkPoints[2]
             end
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
@@ -141,7 +149,6 @@ function startConversationWith(_interactableID)
                     currentDialogTreeId = interactables[2].checkPoints[1]
                 end
             elseif sororityGirlConvoState == 2 then
-                hairGuyConvoState = 1
                 if contains(InventoryBag, interactables[2].passingItems[2], true) then
                     currentDialogTreeId = interactables[2].passPoints[2]
                 else
@@ -153,6 +160,8 @@ function startConversationWith(_interactableID)
                 else
                     currentDialogTreeId = interactables[2].checkPoints[3]
                 end
+            elseif sororityGirlConvoState == 4 then
+                    currentDialogTreeId = interactables[2].checkPoints[4]
             end
         -- Influancer girl section
         elseif conversationState == interactables[3].vanityName then
@@ -176,6 +185,8 @@ function startConversationWith(_interactableID)
                 else
                     currentDialogTreeId = interactables[3].checkPoints[3]
                 end
+            elseif influencerGirlConvoState == 4 then
+                currentDialogTreeId = interactables[3].checkPoints[4]
             end
         elseif conversationState == interactables[4].vanityName then
             --NEEDS TO BE TESTED
@@ -186,7 +197,8 @@ function startConversationWith(_interactableID)
             elseif jacketGuyConvoState == 2 then
 
                 --logic to swap to no jacket guy
-                currentDialogTreeId = "4" --REMOVE
+                conversationState = interactables[11].vanityName
+                currentDialogTreeId = "1"
             end
         elseif conversationState == interactables[5].vanityName then
             --NEEDS TO BE TESTED
@@ -245,6 +257,8 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[11].vanityName then
             --NEEDS TO BE TESTED
             currentDialogTreeId = "1" 
+        elseif conversationState == interactables[12].vanityName then
+            currentDialogTreeId = "1"
         end
     end
 end
@@ -339,6 +353,18 @@ function handleConversation()
         if currentDialogTreeNode["checkPoint"] ~= nil then
             mewGuyConvoState = currentDialogTreeNode.checkPoint
         end
+    elseif conversationState == interactables[11].vanityName then
+        currentDialogTreeNode = findDialogNode(jacketGuyNOJacketTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            jacketGuyNOJacketConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[12].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
     end
 end
 
@@ -348,6 +374,8 @@ function handleDialogSelection()
     if selectedOption == nil then return end
 
     if selectedOption.nextDialog == "failure" then
+        player.mapTileX = 1
+        player.mapTileY = 15.5 -- TODO REMOVE
         defeatTimer = 0
         conversationState = ""
         currentDialogTreeNode = nil
@@ -364,19 +392,19 @@ function handleDialogSelection()
     if selectedOption.nextDialog == "success" then
         -- Goth girl section
         if conversationState == interactables[1].vanityName then
-            if gothGirlConvoState == 1 then
-                jacketGuyConvoState = 1
+            if gothGirlConvoState == 1 and contains(InventoryBag, interactables[1].passingItems[1], true) then
                 gothGirlConvoState = 2
+            elseif gothGirlConvoState == 1 then jacketGuyConvoState = 1
             end
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
             if sororityGirlConvoState == 1 and gothGirlConvoState == 2 then
                 hairGuyConvoState = 1 
-            elseif sororityGirlConvoState == 2 then
+            elseif sororityGirlConvoState == 2 and contains(InventoryBag, interactables[2].passingItems[1], true) then
                 shadesGuyConvoState = 1
-            elseif sororityGirlConvoState == 3 then
+            elseif sororityGirlConvoState == 3 and contains(InventoryBag, interactables[2].passingItems[2], true) then
                 absGuyConvoState = 1
-            elseif sororityGirlConvoState == 4 then
+            elseif sororityGirlConvoState == 4 and contains(InventoryBag, interactables[2].passingItems[3], true) then
                 -- HAVE SORORITY GIRLS MOVE OUT OF WAY HERE
                 currentCollisionDraw = bg_Collision_PostSorortiy
                 currentCollisionData = bg_Collision_PostSorortiy_Data
@@ -386,42 +414,44 @@ function handleDialogSelection()
         elseif conversationState == interactables[3].vanityName then
             if influencerGirlConvoState == 1 then
                 shoesGirlConvoState = 1 
-            elseif influencerGirlConvoState == 2 then
+            elseif influencerGirlConvoState == 2 and contains(InventoryBag, interactables[3].passingItems[1], true) then
                 shortsGuyConvoState = 1
-            elseif influencerGirlConvoState == 3 then
+            elseif influencerGirlConvoState == 3 and contains(InventoryBag, interactables[3].passingItems[2], true) then
                 mewGuyConvoState = 1
-            elseif influencerGirlConvoState == 4 then
+            elseif influencerGirlConvoState == 4 and contains(InventoryBag, interactables[3].passingItems[3], true) then
             -- TRIGGER BOSS FIGHT HERE
                 bossFightInit()
+            elseif influencerGirlConvoState == 5 then
+                gameState = "victory"
             end
         elseif conversationState == interactables[4].vanityName then
-            if jacketGuyConvoState == 1 then   
-                table.insert(InventoryBag, "Jacket")
+            if jacketGuyConvoState == 2 then   
+                table.insert(InventoryBag, "Bigmode Blazer")
+                isJackenStolen = true
                 --SWITCH JACKGUY OUT OF NO JACKET GUY HERE
             end
         elseif conversationState == interactables[5].vanityName then
-            if hairGuyConvoState == 1 then   
-                table.insert(InventoryBag, "Finasteride Hair Gel")
-                
+            if hairGuyConvoState == 2 then   
+                table.insert(InventoryBag, "Bald-Be-Gone TM")
             end    
         elseif conversationState == interactables[6].vanityName then
-            if shadesGuyConvoState == 1 then   
-                table.insert(InventoryBag, "Sunglasses")
+            if shadesGuyConvoState == 2 then   
+                table.insert(InventoryBag, "Heavenly Shades")
             end    
         elseif conversationState == interactables[7].vanityName then
-            if absGuyConvoState == 1 then   
+            if absGuyConvoState == 2 then   
                 table.insert(InventoryBag, "Bowflex")
             end    
         elseif conversationState == interactables[8].vanityName then
-            if shoesGirlConvoState == 1 then   
-                table.insert(InventoryBag, "Pants")
+            if shoesGirlConvoState == 2 then   
+                table.insert(InventoryBag, "Agarthan Fjordans")
             end
         elseif conversationState == interactables[9].vanityName then
-            if shortsGuyConvoState == 1 then   
-                table.insert(InventoryBag, "Shoes")
+            if shortsGuyConvoState == 2 then   
+                table.insert(InventoryBag, "Slick Slacks")
             end
         elseif conversationState == interactables[10].vanityName then
-            if mewGuyConvoState == 1 then   
+            if mewGuyConvoState == 2 then   
                 table.insert(InventoryBag, "Book of Mew")
             end
         end

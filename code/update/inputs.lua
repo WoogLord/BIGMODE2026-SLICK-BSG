@@ -100,7 +100,22 @@ function love.keypressed(key)
             elseif key == INPUTS_ARR.cancel then love.event.quit()
             end
         end        
-    end 
+    end
+
+    if gameState == "defeat" then
+        if key == INPUTS_ARR.cancel then
+            player.mapTileX = 1
+            player.mapTileY = 15.5
+            gameState = "play"
+            playState = "exploring"        
+        end
+    end
+
+    if gameState == "victory" then
+        if key == INPUTS_ARR.cancel then
+            love.event.quit()
+        end
+    end
 end
 
 -- handle inputs - mouse

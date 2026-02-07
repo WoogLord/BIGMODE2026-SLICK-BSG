@@ -128,7 +128,7 @@ function drawExploring()
     love.graphics.setColor(1, 1, 1, 1)
 
     drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
-    drawPlayer()
+    drawPlayer(currWinDim.w / 2 - (tileWH / 2), currWinDim.h / 2 - (tileWH / 2))
 
     love.graphics.setColor(1, 1, 1, 0.30)
     love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
@@ -148,24 +148,26 @@ function drawExploring()
     if inventoryHandler == true then drawInventory() end
 end
 
-function drawPlayer()
+function drawPlayer(_x, _y, _rotate)
     love.graphics.setColor(1, 1, 1, 1)
     -- change spriteSheets for each item
     -- default
     local flip = player.isFlippedLeft and -1 or 1
     local flipOffset = player.isFlippedLeft and (tileWH * gfxScale) or 0
+    local plX = _x + flipOffset
+    local plY = _y
 
-    love.graphics.draw(player.spriteSheet, player.anim.currentAnim
-    , currWinDim.w / 2 - (tileWH / 2) + flipOffset, currWinDim.h / 2 - (tileWH / 2)
-    , 0, gfxScale * flip, gfxScale)
-
-    -- hair -- pompadour -- minoxidyl-phensitride
-    -- glasses -- gurenn lagann glasses --
-    -- face -- mew
-    -- jacket -- leather jacket
-    -- abs -- bowflex
-    -- pants -- ???
-    -- shoes -- ???
+    love.graphics.draw(player.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
+    if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
+    else love.graphics.draw(playerFatbody.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    if contains(InventoryBag, "Bigmode Blazer", false) then love.graphics.draw(playerJacket.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    if contains(InventoryBag, "Book of Mew", false) then love.graphics.draw(playerMew.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    if contains(InventoryBag, "Bald-Be-Gone TM", false) then love.graphics.draw(playerHair.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    love.graphics.setColor(1,1,1,0.85)    
+    if contains(InventoryBag, "Heavenly Shades", false) then love.graphics.draw(playerShades.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
+    love.graphics.setColor(1,1,1,1)    
 
     if isDebug then
         love.graphics.setColor(0.5, 1, 0.5, 0.5)
@@ -188,7 +190,7 @@ function drawInteractables()
         end
         love.graphics.setColor(1, 1, 1, 1)
         if _ == 4 or _ == 11 then
-            if contains(InventoryBag, "jacket", false) then
+            if contains(InventoryBag, "Bigmode Blazer", false) then
                 -- print("drawing 11"..)
                 love.graphics.draw(interactables[11].spriteSheet, interactables[11].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
             else
@@ -224,6 +226,7 @@ end
 
 function drawConversation()
     love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(mainMenuFont)
 
     -- use each girls text bubble
     if interactables[interactingWith].chatbox then
@@ -410,20 +413,34 @@ function drawInventory()
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
 
                 -- RICHARD, i added this shit here (player.anim.animations[1][1]) to get rid of the spritesheet dupe issue you had
-                love.graphics.draw(item.image, player.anim.animations[1][1], x, y, 0, inventoryScale, inventoryScale)
+                
+                -- love.graphics.draw(player.item.image, player.anim.animations[1][1], x, y, 0, inventoryScale, inventoryScale)
             end
         end
     end
 
     -- Show player
     love.graphics.reset()
-    love.graphics.draw(player.spriteSheet, player.anim.animations[1][1], currWinDim.w / 2 + 225, currWinDim.h / 2 - 55, 0,
-        gfxScale, gfxScale)
+    local plX, plY = currWinDim.w / 2 + 225, currWinDim.h / 2 - 55
+    local tFrames = player.anim.animations[1][math.ceil(globalSpriteTimer*player.anim.framesPerSecond[1] % player.anim.frames[1])]
+    -- local tFrames = player.anim.animations[1][1]
+    love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
+    if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
+    else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    if contains(InventoryBag, "Bigmode Blazer", false) then love.graphics.draw(playerJacket.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    if contains(InventoryBag, "Book of Mew", false) then love.graphics.draw(playerMew.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    if contains(InventoryBag, "Bald-Be-Gone TM", false) then love.graphics.draw(playerHair.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    love.graphics.setColor(1,1,1,0.85)    
+    if contains(InventoryBag, "Heavenly Shades", false) then love.graphics.draw(playerShades.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
+    love.graphics.setColor(1,1,1,1)
 end
 
 function drawPauseMenu()
     -- draw cool shader thing
     love.graphics.setColor(0.5, 0.5, 0.5, 0.1)
+    love.graphics.setFont(mainMenuFont)
     love.graphics.rectangle("fill", 0, 0, currWinDim.w, currWinDim.h)
 
     if globalSpriteTimer > introWindUpTime then
@@ -465,26 +482,62 @@ end
 
 function drawDefeat()
     local isStupidDraw = false
+    local plX, plY = currWinDim.w / 2, currWinDim.h / 2
+    local tFrames = player.anim.animations[3][3]
     love.graphics.setColor(1, 1, 1, defeatAlphaTween)
     if isStupidDraw then
         love.graphics.draw(defeatScreen,0,0,0,gfxScale,gfxScale)
-        love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
+        -- love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
+        -- drawPlayer()
+        love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
+        if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
+        else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        if contains(InventoryBag, "Bigmode Blazer", false) then love.graphics.draw(playerJacket.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        if contains(InventoryBag, "Book of Mew", false) then love.graphics.draw(playerMew.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        if contains(InventoryBag, "Bald-Be-Gone TM", false) then love.graphics.draw(playerHair.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+        love.graphics.setColor(1,1,1,0.85)
+        if contains(InventoryBag, "Heavenly Shades", false) then love.graphics.draw(playerShades.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
+
         love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1)
         love.graphics.print("You are forever bitchless", (currWinDim.w / 2) - #("You are forever bitchless"), currWinDim.h / 3, 0, 2, 2)
     else
         love.graphics.draw(defeatScreen,0,0,0,gfxScale,gfxScale)
-        love.graphics.draw(player.spriteSheet, player.anim.animations[3][3]
-            , (currWinDim.w / 2) - (gfxScale * 3 * tileWH / 2), (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
-            , math.rad(270), gfxScale * 3, gfxScale * 3)
+        -- drawPlayer()
+        plX = (currWinDim.w / 2) - (gfxScale * 3 * tileWH / 2)
+        plY = (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
+        local rot = math.rad(270)
+        love.graphics.draw(player.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
+        if contains(InventoryBag, "Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
+        else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        if contains(InventoryBag, "Bigmode Blazer", false) then love.graphics.draw(playerJacket.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        if contains(InventoryBag, "Book of Mew", false) then love.graphics.draw(playerMew.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        if contains(InventoryBag, "Bald-Be-Gone TM", false) then love.graphics.draw(playerHair.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+        love.graphics.setColor(1,1,1,0.85)
+        if contains(InventoryBag, "Heavenly Shades", false) then love.graphics.draw(playerShades.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
+
+        -- love.graphics.draw(player.spriteSheet, player.anim.animations[3][3]
+        --     , (currWinDim.w / 2) - (gfxScale * 3 * tileWH / 2), (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
+        --     , math.rad(270), gfxScale * 3, gfxScale * 3)
         love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, defeatAlphaTween)
         love.graphics.print("You are forever bitchless"
-            , (currWinDim.w / 2) - #"You are forever bitchless"*(mainMenuFont:getHeight() / 2), currWinDim.h / 3
+            , (currWinDim.w / 2) - (#"You are forever bitchless"+3)*(mainMenuFont:getHeight() / 2), currWinDim.h / 3
             , 0, 2, 2)
+        if defeatAlphaTween == 1 then
+            love.graphics.print("Press X to continue"
+                , (currWinDim.w / 2) - (#"Press X to continue"+2)*(mainMenuFont:getHeight() / 2), currWinDim.h * 3 / 4
+                , 0, 2, 2)
+        end
     end
 end
 
 function drawVictory()
     love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+    love.graphics.print("Don't forget to call her at 561-398-3755!", currWinDim.w / 4, currWinDim.h / 2 + 100, 0, 2, 2)
+    love.graphics.print("Press x to exit, get it? x-it! I will do evil things one day", currWinDim.w / 4, currWinDim.h / 2 + 200, 0, 2, 2)
 end
 
 function drawBossFight()
