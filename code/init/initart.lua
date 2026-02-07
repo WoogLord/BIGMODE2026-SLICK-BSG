@@ -34,6 +34,11 @@ function assignSpriteSheets()
         table.insert(thingsBeingAnimated, interacts.anim)
         print(thingsBeingAnimated[i])
     end
+
+    table.insert(thingsBeingAnimated, bossFightBG.anim)
+    table.insert(thingsBeingAnimated, bossFightStaticClash.anim)
+    table.insert(thingsBeingAnimated, bossFightBeamElectricity.anim)
+    table.insert(thingsBeingAnimated, bossFightElectricity.anim)
 end
 
 function assignLayerArt()

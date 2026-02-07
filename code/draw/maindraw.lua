@@ -131,7 +131,7 @@ function drawExploring()
     drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
     drawPlayer()
 
-    love.graphics.setColor(1, 1, 1, 0.45)
+    love.graphics.setColor(1, 1, 1, 0.30)
     love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
 
     -- draw cool shader thing
@@ -190,6 +190,7 @@ function drawInteractables()
         love.graphics.setColor(1, 1, 1, 1)
         if _ == 4 or _ == 11 then
             if contains(InventoryBag, "jacket", false) then
+                -- print("drawing 11"..)
                 love.graphics.draw(interactables[11].spriteSheet, interactables[11].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
             else
                 love.graphics.draw(interactables[4].spriteSheet, interactables[4].anim.currentAnim, iX, iY, 0, gfxScale, gfxScale)
@@ -488,13 +489,38 @@ function drawVictory()
 end
 
 function drawBossFight()
-    love.graphics.setColor(1,1,1,1 )
-    love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
-    -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
+    local bossFightFrameStall = (math.min(math.max(math.floor(bossFightTimer),1),4))
+    local bfResize = gfxScale / 2
+    love.graphics.setColor(1,1,1,(1-bossFightAlphaTween))
+    
+    -- vector bg
+    love.graphics.draw(bossFightBG.spriteSheet, bossFightBG.anim.currentAnim, 0, 0, 0, gfxScale / 4, gfxScale / 4)
 
-    -- love.graphics.
+    -- pixel fg
+    print(tostring(bossFightFrameStall))
+    local blueStart, redStart = 475, 1450
+    local pxDiff = redStart - blueStart
+    -- splice logic
+    local playerHP = (influencerMaxHP - influencerCurrentHP)
+    for i=1, playerHP, 1 do
+        love.graphics.draw(bossFightSpliceLeftKame, (blueStart * gfxScale / 4) + (i * gfxScale), 300, 0, gfxScale, bfResize)    
+    end
+    for j=1, (influencerCurrentHP), 1 do
+        love.graphics.draw(bossFightSpliceRightKame, (redStart * gfxScale / 4) - (j * gfxScale), 300, 0, gfxScale, bfResize)
+    end
 
-    love.graphics.setColor(1,1,1,1 )
+    love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall], 210, 300, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightRightKame.spriteSheet, bossFightRightKame.anim.animations[1][bossFightFrameStall], 760, 300, 0, bfResize, bfResize)
+
+    local clashOffset = 500 - (pxDiff / 2) + (pxDiff * playerHP / influencerMaxHP)
+    love.graphics.draw(bossFightStaticClash.spriteSheet, bossFightStaticClash.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightBeamElectricity.spriteSheet, bossFightBeamElectricity.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightElectricity.spriteSheet, bossFightElectricity.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
+
+    love.graphics.setColor(1,1,1,0.8 * (1-bossFightAlphaTween))
+    love.graphics.draw(bossFightHeart, 0, 0, 0, gfxScale, gfxScale)
+
+    love.graphics.setColor(1,1,1,1)
     -- rendered on top so movie plays
     if bossFightIntroMovie:isPlaying() then 
         love.graphics.draw(bossFightIntroMovie, 0, 0, 0, gfxScale / 4, gfxScale / 4)

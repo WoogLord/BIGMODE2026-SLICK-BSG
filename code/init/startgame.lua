@@ -27,11 +27,30 @@ function init()
     playerBaseDamage = 1
     playerTotalDamage = 1
     bossFightTimer = 0
-    bossFightStatics = love.graphics.newImage("assets/art/bossfightstuff/frame_11_final.png")
-    bossFightHisCore = love.graphics.newImage("assets/art/bossfightstuff/ref sheet.png")
+    bossFightHeart = love.graphics.newImage("assets/art/bossfightstuff/bossfight_heart.png")
+    bossFightBG = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/frame_11_final.png")}
+    bossFightStaticClash = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/Final beam clash - mod_clash-Sheet.png")}
+    bossFightLeftKame = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/Kamahema animation_blue-Sheet.png")}
+    bossFightRightKame = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/Kamahema animation_red-Sheet.png")}
+    bossFightBeamElectricity = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/Final beam clash - mod_beam_electricity-Sheet.png")}
+    bossFightElectricity = {spriteSheet = love.graphics.newImage("assets/art/bossfightstuff/Final beam clash - mod_electricity-Sheet.png")}
+    bossFightSpliceLeftKame = love.graphics.newImage("assets/art/bossfightstuff/kamehemahe-blue-splice.png")
+    bossFightSpliceRightKame = love.graphics.newImage("assets/art/bossfightstuff/kamehemahe-red-splice.png")
     bossFightFadeOutTimer = 0
-    bossFightFadeOutWindDownTime = 0
-    bossFightAlphaTween = 0
+    bossFightFadeOutWindDownTime = 3
+    bossFightAlphaTween = 1
+
+    bossFightArtArray = {
+        bossFightStaticClash, bossFightLeftKame, bossFightRightKame, bossFightBeamElectricity, bossFightElectricity
+    }
+    for i, bossFightArt in pairs(bossFightArtArray) do
+        bossFightArt.anim = bossFightPixelAnimationArray
+        bossFightArt.anim:BuildAnimations(bossFightArt.spriteSheet, 480, 270)
+        bossFightArt.anim.currAnimState = 1
+    end
+    bossFightBG.anim = bossFightVectorAnimationArray
+    bossFightBG.anim:BuildAnimations(bossFightBG.spriteSheet, 1920, 1080)
+    bossFightBG.anim.currAnimState = 1
 
     INPUTS_ARR = {
         fullscreen = "f", debug = "f3", pause = "escape"

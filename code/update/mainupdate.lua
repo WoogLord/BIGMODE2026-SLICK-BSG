@@ -442,10 +442,10 @@ function bossFightInit()
 end
 
 function bossFightGameState()
-    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(math.ceil((1 - influencerCurrentHP / influencerMaxHP) * 20), 20)) -- scales with missing hp
+    influencerTotalHeal = influencerBaseHeal * math.floor(math.min(math.ceil((1 - influencerCurrentHP / influencerMaxHP) * 5), 5)) -- scales with missing hp
     playerTotalDamage = playerBaseDamage * math.floor(math.min(math.max((bossFightTimer - 10) / 5, 1), 10)) -- scales with time
 
-    if influencerHealTimer > 0.48 then
+    if influencerHealTimer > (0.48 / 4) then
         influencerCurrentHP = math.min(influencerMaxHP - 5, influencerTotalHeal + influencerCurrentHP)
         influencerHealTimer = 0
     end
@@ -457,5 +457,6 @@ function bossFightGameState()
         end
     else
         bossFightFadeOutTimer = 0
+        bossFightAlphaTween = 0
     end
 end
