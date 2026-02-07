@@ -303,7 +303,7 @@ function drawConversation()
 
         if love.timer.getTime() - _G.__typewriteState.finishedTime >= delayAfterFinish then
             for i, option in ipairs(currentDialogTreeNode.responses or {}) do
-                local px, py = currWinDim.w * 1 / 5, (currWinDim.h * 1 / 3 - 50 * gfxScale / 4) + (i - 1) * ((55 + textHAdder))
+                local px, py = currWinDim.w * 1 / 5, (currWinDim.h * 1 / 3 - 100 * gfxScale / 4) + (i - 1) * ((55 + textHAdder))
                 local font = love.graphics.getFont()
                 local scale = .9 
                 local padX, padY = 8, 4
@@ -335,12 +335,19 @@ function drawConversation()
                     love.graphics.setColor(1, 1, 1)
                 end
                 
-                -- The +150 is a patch, not the best long term fix, but it prevents text from going outside of the chatbox when the text is long and wraps around. The textLimit variable is used to determine when to add line height to the next response option, but the actual limit for the text is a little higher than that to give it some padding on the right side of the chatbox.
+                -- The +133 is a patch, not the best long term fix, but it prevents text from going outside of the chatbox when the text is long and wraps around. The textLimit variable is used to determine when to add line height to the next response option, but the actual limit for the text is a little higher than that to give it some padding on the right side of the chatbox.
                 love.graphics.printf(option.text, px, py, textLimit + (133 * gfxScale / 4) - padX, "left", 0, scale, scale)
 
-                -- Adds line height if text wraps
+                if textHAdder > 0 then
+                    textHAdder = textHAdder / 2
+                end
+
                 if getTextWidth > textLimit then
+                    if once then
+                        textHAdder = 0
+                    end
                     textHAdder = textHAdder + (textH / 2) 
+                    once = true
                 end
 
                 -- Enables the ability to use the select buttons again
