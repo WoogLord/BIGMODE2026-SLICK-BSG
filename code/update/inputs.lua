@@ -12,18 +12,18 @@ function love.keypressed(key)
             selOptionMain = math.max(selOptionMain - 1 , 1)
         elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
             sfxManager(sfxSources.menuOK, false)
-            if menuOptionsMain[selOptionMain] == "play" then
+            if menuOptionsMain[selOptionMain] == "PLAY" then
                 gameState = "play"
                 playState = "exploring"
-            elseif menuOptionsMain[selOptionMain] == "quit" then
+            elseif menuOptionsMain[selOptionMain] == "QUIT" then
                 love.event.quit()
             end
-        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] and menuOptionsMain[selOptionMain] == "volume" then
+        elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] and menuOptionsMain[selOptionMain] == "VOLUME" then
             sfxManager(sfxSources.menuSelection, false)
-            volumeMaster = math.max(volumeMaster - 0.1, 0)
-        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] and menuOptionsMain[selOptionMain] == "volume" then
+            volumeMaster = math.max((math.floor(volumeMaster * 10) - 1) / 10, 0)
+        elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] and menuOptionsMain[selOptionMain] == "VOLUME" then
             sfxManager(sfxSources.menuSelection, false)
-            volumeMaster = math.min(volumeMaster + 0.1, 1.0)
+            volumeMaster = math.min((math.floor(volumeMaster * 10) + 1) / 10, 1.0)
         end
     end
     
@@ -78,6 +78,25 @@ function love.keypressed(key)
             --pause toggle
             if key == INPUTS_ARR.pause then playState = "exploring"
             -- Pause quit
+            elseif key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
+                sfxManager(sfxSources.menuSelection, false)
+                selOptionPause = math.min(selOptionPause + 1 , #menuOptionsPause)
+            elseif key == INPUTS_ARR.up[1] or key == INPUTS_ARR.up[2] then 
+                sfxManager(sfxSources.menuSelection, false)
+                selOptionPause = math.max(selOptionPause - 1 , 1)
+            elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
+                sfxManager(sfxSources.menuOK, false)
+                if menuOptionsPause[selOptionPause] == "UNPAUSE" then
+                    playState = "exploring"
+                elseif menuOptionsPause[selOptionPause] == "QUIT" then
+                    love.event.quit()
+                end
+            elseif key == INPUTS_ARR.left[1] or key == INPUTS_ARR.left[2] and menuOptionsPause[selOptionPause] == "VOLUME" then
+                sfxManager(sfxSources.menuSelection, false)
+                volumeMaster = math.max((math.floor(volumeMaster * 10) - 1) / 10, 0)
+            elseif key == INPUTS_ARR.right[1] or key == INPUTS_ARR.right[2] and menuOptionsPause[selOptionPause] == "VOLUME" then
+                sfxManager(sfxSources.menuSelection, false)
+                volumeMaster = math.min((math.floor(volumeMaster * 10) + 1) / 10, 1.0)
             elseif key == INPUTS_ARR.cancel then love.event.quit()
             end
         end        

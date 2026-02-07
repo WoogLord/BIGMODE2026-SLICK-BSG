@@ -4,10 +4,15 @@ end
 
 function musicManager(dt)
     local hg = player.inClub and 1 or 0.001 * 1.5
-    if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} end
+    if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} 
+        if isInBossFight or bossFightIntroMovie:isPlaying() then 
+            currentTrack:setVolume(0) 
+        else currentTrack:setVolume(volumeMaster) 
+        end    
+    end
     if currentAnnouncement then currentAnnouncement:setFilter{type = "lowpass", highgain = hg} end
 
-    titleMusic:setVolume(volumeMaster)
+    titleMusic:setVolume(volumeMaster)    
 
     if gameState == "mainmenu" then
         titleMusic:play()
