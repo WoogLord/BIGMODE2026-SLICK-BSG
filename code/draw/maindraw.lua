@@ -446,6 +446,13 @@ function drawBossFight()
     love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
 
+    love.graphics.setColor(1,0.5,0.5,1 )
+    love.graphics.print("Current influencerCurrentHP: ", currWinDim.w / 2, 150)
+    love.graphics.print("Current influencerMaxHP: ", currWinDim.w / 2, 200)
+    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal
+        , currWinDim.w / 2, 250)
+    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage
+        , currWinDim.w / 2, 300)
 
 
 

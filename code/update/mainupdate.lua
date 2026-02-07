@@ -385,7 +385,7 @@ function handleDialogSelection()
 end
 
 -- CUTSCENES/MOVIES AND BOSSFIGHT
-function bossFight()
+function bossFightInit()
     bossFightTimer = 0
     if bossFightIntroMovie then
         isInBossFight = true
@@ -397,5 +397,17 @@ function bossFightGameState()
     influencerTotalHeal = influencerBaseHeal * math.floor(math.min(influencerCurrentHP / influencerMaxHP, 25)) -- scales with missing hp
     playerTotalDamage = playerBaseDamage * math.floor(math.min((bossFightTimer - 10) / 5, 5)) -- scales with time
 
-    influencerCurrentHP = math.min(influencerMaxHP, influencerTotalHeal + influencerCurrentHP)
+    if influencerHealTimer > 0.24 then
+        influencerCurrentHP = math.min(influencerMaxHP - 5, influencerTotalHeal + influencerCurrentHP)
+        influencerHealTimer = 0
+    end
+
+    if influencerCurrentHP == 0 then
+        influencerHealTimer = 0
+        if bossFightFadeOutTimer >  bossFightFadeOutWindDownTime + 5 then
+            isInBossFight = false
+        end
+    else
+        bossFightFadeOutTimer = 0
+    end
 end

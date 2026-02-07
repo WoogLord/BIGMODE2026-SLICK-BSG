@@ -34,8 +34,11 @@ function love.update(dt)
     love.timer.sleep(1/60)
     defeatTimer = defeatTimer + dt
     bossFightTimer = bossFightTimer + dt
+    bossFightFadeOutTimer = bossFightFadeOutTimer + dt
+    influencerHealTimer = influencerHealTimer + dt
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
     defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
+    bossFightAlphaTween = math.min(bossFightFadeOutTimer / bossFightFadeOutWindDownTime, 1)
     gameManager()    
     speedManager(dt)
     doFloaters()

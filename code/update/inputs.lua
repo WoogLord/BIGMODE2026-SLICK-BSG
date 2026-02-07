@@ -31,9 +31,11 @@ function love.keypressed(key)
 
     if gameState == "play" then
         if playState == "exploring" then
-            if key == INPUTS_ARR.bossFightDebug then bossFight() end
+            if key == INPUTS_ARR.bossFightDebug then bossFightInit() end
             if isInBossFight then 
-                if key == INPUTS_ARR.cancel
+                if key == INPUTS_ARR.cancel then
+                    influencerCurrentHP = math.max(influencerCurrentHP - playerTotalDamage, 0)
+                end
             elseif inventoryHandler then --Inventory Logic
                 if key == INPUTS_ARR.down[1] or key == INPUTS_ARR.down[2] then
                     selOptionInv = math.min(selOptionInv + 5 , #InventoryBag)
