@@ -71,7 +71,7 @@ function checkCollision(_a, _b)
 end
 
 function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check
-    print("redPicel checking x: ".._x..", y: ".._y..", w: ".._w..", h: ".._h)
+    -- print("redPicel checking x: ".._x..", y: ".._y..", w: ".._w..", h: ".._h)
     _x = math.floor(_x)
     _y = math.floor(_y)
     if _x < 0 or _y < 0 or (_x + _w - 1) >= _collisionData:getWidth() or (_y + _h - 1) >= _collisionData:getHeight() then return true end

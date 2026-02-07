@@ -13,11 +13,13 @@ end
 function musicManager(dt)
     local hg = player.inClub and math.min(1,1) or math.max(0.001 * 1.5, 0.001 * 1.5)
     if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} 
-        if isInBossFight or bossFightIntroMovie:isPlaying() then 
-            currentTrack:setVolume(0)
-        elseif isInBossFight and not bossFightMusic:isPlaying() then
-            bossFightMusic:setVolume(volumeMaster)
-            bossFightMusic:play()
+        if isInBossFight then 
+            if bossFightIntroMovie:isPlaying() then 
+                currentTrack:setVolume(0)
+            else
+                bossFightMusic:setVolume(volumeMaster)
+                bossFightMusic:play()
+            end
         else currentTrack:setVolume(volumeMaster) 
         end    
     end
