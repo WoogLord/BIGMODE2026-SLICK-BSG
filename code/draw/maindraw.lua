@@ -579,10 +579,10 @@ function drawBossFight()
     -- splice logic
     local playerHP = (influencerMaxHP - influencerCurrentHP)
     for i=1, playerHP, 1 do
-        love.graphics.draw(bossFightSpliceLeftKame, (blueStart * gfxScale / 4) + (i * gfxScale), tY, 0, gfxScale, bfResize)    
+        love.graphics.draw(bossFightSpliceLeftKame, (blueStart) + (i * gfxScale), tY, 0, gfxScale, bfResize)    
     end
     for j=1, (influencerCurrentHP), 1 do
-        love.graphics.draw(bossFightSpliceRightKame, (redStart * gfxScale / 4) - (j * gfxScale), tY, 0, gfxScale, bfResize)
+        love.graphics.draw(bossFightSpliceRightKame, (redStart) - (j * gfxScale), tY, 0, gfxScale, bfResize)
     end
 
     love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall], 210 * gfxScale / 4, tY, 0, bfResize, bfResize)

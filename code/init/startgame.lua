@@ -176,7 +176,7 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
 
     -- Inventory Object
-    InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    InventoryBag = {}
     -- InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
@@ -315,21 +315,26 @@ function init()
         {id = "1c2a", npcEmotion = 4, npcText = "Here! Give me a call sometime. I think I've had enough clubbing for one night.", responses = {{text = "-->", nextDialog = "success"}}},
         {id = "1c2b", npcEmotion = 3, npcText = "You're pushing your luck. Take my number and go before I change my mind.", responses = {{text = "-->", nextDialog = "success"}}},
         -- post checkpoint 2
-        {id = "1d", npcEmotion = 4, npcText = "Not many people talk to me again... well done playa!", responses = {{text = "-->", nextDialog = "success"}}},
+        {id = "1d", npcEmotion = 4, npcText = "Text me sometime soon!", responses = {{text = "-->", nextDialog = "success"}}},
     }
 
     sororityGirlTree = {
+        {id = "1p", npcText = "Go get another girl's number, then I’ll talk to you.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "2p"}}},
+        {id = "2p", npcText = "*Under her beath* That’ll take him all night.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}},
         --part 1 checkpoint 0
         {id = "1z", npcText = "Ew Get away! Have you even looked in a mirror? Your hair looks awful!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- CHECKPOINT 1
         {id = "2z", npcText = "Maybe if you fixed that yee yee ass haircut, you'd get some bitches on your dick.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}},
         --part 2 post checkpoint 1
         {id = "1", npcText = "Wow, you fixed your hair. You don't look like you're 50 anymore.", npcEmotion = 1, responses = {{text = "That's too bad, I bet you're into older men.", nextDialog = "2"}, {text = "I'm actually 24 and very good looking.", nextDialog = "10"}}}, 
         {id = "2", npcText = "Only if they have a lot of money.", npcEmotion = 1, responses = {{text = "I'm pretty loaded. I can show you a good time.", nextDialog = "3"}, {text = "I've got 10 billion Elon shit coins if that counts.", nextDialog = "8"}}},
-        {id = "3", npcText = "Oh yeah?? Why don't you show me and the girls. *Multiple silhouettes of girls fade in *", npcEmotion = 1, responses = {{text = "I'm more of a minimalist. Less is more, you know.", nextDialog = "4"}, {text = "Bet. *Opens wallet*", nextDialog = "27"}}},
+        {id = "3", npcText = "Oh yeah?? Why don't you show me and the girls.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "1x"}}},
+        {id = "1x", npcText = "*Multiple silhouettes of girls fade in*", npcEmotion = 4, responses = {{text = "I'm more of a minimalist. Less is more, you know.", nextDialog = "4"}, {text = "Bet. *Opens wallet*", nextDialog = "27x"}}},
         {id = "4", npcText = "Less is more? I bet that's what you tell yourself whenever your pants are off.", npcEmotion = 1, responses = {{text = "Maybe I do. Sometimes you've got to let things breath.", nextDialog = "5"}, {text = "Hey, hey. Three inches is average..... Some say maybe even a little big.", nextDialog = "6"}}},
         {id = "5", npcText = "I wish you'd breath less around me. You're ugly face is scaring my sisters. Go stick a bag on your head.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- CHECKPOINT 2
         {id = "6", npcText = "Not for me. Bye.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "7", npcText = "Sounds great! *she takes your $10 and gives it to her friend to make a run to the bar.* Go touch grass.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "7", npcText = "Sounds great!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7e"}}},
+        {id = "7e", npcText = "*she takes your $10 and gives it to her friend to make a run to the bar.*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7f"}}},
+        {id = "7f", npcText = "Go touch grass.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "8", npcText = "And how much is that worth?", npcEmotion = 1, responses = {{text = "About 4,424,297.84 Zimbabwe dollars.", nextDialog = "9"}, {text = "It could get you like 3 or 4 drinks at the bar.", nextDialog = "9"}}},
         {id = "9", npcText = "How about you take all that money a get some sunglasses to hide that ugly face.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}},checkPoint = 2}, -- CHECKPOINT 2
         {id = "10", npcText = "Ha you look waaaaay older. Just not quite 50. A solid 45.  Why are you even talking to me? I'm trying to hang out with my sisters.", npcEmotion = 1, responses = {{text = "I knew you were in a sorority. You look like every other bitch here.", nextDialog = "12"}, {text = "What sorority are you in?", nextDialog = "12"}}},
@@ -348,7 +353,8 @@ function init()
         {id = "23", npcText = "*Multiple girls come into sight with only slight variations of their appearance*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "24"}}},
         {id = "24", npcText = "We all look nothing alike. *they say in unison. *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "25"}}},
         {id = "25", npcText = "Get out of here. You're scaring away the good looking guys!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
-        {id = "27", npcText = "*You open your wallet and a small moth flies out. You see you have a singel 10 dollar bill* Heh............. Do one of you want a shot?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7"}}},
+        {id = "27x", npcText = "*You open your wallet and a small moth flies out. You see you have a singel 10 dollar bill*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "27"}}},
+        {id = "27", npcText = "Heh............. Do one of you want a shot?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7"}}},
         {id = "28", npcText = "We all look nothing alike. *They say in unison.*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "29"}}},
         {id = "29", npcText = "Get out of here. You're Scaring away the good looking guys!", npcEmotion = 2, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "30", npcText = "Sigma Beta see ya later!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, --CHECKPOINT 2
@@ -392,7 +398,7 @@ function init()
         {id = "1b", npcText = "Wow, have you hit the gym? You're actually pretty hot now.", npcEmotion = 4, responses = {{text = "A hot guy for a hot girl. Can I get that number now?", nextDialog = "2b"}}},
         {id = "2b", npcText = "Definitely! I need to take you to some functions! The sisters are going to be so jealous!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 4}, -- CHECKPOINT 4
             -- part 5 post checkpoint 4
-        {id = "1c", npcText = "if u readin this u gay lol", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}}
+        {id = "1c", npcText = "Call me tomorrow! I have a function coming up!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}}
     }
 
     influencerGirlTree = {
@@ -451,7 +457,7 @@ function init()
     shoesGirlTree = {
         {id = "1", npcText = "This song is fucking bop.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "Do you like my outfit?? My shoes even match.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "3", npcText = "Vip section? Nah I'm good. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "3", npcText = "I'm surprised they let me in here.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "4", npcText = "You look like you need a shoe game upgrade. Take these, it would totally go with your outfit", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
         {id = "5", npcText = "You look halfway decent now. Maybe some girls will pay attention to you now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
@@ -480,5 +486,4 @@ function init()
     biggieFrogTree = {
         {id = "1", npcText = "Look... I didn't do it!  I don't even know how to drive!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
     }
-inner, outter = "no", "no"
 end
