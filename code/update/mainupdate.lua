@@ -154,7 +154,11 @@ function startConversationWith(_interactableID)
         -- Sorority girl section
         elseif conversationState == interactables[2].vanityName then
             if sororityGirlConvoState == 0 then
-                currentDialogTreeId = "1z"
+                if gothGirlConvoState == 2 then
+                    currentDialogTreeId = "1z"
+                else 
+                    currentDialogTreeId = "1p"
+                end
             elseif sororityGirlConvoState == 1 then
                 if contains(InventoryBag, interactables[2].passingItems[1], true) then
                     currentDialogTreeId = interactables[2].passPoints[1]
