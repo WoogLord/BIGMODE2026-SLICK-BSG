@@ -161,7 +161,7 @@ function drawPlayer(_x, _y, _rotate)
     local plY = _y
 
     love.graphics.draw(player.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
-    if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
+    if contains(InventoryBag, "Miniature Broflex", false) then love.graphics.draw(playerAbs.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale)
     else love.graphics.draw(playerFatbody.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
     if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
     if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, player.anim.currentAnim, plX, plY, _rotate, gfxScale * flip, gfxScale) end
@@ -452,7 +452,7 @@ function drawInventory()
     local tFrames = player.anim.animations[1][math.ceil(globalSpriteTimer*player.anim.framesPerSecond[1] % player.anim.frames[1])]
     -- local tFrames = player.anim.animations[1][1]
     love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
-    if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
+    if contains(InventoryBag, "Miniature Broflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
     else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
     if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
     if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale) end
@@ -517,7 +517,7 @@ function drawDefeat()
         -- love.graphics.draw(player.spriteSheet, player.anim.animations[3][3], currWinDim.w / 2, currWinDim.h / 2, 90, gfxScale * 3, gfxScale * 3)
         -- drawPlayer()
         love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
-        if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
+        if contains(InventoryBag, "Miniature Broflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale)
         else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
         if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
         if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, 90, gfxScale, gfxScale) end
@@ -536,7 +536,7 @@ function drawDefeat()
         plY = (currWinDim.h / 2) + (gfxScale * 3 * tileWH * 2 / 3)
         local rot = math.rad(270)
         love.graphics.draw(player.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
-        if contains(InventoryBag, "Miniature Bowflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
+        if contains(InventoryBag, "Miniature Broflex", false) then love.graphics.draw(playerAbs.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3)
         else love.graphics.draw(playerFatbody.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
         if contains(InventoryBag, "Agarthan Fjordans", false) then love.graphics.draw(playerShoes.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end
         if contains(InventoryBag, "Slick Slacks", false) then love.graphics.draw(playerPants.spriteSheet, tFrames, plX, plY, rot, gfxScale * 3, gfxScale * 3) end

@@ -1,5 +1,5 @@
 function init()
-    buildVersion = "v2"
+    buildVersion = "v3"
     gameState = "mainmenu"
     playState = ""
     conversationState = ""
@@ -181,13 +181,13 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
 
     -- Inventory Object
-    -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Broflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
     InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
         , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item02_hair.png"), name = "Bald-Be-Gone TM", description = "Beautiful hair in a bottle."}
         , ["Heavenly Shades"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item03_shades.png"), name = "Heavenly Shades", description = "Makes it a little hard to see."}
-        , ["Miniature Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item04_abs.png"), name = "Miniature Bowflex", description = "Somehow, you got abs."}
+        , ["Miniature Broflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item04_abs.png"), name = "Miniature Broflex", description = "Somehow, you got abs."}
         , ["Agarthan Fjordans"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item05_shoes.png"), name = "Agarthan Fjordans", description = "Strong shoe game = strong woo game"}
         , ["Slick Slacks"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item06_pants.png"), name = "Slick Slacks", description = "Better than crapped briefs."}
         , ["Book of Mew"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item07_mew.png"), name = "Book of Mew", description = "Written by Yakub himself."}
@@ -220,7 +220,7 @@ function init()
     interactableHitbox = {w = 48, h = 48}
     interactables = {
         {id = 1, name = "gothGirl", vanityName = "Layla", mapTrueX = (9 * tileWH), mapTrueY = (13 * tileWH), checkPoints = {"48a", "1d"}, passPoints = {"1c1"}, passingItems = {"Bigmode Blazer"}, tileH = 32, tileW = 32}
-        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (19 * tileWH), mapTrueY = (18 * tileWH), checkPoints = {"2z", "1", "36a", "1c"}, passPoints = {"1", "1a", "1b"}, passingItems = {"Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex"}, tileH = 32, tileW = 32}
+        , {id = 2, name = "sororityGirl", vanityName = "Bertha", mapTrueX = (19 * tileWH), mapTrueY = (18 * tileWH), checkPoints = {"2z", "1", "36a", "1c"}, passPoints = {"1", "1a", "1b"}, passingItems = {"Bald-Be-Gone TM", "Heavenly Shades", "Miniature Broflex"}, tileH = 32, tileW = 32}
         , {id = 3, name = "influencerGirl", vanityName = "Starchild", mapTrueX = (28 * tileWH), mapTrueY = (22 * tileWH), checkPoints = {"1", "3", "5", "1a"}, passPoints = {"3", "5", "10"}, passingItems = {"Agarthan Fjordans", "Slick Slacks", "Book of Mew"}, tileH = 32, tileW = 32}
         , {id = 4, name = "jacketGuy", vanityName = "Axel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         , {id = 5, name = "hairGuy", vanityName = "Monoxydillian", mapTrueX = (12 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}
@@ -459,7 +459,7 @@ function init()
         {id = "1", npcText = "Clear liquor only, I'm cutting right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "2", npcText = "I heard if you bring 10 girls in, you get free drinks all night.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "I started body building for the ladies but I just end up staring at other dudes all day.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "4", npcText = "What do you weigh, like 300 pounds? You need to hit the gym. Take this miniature bowflex and start pumping iron right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2    
+        {id = "4", npcText = "What do you weigh, like 300 pounds? You need to hit the gym. Take this Miniature Broflex and start pumping iron right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2    
         {id = "5", npcText = "Damn dude, the cut went crazy. Like the physique ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
     }
     shoesGirlTree = {
