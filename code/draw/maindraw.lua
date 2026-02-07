@@ -287,7 +287,7 @@ function drawConversation()
     love.graphics.printf(toShow
         , 160 * gfxScale / 4
         , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h * gfxScale / 4)
-        , (1250 / 1920 * currWinDim.w)
+        , (1250 / 1920 * currWinDim.w) / (gfxScale / 4)
         , "left", 0, gfxScale / 4, gfxScale / 4)
 
     -- Response logic
@@ -302,11 +302,11 @@ function drawConversation()
 
         if love.timer.getTime() - _G.__typewriteState.finishedTime >= delayAfterFinish then
             for i, option in ipairs(currentDialogTreeNode.responses or {}) do
-                local px, py = currWinDim.w * 1 / 5  * gfxScale / 4, (currWinDim.h * 1 / 3  * gfxScale / 4) + (i - 1) * ((70 + textHAdder)  * gfxScale / 4)
+                local px, py = currWinDim.w * 1 / 5, (currWinDim.h * 1 / 3 - 50 * gfxScale / 4) + (i - 1) * ((55 + textHAdder))
                 local font = love.graphics.getFont()
-                local scale = .9
+                local scale = .9 
                 local padX, padY = 8, 4
-                local textLimit = px * 3
+                local textLimit = px * 3 
                 local textH = font:getHeight() * scale
                 local getTextWidth = font:getWidth(option.text) * scale
 
@@ -335,11 +335,11 @@ function drawConversation()
                 end
                 
                 -- The +150 is a patch, not the best long term fix, but it prevents text from going outside of the chatbox when the text is long and wraps around. The textLimit variable is used to determine when to add line height to the next response option, but the actual limit for the text is a little higher than that to give it some padding on the right side of the chatbox.
-                love.graphics.printf(option.text, px, py, textLimit + (100 * gfxScale / 4), "left", 0, scale, scale)
+                love.graphics.printf(option.text, px, py, textLimit + (133 * gfxScale / 4) - padX, "left", 0, scale, scale)
 
                 -- Adds line height if text wraps
                 if getTextWidth > textLimit then
-                    textHAdder = textHAdder + (textH / 2)
+                    textHAdder = textHAdder + (textH / 2) 
                 end
 
                 -- Enables the ability to use the select buttons again
