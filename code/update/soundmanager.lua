@@ -3,7 +3,7 @@ function soundManager(dt)
 end
 
 function musicManager(dt)
-    local hg = player.inClub and 1 or 0.001 * 1.5
+    local hg = player.inClub and math.min(1,1) or math.max(0.001 * 1.5, 0.001 * 1.5)
     if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} 
         if isInBossFight or bossFightIntroMovie:isPlaying() then 
             currentTrack:setVolume(0) 
@@ -57,7 +57,7 @@ function pickRandomAnnouncement()
 end
 
 function sfxManager(_sfxToPlay, _inClubNeeded)
-    local hg = player.inClub and 1 or 0.001
+    local hg = player.inClub and 1 or 0.001 * 1.5
     if _inClubNeeded then _sfxToPlay:setFilter{type = "lowpass", highgain = hg}
     else _sfxToPlay:setFilter{type = "lowpass", highgain = 1}
     end

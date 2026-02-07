@@ -16,6 +16,11 @@ function drawDebug()
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
     love.graphics.print(tostring(interactables[1].portrait.anim.animations[1][1]), 0, 180)
     love.graphics.print("In boss fight?"..tostring(isInBossFight), 0, 200)
+    love.graphics.setColor(1,0.5,0.5,1 )
+    love.graphics.print("Current influencerCurrentHP: "..influencerCurrentHP, 0, 220)
+    love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, 0, 240)
+    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal, 0, 260)
+    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 280)
 end
 
 -- Top level state handler
@@ -486,13 +491,6 @@ function drawBossFight()
     love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
 
-    love.graphics.setColor(1,0.5,0.5,1 )
-    love.graphics.print("Current influencerCurrentHP: "..influencerCurrentHP, currWinDim.w / 2, 150)
-    love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, currWinDim.w / 2, 200)
-    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal
-        , currWinDim.w / 2, 250)
-    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage
-        , currWinDim.w / 2, 300)
 
     love.graphics.setColor(1,1,1,1 )
     -- rendered on top so movie plays
