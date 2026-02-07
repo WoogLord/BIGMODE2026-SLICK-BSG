@@ -19,6 +19,11 @@ function drawDebug()
     love.graphics.print("inner: "..inner..", outter: "..outter, 0, 220)
     love.graphics.print("States " .. "goth:".. gothGirlConvoState .. ", sorority:" .. sororityGirlConvoState .. ", Influ:" .. influencerGirlConvoState .. ", Jacket:" .. jacketGuyConvoState .. ", abs:" .. absGuyConvoState .. ", shoes:" .. shoesGirlConvoState .. ", shorts:" .. shortsGuyConvoState .. ", mew:" .. mewGuyConvoState .. ", jacket2:" .. jacketGuyNOJacketConvoState, 0, 240)
     love.graphics.print("InventoryBag: " .. table.concat(InventoryBag, ", "), 0, 260)
+    love.graphics.setColor(1,0.5,0.5,1 )
+    love.graphics.print("Current influencerCurrentHP: "..influencerCurrentHP, 0, 220)
+    love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, 0, 240)
+    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal, 0, 260)
+    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 280)
 end
 
 -- Top level state handler
@@ -45,8 +50,10 @@ function drawMainMenu()
 
     if globalSpriteTimer > introWindUpTime then
         for i, option in ipairs(menuOptionsMain) do
+            love.graphics.setColor(0.2, 0.2, 0.2)
+            love.graphics.print(option, currWinDim.w / 2 - (#option * 10) + gfxScale, currWinDim.h / 2 + (i - 1) * 40)
             if i == selOptionMain then
-                love.graphics.setColor(1, 0, 0) -- Highlight selected option in red
+                love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1) -- Highlight selected option in red
             else
                 love.graphics.setColor(1, 1, 1) -- Normal color
             end
@@ -55,8 +62,11 @@ function drawMainMenu()
         end
 
         for j = 1, 10, 1 do
+            love.graphics.setColor(0.2, 0.2, 0.2)
+            love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + (j * 12) + gfxScale,
+                currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
             if math.floor(volumeMaster * 10) == j then
-                love.graphics.setColor(0, 0, 1)
+                love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1)
             else
                 love.graphics.setColor(1, 1,
                     1)
@@ -64,6 +74,9 @@ function drawMainMenu()
             love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + (j * 12),
                 currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
         end
+        love.graphics.setColor(0.2, 0.2, 0.2)
+        love.graphics.print(volumeMaster * 10, currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + 144 + gfxScale,
+            currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
         love.graphics.setColor(1, 1, 1)
         love.graphics.print(volumeMaster * 10, currWinDim.w / 2 + (#menuOptionsMain[2] * 10) + 144,
             currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
@@ -107,8 +120,6 @@ function drawExploring()
     love.graphics.draw(bg_Items_01_Props, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
     love.graphics.draw(bg_BIGGIE, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
 
-    love.graphics.setColor(1, 1, 1, 0.45)
-    love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
     love.graphics.setColor(1, 1, 1, 1)
 
     if isDebug then
@@ -121,6 +132,9 @@ function drawExploring()
 
     drawInteractables(drawnMapOffsetX, drawnMapOffsetY)
     drawPlayer()
+
+    love.graphics.setColor(1, 1, 1, 0.45)
+    love.graphics.draw(bg_DJ_Opacity_45, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
 
     -- draw cool shader thing
     love.graphics.setColor(1, 0, 1, 0.05)
@@ -414,10 +428,41 @@ function drawPauseMenu()
     love.graphics.setColor(0.5, 0.5, 0.5, 0.1)
     love.graphics.rectangle("fill", 0, 0, currWinDim.w, currWinDim.h)
 
-    love.graphics.setColor(1, 1, 1, 1)
+    if globalSpriteTimer > introWindUpTime then
+        for i, option in ipairs(menuOptionsPause) do
+            love.graphics.setColor(0.2, 0.2, 0.2)
+            love.graphics.print(option, currWinDim.w / 2 - (#option * 10) + gfxScale, currWinDim.h / 2 + (i - 1) * 40)
+            if i == selOptionPause then
+                love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1) -- Highlight selected option in red
+            else
+                love.graphics.setColor(1, 1, 1) -- Normal color
+            end
+            -- are things not centered?  check here lol, fix #option
+            love.graphics.print(option, currWinDim.w / 2 - (#option * 10), currWinDim.h / 2 + (i - 1) * 40)
+        end
+
+        for j = 1, 10, 1 do
+            love.graphics.setColor(0.2, 0.2, 0.2)
+            love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + (j * 12) + gfxScale,
+                currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
+            if math.floor(volumeMaster * 10) == j then
+                love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, 1)
+            else
+                love.graphics.setColor(1, 1,
+                    1)
+            end
+            love.graphics.rectangle("fill", currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + (j * 12),
+                currWinDim.h / 2 + mainMenuFont:getHeight() + 21, 6, 6)
+        end
+        love.graphics.setColor(0.2, 0.2, 0.2)
+        love.graphics.print(volumeMaster * 10, currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + 144 + gfxScale,
+            currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.print(volumeMaster * 10, currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + 144,
+            currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
+    end
+    love.graphics.setColor(1, 1, 1, alphaTween)
     love.graphics.setFont(mainMenuFont)
-    love.graphics.print("PAUSE", currWinDim.w / 2, currWinDim.h / 2, 0, portScale, portScale)
-    love.graphics.print("Press x to quit game :(", currWinDim.w / 2 - 35, currWinDim.h / 2 + 120, 0, .5, .5)
 end
 
 function drawDefeat()
@@ -435,7 +480,7 @@ function drawDefeat()
             , math.rad(270), gfxScale * 3, gfxScale * 3)
         love.graphics.setColor(139 / 255, 77 / 255, 188 / 255, defeatAlphaTween)
         love.graphics.print("You are forever bitchless"
-            , (currWinDim.w / 2) - #"You are forever bitchless"*(mainMenuFont:getHeight() * 2 / 3), currWinDim.h / 3
+            , (currWinDim.w / 2) - #"You are forever bitchless"*(mainMenuFont:getHeight() / 2), currWinDim.h / 3
             , 0, 2, 2)
     end
 end
@@ -449,16 +494,8 @@ function drawBossFight()
     love.graphics.draw(bossFightStatics, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     -- love.graphics.draw(bossFightHisCore, 0, 0, 0, gfxScale, gfxScale)
 
-    love.graphics.setColor(1,0.5,0.5,1 )
-    love.graphics.print("Current influencerCurrentHP: ", currWinDim.w / 2, 150)
-    love.graphics.print("Current influencerMaxHP: ", currWinDim.w / 2, 200)
-    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal
-        , currWinDim.w / 2, 250)
-    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage
-        , currWinDim.w / 2, 300)
 
-
-
+    love.graphics.setColor(1,1,1,1 )
     -- rendered on top so movie plays
     if bossFightIntroMovie:isPlaying() then 
         love.graphics.draw(bossFightIntroMovie, 0, 0, 0, gfxScale / 4, gfxScale / 4)
