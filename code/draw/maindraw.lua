@@ -104,7 +104,7 @@ function drawExploring()
     local mapOffsetY = tileWH * gfxScale * (-1 * player.mapTileY)
     drawnMapOffsetX = mapOffsetX + (currWinDim.w / 2 - (tileWH / 2))
     drawnMapOffsetY = mapOffsetY + (currWinDim.h / 2 - (tileWH / 2))
-
+    
     -- terrain + scenery
     love.graphics.draw(bg_floor_tiles, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
     love.graphics.draw(bg_WALLS, drawnMapOffsetX, drawnMapOffsetY, 0, gfxScale, gfxScale)
@@ -124,8 +124,7 @@ function drawExploring()
 
     if isDebug then
         love.graphics.setColor(1, 1, 1, 0.5)
-        love.graphics.draw(currentCollisionDraw
-        , drawnMapOffsetX, drawnMapOffsetY
+        love.graphics.draw(currentCollisionDraw, drawnMapOffsetX, drawnMapOffsetY
         , 0, gfxScale, gfxScale)
     end
     love.graphics.setColor(1, 1, 1, 1)
@@ -229,7 +228,7 @@ end
 
 function drawConversation()
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setFont(mainMenuFont)
+    love.graphics.setFont(npcDialogueFont)
 
     -- use each girls text bubble
     if interactables[interactingWith].chatbox then
@@ -284,11 +283,13 @@ function drawConversation()
     if charsToShow > #fullText then charsToShow = #fullText end
 
     local toShow = string.sub(fullText, 1, charsToShow)
+    love.graphics.setFont(npcDialogueFont)
     love.graphics.printf(toShow
         , 160 * gfxScale / 4
-        , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h * gfxScale / 4)
-        , (1250 / 1920 * currWinDim.w) / (gfxScale / 4)
+        , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h)
+        , (1250 / 1920 * currWinDim.w)
         , "left", 0, gfxScale / 4, gfxScale / 4)
+    love.graphics.setFont(responseFont)
 
     -- Response logic
     local delayAfterFinish = 0.4
@@ -362,12 +363,13 @@ function drawInventory()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.setFont(mainMenuFont)
 
+    inventoryCellSize = 32 * inventoryScale * gfxScale / 4
     -- Base rectangle
     local baseRecWidth = inventoryCellSize * inventoryCols
     local baseRecHeight = inventoryCellSize * inventoryRows
     love.graphics.setColor(.8, .7, .3, 1)
     love.graphics.rectangle("fill", (currWinDim.w / 2) - (baseRecWidth / 2), (currWinDim.h / 2) - (baseRecHeight / 2),
-        baseRecWidth + 100, baseRecHeight, 10, 10)
+        baseRecWidth + (100 * gfxScale / 4), baseRecHeight, 10, 10)
 
     -- Inventory grid
     love.graphics.setColor(.212, .203, .154, 1) -- Set color for the grid lines
@@ -423,7 +425,7 @@ function drawInventory()
     love.graphics.setColor(.8, .5, .3, 1) -- Set color for the outline
     love.graphics.setLineWidth(8)
     love.graphics.rectangle("line", (currWinDim.w / 2) - (baseRecWidth / 2) - 3,
-        (currWinDim.h / 2) - (baseRecHeight / 2) - 3, baseRecWidth + 103, baseRecHeight + 3, 10, 10)
+        (currWinDim.h / 2) - (baseRecHeight / 2) - 3, baseRecWidth + (103 * gfxScale / 4), baseRecHeight + 3, 10, 10)
 
     -- Inventory items
     love.graphics.reset()
@@ -435,14 +437,14 @@ function drawInventory()
                 local x = (currWinDim.w / 2) - (inventoryCellSize * inventoryCols / 2) + (col - 1) * inventoryCellSize
                 local y = (currWinDim.h / 2) - (inventoryCellSize * inventoryRows / 2) + (row - 1) * inventoryCellSize
                 
-                love.graphics.draw(InventoryImages[item].image, x, y, 0, inventoryScale, inventoryScale)
+                love.graphics.draw(InventoryImages[item].image, x, y, 0, inventoryScale * gfxScale / 4, inventoryScale * gfxScale / 4)
             end
         end
     end
 
     -- Show player
     love.graphics.reset()
-    local plX, plY = currWinDim.w / 2 + 225, currWinDim.h / 2 - 55
+    local plX, plY = currWinDim.w / 2 + (225 * gfxScale / 4), currWinDim.h / 2 - (55  * gfxScale / 4)
     local tFrames = player.anim.animations[1][math.ceil(globalSpriteTimer*player.anim.framesPerSecond[1] % player.anim.frames[1])]
     -- local tFrames = player.anim.animations[1][1]
     love.graphics.draw(player.spriteSheet, tFrames, plX, plY, 0, gfxScale, gfxScale)
@@ -571,27 +573,28 @@ function drawBossFight()
 
     -- pixel fg
     print(tostring(bossFightFrameStall))
-    local blueStart, redStart = 475, 1450
+    local blueStart, redStart = 475 * gfxScale / 4, 1450 * gfxScale / 4
     local pxDiff = redStart - blueStart
+    local tY = 300 * gfxScale / 4
     -- splice logic
     local playerHP = (influencerMaxHP - influencerCurrentHP)
     for i=1, playerHP, 1 do
-        love.graphics.draw(bossFightSpliceLeftKame, (blueStart * gfxScale / 4) + (i * gfxScale), 300, 0, gfxScale, bfResize)    
+        love.graphics.draw(bossFightSpliceLeftKame, (blueStart * gfxScale / 4) + (i * gfxScale), tY, 0, gfxScale, bfResize)    
     end
     for j=1, (influencerCurrentHP), 1 do
-        love.graphics.draw(bossFightSpliceRightKame, (redStart * gfxScale / 4) - (j * gfxScale), 300, 0, gfxScale, bfResize)
+        love.graphics.draw(bossFightSpliceRightKame, (redStart * gfxScale / 4) - (j * gfxScale), tY, 0, gfxScale, bfResize)
     end
 
-    love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall], 210, 300, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightRightKame.spriteSheet, bossFightRightKame.anim.animations[1][bossFightFrameStall], 760, 300, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightLeftKame.spriteSheet, bossFightLeftKame.anim.animations[1][bossFightFrameStall], 210 * gfxScale / 4, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightRightKame.spriteSheet, bossFightRightKame.anim.animations[1][bossFightFrameStall], 760 * gfxScale / 4, tY, 0, bfResize, bfResize)
 
-    local clashOffset = 500 - (pxDiff / 2) + (pxDiff * playerHP / influencerMaxHP)
-    love.graphics.draw(bossFightStaticClash.spriteSheet, bossFightStaticClash.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightBeamElectricity.spriteSheet, bossFightBeamElectricity.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
-    love.graphics.draw(bossFightElectricity.spriteSheet, bossFightElectricity.anim.currentAnim, clashOffset, 300, 0, bfResize, bfResize)
+    local clashOffset = (500 * gfxScale / 4) - (pxDiff / 2) + (pxDiff * playerHP / influencerMaxHP)
+    love.graphics.draw(bossFightStaticClash.spriteSheet, bossFightStaticClash.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightBeamElectricity.spriteSheet, bossFightBeamElectricity.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
+    love.graphics.draw(bossFightElectricity.spriteSheet, bossFightElectricity.anim.currentAnim, clashOffset, tY, 0, bfResize, bfResize)
 
     love.graphics.setColor(1,1,1,0.8 * (1-bossFightAlphaTween))
-    love.graphics.draw(bossFightHeart, 0, 0, 0, gfxScale, gfxScale)
+    love.graphics.draw(bossFightHeart, 0, 0, 0, gfxScale / 4, gfxScale / 4)
 
     love.graphics.setColor(1,1,1,1)
     -- rendered on top so movie plays

@@ -83,7 +83,10 @@ function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we
 end
 
 function handleCollision()
-    if isRedPixel(currentCollisionData, player.mapTrueX - (tileWH / 2) + (6 * gfxScale * gfxScale) / 4, player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+    if isRedPixel(currentCollisionData 
+        -- , drawnMapOffsetX
+        , player.mapTrueX - (tileWH / 2) + (6 * gfxScale)
+        , player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
         player.isColliding = true
         player.mapTileX, player.mapTileY = player.lastMapTileX, player.lastMapTileY
@@ -92,7 +95,9 @@ function handleCollision()
         player.isColliding = false
         lastPositionSave()
     end
-    if isRedPixel(bg_Collision_InClub_Data, player.mapTrueX - (tileWH / 2) + (6 * gfxScale * gfxScale) / 4, player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
+    if isRedPixel(bg_Collision_InClub_Data
+        , player.mapTrueX - (tileWH / 2) + (6 * gfxScale)
+        , player.mapTrueY - (tileWH / 2) + (8 * gfxScale)
         , player.hitbox.w, player.hitbox.h) then
         player.inClub = true
     else
