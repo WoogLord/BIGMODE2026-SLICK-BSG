@@ -171,13 +171,13 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/mangaPanel_test.ogv")
 
     -- Inventory Object
-    InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    InventoryBag = {}
     -- InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
         , ["Bald-Be-Gone TM"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item02_hair.png"), name = "Bald-Be-Gone TM", description = "Beautiful hair in a bottle."}
         , ["Heavenly Shades"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item03_shades.png"), name = "Heavenly Shades", description = "Makes it a little hard to see."}
-        , ["Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item04_abs.png"), name = "Bowflex", description = "Somehow, you got abs."}
+        , ["Miniature Bowflex"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item04_abs.png"), name = "Miniature Bowflex", description = "Somehow, you got abs."}
         , ["Agarthan Fjordans"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item05_shoes.png"), name = "Agarthan Fjordans", description = "Strong shoe game = strong woo game"}
         , ["Slick Slacks"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item06_pants.png"), name = "Slick Slacks", description = "Better than crapped briefs."}
         , ["Book of Mew"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item07_mew.png"), name = "Book of Mew", description = "Written by Yakub himself."}
