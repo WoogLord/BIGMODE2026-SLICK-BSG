@@ -230,6 +230,8 @@ function init()
         , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         -- bonus fellas
         , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25.5 * tileWH), tileH = 32, tileW = 32}
+       --[[ , {id = 13, name = "gothGirlFriend1", vanityName = "Toxic", mapTrueX = (22 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
+        , {id = 14, name = "gothGirlFriend2", vanityName = "Wasteland", mapTrueX = (23 * tileWH), mapTrueY = (23 * tileWH), tileH = 32, tileW = 32}]]
     }
     sororityDrawYOffset = 0
 
@@ -246,7 +248,7 @@ function init()
         {id = "9a", npcEmotion = 1, npcText = "No haha. You're short, fat, and you've got the hair of a 50 year old. You could use some work. ", responses = {{text = "But I can make you smile. That's what counts. ", nextDialog = "10a" }, {text = "I'm just trying to get you number and subsiquently hit. Are you letting me or not?", nextDialog = "19a"}}},
         {id = "10a", npcEmotion = 1, npcText = "That's definitely part of it. I'll give you that. ", responses = {{text = "How about I get your number and I can make you laugh over dinner?", nextDialog = "47b"}}}, 
         {id = "3b", npcEmotion = 3, npcText = ".............", responses = {{text = "*shit pants*", nextDialog = "reset"}, {text = "MY MOM.", nextDialog = "11a"}}},
-        {id = "11a", npcEmotion = 4, npcText = "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.", responses = {{text = "-->", nextDialog = "27b"}}},
+        {id = "11a", npcEmotion = 4, npcText = "WOOOOOOOOOOOOOOOOOOOOOOOOOOOOAH *high fives* That's what I'm talking about.", responses = {{text = "-->", nextDialog = "47b"}}},
         {id = "4b", npcEmotion = 2, npcText = "Do I look like I have a fucking father figure?", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "5b", npcEmotion = 1, npcText = "It's Ok. I've just had a really rough night. ", responses = {{text = "What happened?", nextDialog = "23a"}, {text = "Are we talking like a P80 or more of a P320?", nextDialog = "12b"}}},
         {id = "6b", npcEmotion = 2, npcText = "You know what?! LEAVE ME ALONE", responses = {{text = "-->", nextDialog = "failure"}}},
