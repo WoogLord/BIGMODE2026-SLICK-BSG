@@ -77,7 +77,8 @@ function init()
         , facing = "Right"
         , mapTileX = 1, mapTileY = 15.5
         , mapTrueX = 0, mapTrueY = 0
-        , lastMapTileX = 0, lastMapTileY = 0 
+        , lastMapTileX = 1, lastMapTileY = 15.5 
+        , lastMapTrueX = 0, lastMapTrueY = 0
         , speed = 25
         , items = {
             love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png")
