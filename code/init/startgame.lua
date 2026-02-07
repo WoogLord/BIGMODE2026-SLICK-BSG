@@ -117,7 +117,7 @@ function init()
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
-    gfxScale = math.floor((screenW - 1) / 480)
+    gfxScale = 2--math.floor((screenW - 1) / 480)
     portScale = 1 / 4 * gfxScale
     currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
@@ -293,8 +293,9 @@ function init()
         {id = "22b", npcEmotion = 1, npcText = "That's pretty cool. You've got some connections in this place.", responses = {{text = "It's nothing huge. He's just a server in the VIP area.", nextDialog = "23a"}, {text = "Meh, I'm mostly here for the ladies.", nextDialog = "36a"}}},
         {id = "36a", npcEmotion = 1, npcText = "Oh yeah? How many phone number have you got tonight?", responses = {{text = "Zero", nextDialog = "37a"}, {text = "Three", nextDialog = "37b"}, {text = "One..... after I get yours.", nextDialog = "47b"}}},
         {id = "37a", npcEmotion = 3, npcText = "Probably because you have no game and you have that weird stain on your crotch", responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "37b", npcEmotion = 1, npcText = "Big shot over here. I bet they're all fake.", responses = {{text = "Oh yeah? How about I call one.", nextDialog = "38a"}, {text = "How about you give me yours and I'll have 3 fake ones and one real.", nextDialog = "38b"}}},
-        {id = "38a", npcEmotion = 1, npcText = "Be my guest.", responses = {{text = "*call a girls phone number*", nextDialog = "39a"}, {npcText = "Why would I want to call another girl when I have you right in front of me?", nextDialog = "39b"}}},
+        {id = "38b", npcEmotion = 3, npcText = "Yeah, I don't think so.", responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "37b", npcEmotion = 1, npcText = "Big shot over here. I bet they're all fake.", responses = {{text = "Oh yeah? How about I call one.", nextDialog = "38a"}, {text = "How about you give me yours and I'll have 3 fake ones and one real.", nextDialog = "38b"}}}, 
+        {id = "38a", npcEmotion = 1, npcText = "Be my guest.", responses = {{text = "*call a girls phone number*", nextDialog = "39a"}, {text = "Why would I want to call another girl when I have you right in front of me?", nextDialog = "39b"}}},
         {id = "39a", npcEmotion = 1, npcText = "...", responses = {{text = "*You realize you were bluffing and are now awkwardly staring at your phone. You put your phone in your pocket embarrassed. How could you be so foolish", nextDialog = "40a"}}},
         {id = "40a", npcEmotion = 3, npcText = "Ha! That's what I thought. What a loser.", responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "39b", npcEmotion = 4, npcText = "*Blushes* Thanks. You're kinda ugly but at least you're sweet", responses = {{text = "Ugly? You just mean my shirt right??", nextDialog = "41a"}}},
@@ -344,9 +345,9 @@ function init()
         {id = "7f", npcText = "Go touch grass.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "8", npcText = "And how much is that worth?", npcEmotion = 1, responses = {{text = "About 4,424,297.84 Zimbabwe dollars.", nextDialog = "9"}, {text = "It could get you like 3 or 4 drinks at the bar.", nextDialog = "9"}}},
         {id = "9", npcText = "How about you take all that money a get some sunglasses to hide that ugly face.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}},checkPoint = 2}, -- CHECKPOINT 2
-        {id = "10", npcText = "Ha you look waaaaay older. Just not quite 50. A solid 45.  Why are you even talking to me? I'm trying to hang out with my sisters.", npcEmotion = 1, responses = {{text = "I knew you were in a sorority. You look like every other bitch here.", nextDialog = "12"}, {text = "What sorority are you in?", nextDialog = "12"}}},
+        {id = "10", npcText = "Ha you look waaaaay older. Just not quite 50. A solid 45.  Why are you even talking to me? I'm trying to hang out with my sisters.", npcEmotion = 1, responses = {{text = "I knew you were in a sorority. You look like every other bitch here.", nextDialog = "11"}, {text = "What sorority are you in?", nextDialog = "12"}}},
         {id = "11", npcText = "*multiple girls walk over with only slight variations of their appearance*", npcEmotion = 2, responses = {{text = "-->", nextDialog = "28"}}},
-        {id = "12", npcText = "Take a guess!", npcEmotion = 1, responses = {{text = "Tau Iota Tau?", nextDialog = "13"}, {text = "Delta Iota Kappa?", nextDialog = "14"}, {text = "Sigma Beta?", nextDialog = "23"}}},
+        {id = "12", npcText = "Take a guess!", npcEmotion = 1, responses = {{text = "Tau Iota Tau?", nextDialog = "13"}, {text = "Delta Iota Kappa?", nextDialog = "14"}, {text = "Sigma Beta?", nextDialog = "22"}}},
         {id = "13", npcText = "They're huge but no. We're smaller.", npcEmotion = 1, responses = {{text = "I give up. They seem all the same", nextDialog = "15"}, {text = "You've got me stumped. Which one?", nextDialog = "17"}}},
         {id = "14", npcText = "No, but I really love that one.", npcEmotion = 1, responses = {{text = "I give up. They seem all the same", nextDialog = "15"}, {text = "You've got me stumped. Which one?", nextDialog = "17"}}},
         {id = "15", npcText = "That's not true at all. We pay good money to have these friends.", npcEmotion = 1, responses = {{text = "Yeah.... So you just pay for friends and that's it?", nextDialog = "16"}}},
@@ -389,7 +390,7 @@ function init()
         {id = "21a", npcText = "Yeah, I see them. It's all not enough to make up for all your other........ issues.", npcEmotion = 1, responses = {{text = "Issues? I've overcome so much. *starts crying*", nextDialog = "22a"}, {text = "Issues? What am I, a magazine? I'm perfect.", nextDialog = "23a"}}},
         {id = "22a", npcText = "Crying in the club, great idea. That's how you get loads of girls' numbers.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "23a", npcText = "Says the guy who was balding just a few minutes ago.", npcEmotion = 1, responses = {{text = 'Yeah, but look at my hair now. What "issues" could I possibly have?', nextDialog = "24a"}, {text = "Woah, you're not supposed to remember that.", nextDialog = "25a"}}},
-        {id = "24a", npcText = "I'm sorry but you're chopped as hell. Loose like 80 pounds and then you can talk to me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"},checkPoint = 3}}, --CHECKPOINT 3
+        {id = "24a", npcText = "I'm sorry but you're chopped as hell. Loose like 80 pounds and then you can talk to me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 3}, --CHECKPOINT 3
         {id = "25a", npcText = "Why not? Because its convenient for the plot?", npcEmotion = 1, responses = {{text = ".............................", nextDialog = "2a"}}},
         {id = "26a", npcText = "Haha. My mom too, in a loving way.", npcEmotion = 1, responses = {{text = "I was always the problem child but it was because I wanted to stand out, make a memorable moment.", nextDialog = "27a"}, {text = "I'm just joking, both my parents died when I was 5.", nextDialog = "32a"}}},
         {id = "27a", npcText = "I know exactly how you feel, getting carried away and getting in trouble.", npcEmotion = 1, responses = {{text = "Yeah, sometimes I go too far. That's why I have a few restraining orders against me.", nextDialog = "28a"}, {text = "You strike me as the type of girl who can get a little naughty.", nextDialog = "29a"}}},
@@ -400,7 +401,7 @@ function init()
         {id = "32a", npcText = "Oh.... way to kill the vibe. Sorry to hear that though....Pity wont get you my number.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2a"}}},
         {id = "34a", npcText = "*Does a nollie backside kickflip on an imaginary skateboard *", npcEmotion = 1, responses = {{text = "-->", nextDialog = "14a"}}},
         {id = "35a", npcText = "I do like a bad boy though.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2a"}}},
-        {id = "36a", npcText = "Honestly, if you were jacked, it would be a different story.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"},checkPoint = 3}}, --CHECKPOINT 3
+        {id = "36a", npcText = "Honestly, if you were jacked, it would be a different story.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 3}, --CHECKPOINT 3
             --part 4 post checkpoint 3
         {id = "1b", npcText = "Wow, have you hit the gym? You're actually pretty hot now.", npcEmotion = 4, responses = {{text = "A hot guy for a hot girl. Can I get that number now?", nextDialog = "2b"}}},
         {id = "2b", npcText = "Definitely! I need to take you to some functions! The sisters are going to be so jealous!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 4}, -- CHECKPOINT 4
@@ -436,7 +437,7 @@ function init()
         {id = "2", npcText = "Chicks dig a guy bomber jacket.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "Not going to lie, its getting a little hot in here", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "4", npcText = "Hey loser, your shirt looks like a piece of crap.", npcEmotion = 1, responses = {{text = "*you reach out and rip the jacket off his back*", nextDialog = "5"}}},
-        {id = "5", npcText = "Erm..... I guess you can have it. You're probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}-- checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "Erm..... I guess you can have it. You're probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
     }     
     hairGuyTree = {
         {id = "1", npcText = "Where are all the little mamas at?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},

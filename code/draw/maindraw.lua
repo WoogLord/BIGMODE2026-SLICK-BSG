@@ -213,11 +213,13 @@ function drawInteractableButton()
         if checkCollision(player, interacts) and not isGettingItem then
             love.graphics.setColor(0.5, 0.5, 0.5, 1)
             love.graphics.setFont(mainMenuFont)
-            love.graphics.print("PRESS", iX - (tileWH * gfxScale * 2 / 3),
-                iY + 4 - (tileWH * gfxScale * 2 / 5) - (updownFloating))
+            love.graphics.print("PRESS", iX - (tileWH / (gfxScale / 3)) - 20,
+                iY + 4 - (tileWH * gfxScale * 2 / 5) - (updownFloating)
+            , 0, gfxScale / 4, gfxScale / 4)
             love.graphics.setColor(1, 1, 1, 1)
-            love.graphics.print("PRESS", iX - (tileWH * gfxScale * 2 / 3),
-                iY - (tileWH * gfxScale * 2 / 5) - (updownFloating))
+            love.graphics.print("PRESS", iX - (tileWH / (gfxScale / 3)) - 20,
+                iY - (tileWH * gfxScale * 2 / 5) - (updownFloating)
+            , 0, gfxScale / 4, gfxScale / 4)
             love.graphics.setColor(0.5, 0.5, 0.5, 1)
             love.graphics.draw(z_key_art, iX + (tileWH * gfxScale / 4), iY - (tileWH * gfxScale / 2), 0, gfxScale / 2,
                 gfxScale / 2)
