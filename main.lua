@@ -50,4 +50,7 @@ end
 function love.draw()
     drawStateMachine()
     if isDebug == true then drawDebug() end
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.setFont(debugFont)
+    love.graphics.print("ONE NIGHT WINDOW - "..buildVersion.." - build time: 02-07-2026 at 2:57a ET", 5 * gfxScale, currWinDim.h-(gfxScale)-debugFont:getHeight(debugFont))
 end
