@@ -53,16 +53,19 @@ function allTheFullscreenChangeStuff()
     local cw, ch = love.graphics.getDimensions()
     currWinDim.w, currWinDim.h = cw, ch
     local recalcRatio = (currWinDim.w / priorWinDim.w)
+    gfxScale = gfxScale * recalcRatio
+    portScale = portScale * recalcRatio
     -- use the recalcRatio like below:
     -- PLAYER_STATS_ARR.x, PLAYER_STATS_ARR.y = PLAYER_STATS_ARR.x * recalcRatio, PLAYER_STATS_ARR.y * recalcRatio
 end
 
 function checkCollision(_a, _b)
     -- basic rectangle collision
-    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * 3 / 6)                  -- x min
-        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w * 3 / 6)) -- x max
-        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * 3 / 6)                 -- y min
-        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * 3 / 6)) -- y max
+    local collRescale =  3 / 6 * gfxScale / 4
+    return _a.mapTrueX < _b.mapTrueX + (interactableHitbox.w * collRescale)                  -- x min
+        and _a.mapTrueX + _a.hitbox.w > (_b.mapTrueX - (interactableHitbox.w *collRescale)) -- x max
+        and _a.mapTrueY < _b.mapTrueY + (interactableHitbox.h * collRescale)                 -- y min
+        and _a.mapTrueY + _a.hitbox.h > (_b.mapTrueY - (interactableHitbox.h * collRescale)) -- y max
 end
 
 function isRedPixel(_collisionData, _x, _y, _w, _h) -- the red being whatever we need to check

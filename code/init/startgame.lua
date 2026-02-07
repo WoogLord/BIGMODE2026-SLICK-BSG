@@ -4,7 +4,7 @@ function init()
     playState = ""
     conversationState = ""
     inventoryHandler = false
-    gfxScale = 4
+    gfxScale = 3
     portScale = 1 / 4 * gfxScale
     moveSpeed = 0
     globalSpriteTimer = 0
@@ -110,7 +110,7 @@ function init()
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
-    currWinDim = {w = 1920, h = 1080}
+    currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
     isFullScreen = false
     love.window.setFullscreen(isFullScreen)
@@ -190,11 +190,11 @@ function init()
 
     -- CONVERSATION SECTION
 
-    gothGirlConvoState = 1
+    gothGirlConvoState = 0
     sororityGirlConvoState = 0
     influencerGirlConvoState = 0
 
-    jacketGuyConvoState = 1
+    jacketGuyConvoState = 0
     hairGuyConvoState = 0
     shadesGuyConvoState = 0
     absGuyConvoState = 0
