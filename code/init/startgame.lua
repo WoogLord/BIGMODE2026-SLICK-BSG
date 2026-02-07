@@ -173,7 +173,7 @@ function init()
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
 
     -- Inventory Object
-    InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Bowflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}
+    InventoryBag = {}
     -- InventoryBag = {}
     InventoryImages = {
         ["Bigmode Blazer"] = {image = love.graphics.newImage("assets/art/Nightclubitems/item01_jacket.png"), name = "Bigmode Blazer", description = "Ripped straight from a cool dude's back. "}
