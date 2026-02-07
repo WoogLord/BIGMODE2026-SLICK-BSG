@@ -8,7 +8,7 @@ function drawDebug()
     love.graphics.print("Current inventoryHandler: " .. tostring(inventoryHandler), 0, 40)
     love.graphics.print("Current player.mapTileX: " .. player.mapTileX .. ", player.mapTileY: " .. player.mapTileY, 0, 60)
     love.graphics.print("Current player.lastMapTileX: " .. player.lastMapTileX .. ", player.lastMapTileY: " .. player.lastMapTileY, 0, 80)
-    love.graphics.print("Current player.mapTrueX: " .. player.mapTrueX .. ", player.mapTrueY: " .. player.mapTrueY, 0, 100)
+    love.graphics.print("Current player.mapTrueX: " .. player.mapTrueX .. ", player.mapTrueY: " .. player.mapTrueY..", player.lastMapTrueX: " .. player.lastMapTrueX .. ", player.lastMapTrueY: " .. player.lastMapTrueY, 0, 100)
     love.graphics.print("Current player.isColliding: " .. tostring(player.isColliding), 0, 120)
     love.graphics.print("Current interactingWith: " .. tostring(interactingWith), 0, 140)
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
@@ -23,6 +23,7 @@ function drawDebug()
     love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 340)
     love.graphics.setColor(1,1,1,1)
     love.graphics.print("itemGetSfxDelayTimer: "..itemGetSfxDelayTimer..", itemGetSfxDelayTime: "..itemGetSfxDelayTime..", isPlayingDelayedSfx: "..tostring(isPlayingDelayedSfx), 0, 360)
+    love.graphics.print("player.hitbox.w: "..player.hitbox.w..", player.hitbox.h: "..player.hitbox.h..", player.hitbox.x: "..player.hitbox.x..", player.hitbox.y: "..player.hitbox.y..", player.hitbox.tileX: "..player.hitbox.tileX..", player.hitbox.tileY: "..player.hitbox.tileY, 0, 380)
 end
 
 -- Top level state handler
@@ -174,7 +175,8 @@ function drawPlayer(_x, _y, _rotate)
     if isDebug then
         love.graphics.setColor(0.5, 1, 0.5, 0.5)
         love.graphics.rectangle("fill"
-        , player.hitbox.x, player.hitbox.y
+        , player.hitbox.x + (tileWH / 2)
+        , player.hitbox.y + (tileWH / 2)
         , player.hitbox.w * gfxScale, player.hitbox.h * gfxScale
         )
     end

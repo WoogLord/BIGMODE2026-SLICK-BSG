@@ -100,10 +100,12 @@ function init()
             , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_01.mp3", "stream", false)
             , love.audio.newSource("assets/sfx/sillyvoicelines/youGot_02.mp3", "stream", false)
         }
-        , hitbox = {w = 14, h = 14}
+        , hitbox = {w = 14, h = 14, tileX = 0, tileY = 0}
         , isColliding = false
         , inClub = false
     }
+    player.mapTrueX, player.mapTrueY = (player.mapTileX * 32), (player.mapTileY * 32)
+    player.lastMapTrueX, player.lastMapTrueY = player.mapTrueX, player.mapTrueY
     floater = {}
     
     -- fonts
