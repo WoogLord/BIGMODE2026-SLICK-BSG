@@ -14,11 +14,14 @@ function drawDebug()
     love.graphics.print("Current gothGirlConvoState: " .. gothGirlConvoState, 0, 160)
     love.graphics.print(tostring(interactables[1].portrait.anim.animations[1][1]), 0, 180)
     love.graphics.print("In boss fight?"..tostring(isInBossFight), 0, 200)
+    love.graphics.print("inner: "..inner..", outter: "..outter, 0, 220)
+    love.graphics.print("States " .. "goth:".. gothGirlConvoState .. ", sorority:" .. sororityGirlConvoState .. ", Influ:" .. influencerGirlConvoState .. ", Jacket:" .. jacketGuyConvoState .. ", abs:" .. absGuyConvoState .. ", shoes:" .. shoesGirlConvoState .. ", shorts:" .. shortsGuyConvoState .. ", mew:" .. mewGuyConvoState .. ", jacket2:" .. jacketGuyNOJacketConvoState, 0, 240)
+    love.graphics.print("InventoryBag: " .. table.concat(InventoryBag, ", "), 0, 260)
     love.graphics.setColor(1,0.5,0.5,1 )
-    love.graphics.print("Current influencerCurrentHP: "..influencerCurrentHP, 0, 220)
-    love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, 0, 240)
-    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal, 0, 260)
-    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 280)
+    love.graphics.print("Current influencerCurrentHP: "..influencerCurrentHP, 0, 280)
+    love.graphics.print("Current influencerMaxHP: "..influencerMaxHP, 0, 300)
+    love.graphics.print("Current influencerTotalHeal: "..influencerTotalHeal..", influencerBaseHeal: "..influencerBaseHeal, 0, 320)
+    love.graphics.print("Current playerTotalDamage: "..playerTotalDamage..", playerBaseDamage: "..playerBaseDamage, 0, 340)
 end
 
 -- Top level state handler
