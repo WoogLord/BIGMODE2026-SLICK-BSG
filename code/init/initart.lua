@@ -33,6 +33,11 @@ function assignSpriteSheets()
     -- Juice NPCs
     interactables[11].spriteSheet = love.graphics.newImage("assets/art/SpriteCharacters/Leather Jacket guy WO-Sheet.png")
     interactables[12].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
+    interactables[13].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
+    interactables[14].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
+    interactables[15].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
+    interactables[16].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
+    interactables[17].spriteSheet = love.graphics.newImage("assets/art/ifhesinvinciblewhycaniseehim.png")
 
     -- add everyone else to animation array
     for i, interacts in pairs(interactables) do
@@ -77,8 +82,8 @@ function assignLayerArt()
     bg_Collision_PostSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PostSorortiy.png")
     bg_Collision_InClub_Data = love.image.newImageData("assets/art/bgs/bg_Collision_InClub.png")
 
-    currentCollisionDraw = bg_Collision_PostSorortiy
-    currentCollisionData = bg_Collision_PostSorortiy_Data
+    currentCollisionDraw = bg_Collision_PreSorortiy
+    currentCollisionData = bg_Collision_PreSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")
