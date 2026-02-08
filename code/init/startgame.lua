@@ -175,6 +175,7 @@ function init()
         , menuOK = love.audio.newSource("assets/sfx/regular ah soundeffects/SFX_7.wav", "stream", false)
     }
     bossFightMusic = love.audio.newSource("assets/music/spam.mp3", "stream", false)
+    shittingMyselfSfx = love.audio.newSource("assets/sfx/sillyvoicelines/shitingmyself.mp3", "stream", false)
     
     -- Movies
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
@@ -236,8 +237,8 @@ function init()
         , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         -- bonus fellas
         , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25.5 * tileWH), tileH = 32, tileW = 32}
-        , {id = 13, name = "gothGirlFriend1", vanityName = "Toxic", mapTrueX = (22 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
-        , {id = 14, name = "gothGirlFriend2", vanityName = "Wasteland", mapTrueX = (23 * tileWH), mapTrueY = (23 * tileWH), tileH = 32, tileW = 32}
+        , {id = 13, name = "gothGirlFriend1", vanityName = "Toxic", mapTrueX = (23.5 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}
+        , {id = 14, name = "gothGirlFriend2", vanityName = "Wasteland", mapTrueX = (25.5 * tileWH), mapTrueY = (24 * tileWH), tileH = 32, tileW = 32}
         , {id = 15, name = "kojimaSan", vanityName = "Hideo Kojima", mapTrueX = (12.5 * tileWH), mapTrueY = (21.5 * tileWH), tileH = 32, tileW = 32}
         , {id = 16, name = "mysteryShitter", vanityName = "Woog", mapTrueX = (14 * tileWH), mapTrueY = (2.5 * tileWH), tileH = 32, tileW = 32}
         , {id = 17, name = "dunkey", vanityName = "Meatwad Himself", mapTrueX = (13 * tileWH), mapTrueY = (7 * tileWH), tileH = 32, tileW = 32}

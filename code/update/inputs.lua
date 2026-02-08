@@ -124,6 +124,8 @@ function love.keypressed(key)
             playState = ""
         end
     end
+
+    if key == "p" then sfxManager(shittingMyselfSfx, true) end
 end
 
 -- -- handle inputs - mouse

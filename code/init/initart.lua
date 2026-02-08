@@ -72,6 +72,20 @@ function assignLayerArt()
     bg_Items_01_Props = love.graphics.newImage("assets/art/bgs/bg_Items_01_Props.png")
     bg_BIGGIE = love.graphics.newImage("assets/art/bgs/bg_BIGGIE.png")
 
+    -- juice
+    bg_DJ_Opacity_45_Frame1 = love.graphics.newImage("assets/art/bgs/bg_DJ_Opacity_45_frame1.png")
+    bg_DJ_Opacity_45_Frame2 = love.graphics.newImage("assets/art/bgs/bg_DJ_Opacity_45_frame2.png")
+    bg_DJ_Opacity_45_Frame3 = love.graphics.newImage("assets/art/bgs/bg_DJ_Opacity_45_frame3.png")
+    bg_DJ_Opacity_45_Frame4 = love.graphics.newImage("assets/art/bgs/bg_DJ_Opacity_45_frame4.png")
+    bg_Characters_01_Frame1 = love.graphics.newImage("assets/art/bgs/bg_Characters_01_frame1.png")
+    bg_Characters_01_Frame2 = love.graphics.newImage("assets/art/bgs/bg_Characters_01_frame2.png")
+    bg_Characters_01_Frame3 = love.graphics.newImage("assets/art/bgs/bg_Characters_01_frame3.png")
+    bg_Characters_01_Frame4 = love.graphics.newImage("assets/art/bgs/bg_Characters_01_frame4.png")
+    bg_Characters_02_Frame1 = love.graphics.newImage("assets/art/bgs/bg_Characters_02_frame1.png")
+    bg_Characters_02_Frame2 = love.graphics.newImage("assets/art/bgs/bg_Characters_02_frame2.png")
+    bg_Characters_02_Frame3 = love.graphics.newImage("assets/art/bgs/bg_Characters_02_frame3.png")
+    bg_Characters_02_Frame4 = love.graphics.newImage("assets/art/bgs/bg_Characters_02_frame4.png")
+
     -- collision
     -- debug
     bg_Collision_PreSorortiy = love.graphics.newImage("assets/art/bgs/bg_Collision_PreSorortiy.png")
@@ -84,6 +98,8 @@ function assignLayerArt()
 
     currentCollisionDraw = bg_Collision_PreSorortiy
     currentCollisionData = bg_Collision_PreSorortiy_Data
+    -- currentCollisionDraw = bg_Collision_PostSorortiy
+    -- currentCollisionData = bg_Collision_PostSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")
@@ -135,6 +151,11 @@ function assignPortraits()
         interactables[10].portrait,
         interactables[11].portrait,
         interactables[12].portrait,
+        interactables[13].portrait,
+        interactables[14].portrait,
+        interactables[15].portrait,
+        interactables[16].portrait,
+        interactables[17].portrait,
     }
 
     -- portrait assignment for animations

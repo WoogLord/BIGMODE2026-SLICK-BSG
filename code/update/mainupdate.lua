@@ -402,31 +402,32 @@ function handleConversation()
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
     elseif conversationState == interactables[13].vanityName then
-        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+        currentDialogTreeNode = findDialogNode(gothGirlFriend1Tree, currentDialogTreeId)
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
     elseif conversationState == interactables[14].vanityName then
-        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+        currentDialogTreeNode = findDialogNode(gothGirlFriend2Tree, currentDialogTreeId)
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
     elseif conversationState == interactables[15].vanityName then
-        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+        currentDialogTreeNode = findDialogNode(kojimaSanTree, currentDialogTreeId)
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
     elseif conversationState == interactables[16].vanityName then
-        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+        currentDialogTreeNode = findDialogNode(mysteryShitterTree, currentDialogTreeId)
+        sfxManager(shittingMyselfSfx, false)
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
     elseif conversationState == interactables[17].vanityName then
-        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+        currentDialogTreeNode = findDialogNode(dunkeyTree, currentDialogTreeId)
 
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
@@ -534,7 +535,7 @@ function handleDialogSelection()
                 -- table.insert(InventoryBag, "Book of Mew")
             end
         elseif conversationState == interactables[16].vanityName then
-            -- sfxManager(, false)
+            
         else
         end
         conversationState = ""
