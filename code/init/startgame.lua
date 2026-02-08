@@ -410,26 +410,32 @@ function init()
     }
 
     influencerGirlTree = {
-        {id = "1", npcText = "Um, EWWWW. Do you even know who I am?? I'm Starchild Queen of this city. I'm livestreaming right now.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2"}}}, -- No items
-        {id = "2", npcText = "OMG chat! Look at this dork's shoes hahahaha. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- Checkpoint 1
-        {id = "3", npcText = "You're back, and you got rid of those terrible shoes? How did you get in the VIP section anyway? You look like a clown in those shorts.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "4"}}}, -- Item 1
-        {id = "4", npcText = "Julio, kick this loser out of here", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
-        {id = "5", npcText = "GRRRR. I thought it was clear last time that I wanted you out. ", npcEmotion = 1, responses = {{text = "-->", nextDialog = "6"}}}, -- Item 2
-        {id = "6", npcText = "Do I need to call Julio again??", npcEmotion = 1, responses = {{text = "No need. How do you like the pants??", nextDialog = "7"}}},
-        {id = "7", npcText = "I don't give a fuck. Get out. The VIP section is for famous and hot people, like me.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "8"}}}, 
-        {id = "8", npcText = "I have 10 million followers and I don't even know who you are.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "9"}}},
-        {id = "9", npcText = "On top of all that, you have the worst jawline I'VE EVER SEEN!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 3}, -- CHECKPOINT 3
+        {id = "1", npcText = "Um, EWWWW. Do you even know who I am?? I'm Starchild Queen of this city. I'm livestreaming right now.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "2"}}}, -- No items
+        {id = "2", npcText = "OMG chat! Look at this dork's shoes hahahaha. ", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- Checkpoint 1
+        {id = "3", npcText = "You're back, and you got rid of those terrible shoes? How did you get in the VIP section anyway? You look like a clown in those shorts.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "4"}}}, -- Item 1
+        {id = "4", npcText = "Julio, kick this loser out of here", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
+        {id = "5", npcText = "GRRRR. I thought it was clear last time that I wanted you out. ", npcEmotion = 3, responses = {{text = "-->", nextDialog = "6"}}}, -- Item 2
+        {id = "6", npcText = "Do I need to call Julio again??", npcEmotion = 2, responses = {{text = "No need. How do you like the pants??", nextDialog = "7"}}},
+        {id = "7", npcText = "I don't give a fuck. Get out. The VIP section is for famous and hot people, like me.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "8"}}}, 
+        {id = "8", npcText = "I have 10 million followers and I don't even know who you are.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "9"}}},
+        {id = "9", npcText = "On top of all that, you have the worst jawline I'VE EVER SEEN!!!!", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 3}, -- CHECKPOINT 3
         {id = "10", npcText = "Hello handso............", npcEmotion = 1, responses = {{text = "-->", nextDialog = "11"}}},-- Item 3
         {id = "11", npcText = "It's you???", npcEmotion = 1, responses = {{text = "-->", nextDialog = "12"}}},
         {id = "12", npcText = "What the fuck happened to your face???? You look.... Hot!", npcEmotion = 1, responses = {{text = "I'm a looks maxer now baby. I'm hotter than everyone in here..... Even you.", nextDialog = "13"}}},
-        {id = "13", npcText = "NO! I... I can't be outdone by a... a nobody.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "14"}}},
+        {id = "13", npcText = "NO! I... I can't be outdone by a... a nobody.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "14"}}},
         {id = "14", npcText = "You're so hot though.....", npcEmotion = 1, responses = {{text = "-->", nextDialog = "15"}}},
-        {id = "15", npcText = "Must... Resist!", npcEmotion = 1, responses = {{text = "I've got too much Rizz for you to handle. Give me your number, you know you want to.", nextDialog = "16"}}},
-        {id = "16", npcText = "No!!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "17"}}},
-        {id = "17", npcText = "Never!!!!!!!!!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "18"}}},
-        {id = "18", npcText = "HYYYAAAAAAAAAAAAAAA!!!!!!!!!!!!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 4},
+        {id = "15", npcText = "Must... Resist!", npcEmotion = 3, responses = {{text = "I've got too much Rizz for you to handle. Give me your number, you know you want to.", nextDialog = "16"}}},
+        {id = "16", npcText = "No!!!!!", npcEmotion = 3, responses = {{text = "-->", nextDialog = "17"}}},
+        {id = "17", npcText = "Never!!!!!!!!!!!!", npcEmotion = 3, responses = {{text = "-->", nextDialog = "18"}}},
+        {id = "18", npcText = "HYYYAAAAAAAAAAAAAAA!!!!!!!!!!!!", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 4},
             -- part 2 post checkpoint 4 -- LAST OF THE GAME
-        {id = "1a", npcText = "You know what, take my number!  It's 561-398-3755", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 5},
+        {id = "1a", npcText = "I can't believe it. You're...you're too...", npcEmotion = 1, responses = {{text = "-->", nextDialog = "2a"}}, checkPoint = 5},
+        {id = "2a", npcText = "Slick", npcEmotion = 4, responses = {{text = "I did all of this for you.", nextDialog = "3a"}}, checkPoint = 5},
+        {id = "3a", npcText = "You did?", npcEmotion = 4, responses = {{text = "This whole night was about getting your number while I had a chance.", nextDialog = "4a"}}, checkPoint = 5},
+        {id = "4a", npcText = "You know, I love a man who takes action.", npcEmotion = 4, responses = {{text = "-->", nextDialog = "5a"}}, checkPoint = 5},
+        {id = "5a", npcText = "Here take my number!! I'd love to go on a date sometime!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "6a"}}, checkPoint = 5},
+        {id = "6a", npcText = "I'd love to go out with someone. I can't look up everything about them online!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "7a"}}, checkPoint = 5},
+        {id = "7a", npcText = "I'm so EXCITED!!!!!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 5},
     }   
     
     jacketGuyTree = {
