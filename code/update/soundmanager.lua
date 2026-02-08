@@ -19,8 +19,15 @@ function musicManager(dt)
             else
                 bossFightMusic:setVolume(volumeMaster)
                 bossFightMusic:play()
+                if currentAnnouncement then 
+                    currentAnnouncement:setVolume(0)
+                end
             end
+        elseif gameState == "victory" then
+            currentTrack:setVolume(0) 
+            bossFightMusic:setVolume(0)
         else currentTrack:setVolume(volumeMaster) 
+            bossFightMusic:setVolume(0)
         end    
     end
     if currentAnnouncement then currentAnnouncement:setFilter{type = "lowpass", highgain = hg} end
@@ -28,10 +35,14 @@ function musicManager(dt)
     titleMusic:setVolume(volumeMaster)    
 
     if gameState == "mainmenu" then
+        creditsMovie:getSource():setVolume(0)
         titleMusic:play()
         needNextTrack = true
-    elseif gameState == "play" then
+    elseif gameState == "intro_cutscene" then
         titleMusic:stop()
+    elseif gameState == "victory" then
+        bossFightMusic:setVolume(0)
+    elseif gameState == "play" then
         if currentAnnouncement then else currentAnnouncement = pickRandomAnnouncement() end
         currentSongTimePlayedFor = currentSongTimePlayedFor + dt
         if currentSongTimePlayedFor > currentSongDuration - 4 and currentAnnouncement and not currentAnnouncement:isPlaying() then

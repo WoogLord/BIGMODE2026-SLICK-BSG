@@ -37,6 +37,8 @@ function love.update(dt)
     bossFightFadeOutTimer = bossFightFadeOutTimer + dt
     influencerHealTimer = influencerHealTimer + dt
     itemGetSfxDelayTime = itemGetSfxDelayTime + dt
+    creditsMovieStallTime = creditsMovieStallTime + dt
+    introMovieStallTime = introMovieStallTime + dt
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
     defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
     bossFightAlphaTween = math.min(bossFightFadeOutTimer / bossFightFadeOutWindDownTime, 1)
@@ -53,5 +55,5 @@ function love.draw()
     if isDebug == true then drawDebug() end
     love.graphics.setColor(1,1,1,1)
     love.graphics.setFont(debugFont)
-    love.graphics.print("ONE NIGHT WINDOW - "..buildVersion.." - build time: 02-07-2026 at 5:46p ET", 5 * gfxScale, currWinDim.h-(gfxScale)-debugFont:getHeight(debugFont))
+    love.graphics.print("ONE NIGHT WINDOW - "..buildVersion.." - build time: 02-07-2026 at 8:46p ET", 5 * gfxScale, currWinDim.h-(gfxScale)-debugFont:getHeight(debugFont))
 end
