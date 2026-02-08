@@ -291,7 +291,7 @@ function drawConversation()
     love.graphics.printf(toShow
         , 160 * gfxScale / 4
         , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h)
-        , (1250 / 1920 * currWinDim.w)
+        , 1180
         , "left", 0, gfxScale / 4, gfxScale / 4)
     love.graphics.setFont(responseFont)
 
