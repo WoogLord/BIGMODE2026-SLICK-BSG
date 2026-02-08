@@ -31,6 +31,8 @@ end
 function drawStateMachine()
     if gameState == "mainmenu" then
         drawMainMenu()
+    elseif gameState == "intro_cutscene" then
+        drawIntroCutscene()
     elseif gameState == "play" then
         drawPlay()
     elseif gameState == 'defeat' then
@@ -562,9 +564,14 @@ function drawDefeat()
 end
 
 function drawVictory()
-    love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
-    love.graphics.print("Don't forget to call her at 561-398-3755!", currWinDim.w / 4, currWinDim.h / 2 + 100, 0, 2, 2)
-    love.graphics.print("Press x to exit, get it? x-it! I will do evil things one day", currWinDim.w / 4, currWinDim.h / 2 + 200, 0, 2, 2)
+    love.graphics.setColor(1,1,1,1)
+    if creditsMovie:isPlaying() then 
+        love.graphics.draw(creditsMovie, 0, 0, 0, gfxScale / 2, gfxScale / 2)
+    else end
+
+    -- love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)
+    -- love.graphics.print("Don't forget to call her at 561-398-3755!", currWinDim.w / 4, currWinDim.h / 2 + 100, 0, 2, 2)
+    -- love.graphics.print("Press x to exit, get it? x-it! I will do evil things one day", currWinDim.w / 4, currWinDim.h / 2 + 200, 0, 2, 2)
 end
 
 function drawBossFight()
@@ -622,4 +629,11 @@ function drawGettingItem()
         , currWinDim.w / 2 - (tileWH / 2) + (8 * gfxScale) + flipOffset
         , currWinDim.h / 2 - (tileWH / 2) + (updownFloating * gfxScale) - (14 * gfxScale)
         , 0, gfxScale, gfxScale)
+end
+
+function drawIntroCutscene()
+    love.graphics.setColor(1,1,1,1)
+    if gameIntroMovie:isPlaying() then 
+        love.graphics.draw(gameIntroMovie, 0, 0, 0, gfxScale, gfxScale)
+    else end
 end

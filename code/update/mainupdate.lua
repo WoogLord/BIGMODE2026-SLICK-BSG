@@ -36,6 +36,13 @@ function gameManager()
     if isInBossFight == true and not bossFightIntroMovie:isPlaying() then
         bossFightGameState()
     end
+    if gameState == "intro_cutscene" and not gameIntroMovie:isPlaying() then
+        introCutsceneGamestate()
+    end
+    if gameState == "victory" and not creditsMovie:isPlaying() and creditsMovieStallTime > 1 then
+            gameState = "mainmenu"
+            playState = ""       
+    end
     -- if bossFightIntroMovie:isPlaying() then isInBossFight = true else isInBossFight = false end
 end
 
@@ -439,6 +446,10 @@ function handleDialogSelection()
             -- TRIGGER BOSS FIGHT HERE
                 bossFightInit()
             elseif influencerGirlConvoState == 5 then
+                bossFightMusic:stop()
+                creditsMovie:getSource():setVolume(volumeMaster)
+                creditsMovie:play()
+                creditsMovieStallTime = 0
                 gameState = "victory"
             end
         elseif conversationState == interactables[4].vanityName then
@@ -503,7 +514,7 @@ function bossFightGameState()
     influencerTotalHeal = influencerBaseHeal * math.floor(math.min(math.ceil((1 - influencerCurrentHP / influencerMaxHP) * 5), 5)) -- scales with missing hp
     playerTotalDamage = playerBaseDamage * math.floor(math.min(math.max((bossFightTimer - 10) / 5, 1), 10)) -- scales with time
 
-    if influencerHealTimer > (0.48 / 4) then
+    if influencerHealTimer > (0.48 / 5) then
         influencerCurrentHP = math.min(influencerMaxHP - 5, influencerTotalHeal + influencerCurrentHP)
         influencerHealTimer = 0
     end
@@ -531,4 +542,14 @@ function getItemHandler(_item)
     itemGetSfxDelayTimer = youGotSfx:getDuration("seconds")
     itemGetSfxDelayTime = 0
     isPlayingDelayedSfx = true
+end
+
+function introCutsceneGamestate()
+    if introMovieStallTime > introMovieTotalDuration then 
+        gameState = "play"
+        playState = "exploring"
+    elseif gameIntroMovie and not gameIntroMovie:isPlaying() then
+        gameIntroMovie:getSource():setVolume(volumeMaster)
+        gameIntroMovie:play()
+    end
 end

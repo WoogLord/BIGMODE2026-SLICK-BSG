@@ -1,5 +1,5 @@
 function init()
-    buildVersion = "v4"
+    buildVersion = "v5"
     gameState = "mainmenu"
     playState = ""
     conversationState = ""
@@ -117,7 +117,7 @@ function init()
 
     -- window/screen logic
     screenW, screenH = love.window.getDesktopDimensions()
-    gfxScale = 2--math.floor((screenW - 1) / 480)
+    gfxScale = math.floor((screenW - 1) / 480)
     portScale = 1 / 4 * gfxScale
     currWinDim = {w = 1920 / 4 * gfxScale, h = 1080 / 4 * gfxScale}
     love.window.setMode(currWinDim.w, currWinDim.h)
@@ -174,11 +174,15 @@ function init()
           menuSelection = love.audio.newSource("assets/sfx/regular ah soundeffects/Menu_interaction.mp3", "stream", false)
         , menuOK = love.audio.newSource("assets/sfx/regular ah soundeffects/SFX_7.wav", "stream", false)
     }
-    credits = 0 -- mus_06_rave3_w_L
     bossFightMusic = love.audio.newSource("assets/music/spam.mp3", "stream", false)
     
     -- Movies
     bossFightIntroMovie = love.graphics.newVideo("assets/videos/bossFightCutscene.ogv")
+    gameIntroMovie = love.graphics.newVideo("assets/videos/intro_cutscene.ogv")
+    creditsMovie = love.graphics.newVideo("assets/videos/credits.ogv")
+    introMovieStallTime = 0
+    introMovieTotalDuration = gameIntroMovie:getSource():getDuration("seconds")
+    creditsMovieStallTime = 0
 
     -- Inventory Object
     -- InventoryBag = {"Bigmode Blazer", "Bald-Be-Gone TM", "Heavenly Shades", "Miniature Broflex", "Agarthan Fjordans", "Slick Slacks", "Book of Mew"}

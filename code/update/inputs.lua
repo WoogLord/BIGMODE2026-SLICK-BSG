@@ -13,8 +13,8 @@ function love.keypressed(key)
         elseif key == INPUTS_ARR.select[1] or key == INPUTS_ARR.select[2] or key == INPUTS_ARR.select[3] then
             sfxManager(sfxSources.menuOK, false)
             if menuOptionsMain[selOptionMain] == "PLAY" then
-                gameState = "play"
-                playState = "exploring"
+                introMovieStallTime = 0
+                gameState = "intro_cutscene"
             elseif menuOptionsMain[selOptionMain] == "QUIT" then
                 love.event.quit()
             end
@@ -31,7 +31,7 @@ function love.keypressed(key)
 
     if gameState == "play" then
         if playState == "exploring" then
-            if key == INPUTS_ARR.bossFightDebug then bossFightInit() end
+            -- if key == INPUTS_ARR.bossFightDebug then bossFightInit() end
             if isInBossFight then 
                 if key == INPUTS_ARR.cancel then
                     influencerCurrentHP = math.max(influencerCurrentHP - playerTotalDamage, 0)
@@ -120,7 +120,8 @@ function love.keypressed(key)
 
     if gameState == "victory" then
         if key == INPUTS_ARR.cancel then
-            love.event.quit()
+            gameState = "mainmenu"
+            playState = ""
         end
     end
 end
