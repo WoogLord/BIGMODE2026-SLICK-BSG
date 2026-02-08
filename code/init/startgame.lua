@@ -327,8 +327,8 @@ function init()
     }
 
     sororityGirlTree = {
-        {id = "1p", npcText = "Go get another girl's number, then I’ll talk to you.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "2p"}}},
-        {id = "2p", npcText = "*Under her beath* That’ll take him all night.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}},
+        {id = "1p", npcText = "Go get another girl's number, then I'll talk to you.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "2p"}}},
+        {id = "2p", npcText = "*Under her beath* That'll take him all night.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}},
         --part 1 checkpoint 0
         {id = "1z", npcText = "Ew Get away! Have you even looked in a mirror? Your hair looks awful!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- CHECKPOINT 1
         {id = "2z", npcText = "Maybe if you fixed that yee yee ass haircut, you'd get some bitches on your dick.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}},
