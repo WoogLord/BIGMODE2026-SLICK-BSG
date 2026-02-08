@@ -236,8 +236,11 @@ function init()
         , {id = 11, name = "jacketGuyNOJacket", vanityName = "AscendedAxel", mapTrueX = (18 * tileWH), mapTrueY = (22.5 * tileWH), tileH = 48, tileW = 32}
         -- bonus fellas
         , {id = 12, name = "biggie", vanityName = "Biggimus Modicus", mapTrueX = (15.5 * tileWH), mapTrueY = (25.5 * tileWH), tileH = 32, tileW = 32}
-       --[[ , {id = 13, name = "gothGirlFriend1", vanityName = "Toxic", mapTrueX = (22 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
-        , {id = 14, name = "gothGirlFriend2", vanityName = "Wasteland", mapTrueX = (23 * tileWH), mapTrueY = (23 * tileWH), tileH = 32, tileW = 32}]]
+        , {id = 13, name = "gothGirlFriend1", vanityName = "Toxic", mapTrueX = (22 * tileWH), mapTrueY = (25 * tileWH), tileH = 32, tileW = 32}
+        , {id = 14, name = "gothGirlFriend2", vanityName = "Wasteland", mapTrueX = (23 * tileWH), mapTrueY = (23 * tileWH), tileH = 32, tileW = 32}
+        , {id = 15, name = "kojimaSan", vanityName = "Hideo Kojima", mapTrueX = (12.5 * tileWH), mapTrueY = (21.5 * tileWH), tileH = 32, tileW = 32}
+        , {id = 16, name = "mysteryShitter", vanityName = "Woog", mapTrueX = (14 * tileWH), mapTrueY = (2.5 * tileWH), tileH = 32, tileW = 32}
+        , {id = 17, name = "dunkey", vanityName = "Meatwad Himself", mapTrueX = (13 * tileWH), mapTrueY = (7 * tileWH), tileH = 32, tileW = 32}
     }
     sororityDrawYOffset = 0
 
@@ -334,7 +337,7 @@ function init()
         {id = "1p", npcText = "Go get another girl's number, then I'll talk to you.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "2p"}}},
         {id = "2p", npcText = "*Under her beath* That'll take him all night.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}},
         --part 1 checkpoint 0
-        {id = "1z", npcText = "Ew Get away! Have you even looked in a mirror? Your hair looks awful!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- CHECKPOINT 1
+        {id = "1z", npcText = "Ew Get away! Have you even looked in a mirror? Your hair looks awful!", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 1}, -- CHECKPOINT 1
         {id = "2z", npcText = "Maybe if you fixed that yee yee ass haircut, you'd get some bitches on your dick.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}},
         --part 2 post checkpoint 1
         {id = "1", npcText = "Wow, you fixed your hair. You don't look like you're 50 anymore.", npcEmotion = 1, responses = {{text = "That's too bad, I bet you're into older men.", nextDialog = "2"}, {text = "I'm actually 24 and very good looking.", nextDialog = "10"}}}, 
@@ -348,7 +351,7 @@ function init()
         {id = "7e", npcText = "*she takes your $10 and gives it to her friend to make a run to the bar.*", npcEmotion = 1, responses = {{text = "-->", nextDialog = "7f"}}},
         {id = "7f", npcText = "Go touch grass.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "failure"}}},
         {id = "8", npcText = "And how much is that worth?", npcEmotion = 1, responses = {{text = "About 4,424,297.84 Zimbabwe dollars.", nextDialog = "9"}, {text = "It could get you like 3 or 4 drinks at the bar.", nextDialog = "9"}}},
-        {id = "9", npcText = "How about you take all that money a get some sunglasses to hide that ugly face.", npcEmotion = 3, responses = {{text = "-->", nextDialog = "success"}},checkPoint = 2}, -- CHECKPOINT 2
+        {id = "9", npcText = "How about you take all that money a get some sunglasses to hide that ugly face.", npcEmotion = 2, responses = {{text = "-->", nextDialog = "success"}},checkPoint = 2}, -- CHECKPOINT 2
         {id = "10", npcText = "Ha you look waaaaay older. Just not quite 50. A solid 45.  Why are you even talking to me? I'm trying to hang out with my sisters.", npcEmotion = 1, responses = {{text = "I knew you were in a sorority. You look like every other bitch here.", nextDialog = "11"}, {text = "What sorority are you in?", nextDialog = "12"}}},
         {id = "11", npcText = "*multiple girls walk over with only slight variations of their appearance*", npcEmotion = 2, responses = {{text = "-->", nextDialog = "28"}}},
         {id = "12", npcText = "Take a guess!", npcEmotion = 1, responses = {{text = "Tau Iota Tau?", nextDialog = "13"}, {text = "Delta Iota Kappa?", nextDialog = "14"}, {text = "Sigma Beta?", nextDialog = "22"}}},
@@ -372,7 +375,7 @@ function init()
         {id = "30", npcText = "Sigma Beta see ya later!", npcEmotion = 4, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, --CHECKPOINT 2
             --part 3 post checkpoint 2
         {id = "1a", npcText = "Wait..... Its you? You look different....", npcEmotion = 3, responses = {{text = "-->", nextDialog = "2a"}}},
-        {id = "2a", npcText = "You don't look half bad but if you want to date a Sigma Beta you need to be hot.", npcEmotion = 1, responses = {{text = "I many not be hot but I know I look cool.", nextDialog = "3a"}}},
+        {id = "2a", npcText = "You don't look half bad but if you want to date a Sigma Beta you need to be hot.", npcEmotion = 1, responses = {{text = "I may not be hot but I know I look cool.", nextDialog = "3a"}}},
         {id = "3a", npcText = "Ha, you do look a little cool. You're not making me viscerally sick anymore.", npcEmotion = 1, responses = {{text = "We're moving in the right direction. What are you studying?", nextDialog = "4a"}, {text = "Want to see something viscerally sick?", nextDialog = "34a"}}},
         {id = "4a", npcText = "I'm studying communications and gender studies.", npcEmotion = 1, responses = {{text = "Ok, I'll have a large iced coffee with oat milk.", nextDialog = "5a"}, {text = "Oh really? How about we get out of here and study our chemistry?", nextDialog = "13a"}}},
         {id = "5a", npcText = "Haha. I honestly wasn't expecting that. I actually work at a radio station as a host.", npcEmotion = 1, responses = {{text = "Radio? You're way too pretty. Why not TV?", nextDialog = "6a"}, {text = "That's actually really cool? What do you talk about?", nextDialog = "9a"}}},
@@ -503,5 +506,20 @@ function init()
     }
     biggieFrogTree = {
         {id = "1", npcText = "Look... I didn't do it!  I don't even know how to drive!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
+    }
+    gothGirlFriend1Tree = {
+        {id = "1", npcText = "I'm the one who tells lies", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
+    }
+    gothGirlFriend2Tree = {
+        {id = "1", npcText = "My treasure!  That was my entire life's savings!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
+    }
+    kojimaSanTree = {
+        {id = "1", npcText = "You know, I thought I was the only one making strand type games. This is pretty good, can I scan your feet?", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
+    }
+    mysteryShitterTree = {
+        {id = "1", npcText = "Oh dear God, make it stop.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}}
+    }
+    dunkeyTree = {
+        {id = "1", npcText = "Spaghetti and meat BALLS!", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}}
     }
 end

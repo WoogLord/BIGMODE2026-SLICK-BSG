@@ -77,8 +77,8 @@ function assignLayerArt()
     bg_Collision_PostSorortiy_Data = love.image.newImageData("assets/art/bgs/bg_Collision_PostSorortiy.png")
     bg_Collision_InClub_Data = love.image.newImageData("assets/art/bgs/bg_Collision_InClub.png")
 
-    currentCollisionDraw = bg_Collision_PostSorortiy
-    currentCollisionData = bg_Collision_PostSorortiy_Data
+    currentCollisionDraw = bg_Collision_PreSorortiy
+    currentCollisionData = bg_Collision_PreSorortiy_Data
 
     -- interactables
     z_key_art = love.graphics.newImage("assets/art/ui/z_key.png")

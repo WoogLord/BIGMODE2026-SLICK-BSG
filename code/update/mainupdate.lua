@@ -281,7 +281,19 @@ function startConversationWith(_interactableID)
         elseif conversationState == interactables[11].vanityName then
             --NEEDS TO BE TESTED
             currentDialogTreeId = "1" 
+
+        -- FOR INVISIBLE CHARACTERS
         elseif conversationState == interactables[12].vanityName then
+            currentDialogTreeId = "1"
+        elseif conversationState == interactables[13].vanityName then
+            currentDialogTreeId = "1"
+        elseif conversationState == interactables[14].vanityName then
+            currentDialogTreeId = "1"
+        elseif conversationState == interactables[15].vanityName then
+            currentDialogTreeId = "1"
+        elseif conversationState == interactables[16].vanityName then
+            currentDialogTreeId = "1"
+        elseif conversationState == interactables[17].vanityName then
             currentDialogTreeId = "1"
         end
     end
@@ -389,6 +401,36 @@ function handleConversation()
         if currentDialogTreeNode["checkPoint"] ~= nil then
             biggieConvoState = currentDialogTreeNode.checkPoint
         end
+    elseif conversationState == interactables[13].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[14].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[15].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[16].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
+    elseif conversationState == interactables[17].vanityName then
+        currentDialogTreeNode = findDialogNode(biggieFrogTree, currentDialogTreeId)
+
+        if currentDialogTreeNode["checkPoint"] ~= nil then
+            biggieConvoState = currentDialogTreeNode.checkPoint
+        end
     end
 end
 
@@ -491,6 +533,9 @@ function handleDialogSelection()
                 getItemHandler("Book of Mew")
                 -- table.insert(InventoryBag, "Book of Mew")
             end
+        elseif conversationState == interactables[16].vanityName then
+            -- sfxManager(, false)
+        else
         end
         conversationState = ""
         currentDialogTreeNode = nil
