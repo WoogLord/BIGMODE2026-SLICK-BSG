@@ -255,7 +255,7 @@ function drawConversation()
 
     if interactables[interactingWith].portraitFrame then
         love.graphics.draw(interactables[interactingWith].portraitFrame
-            , (currWinDim.w * 18 / 24) - (20), (currWinDim.h * 31 / 48) - (20),
+            , (currWinDim.w * 18 / 24) - (20 * gfxScale / 4), (currWinDim.h * 31 / 48) - (20 * gfxScale / 4),
             0, portScale, portScale)
     else
         -- default portraitFrame
