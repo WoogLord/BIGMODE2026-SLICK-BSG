@@ -527,7 +527,7 @@ function drawPauseMenu()
     love.graphics.print("Press I to open inventory", 50, 80, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
     love.graphics.print("Press F to fullscreen", 50, 110, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
     love.graphics.print("Press X to exit conversations", 50, 140, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
-
+    love.graphics.print("Press F3 to debug", 50, 170, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
 
     love.graphics.setColor(1, 1, 1, alphaTween)
     love.graphics.setFont(mainMenuFont)
@@ -590,7 +590,7 @@ end
 function drawVictory()
     love.graphics.setColor(1,1,1,1)
     if creditsMovie:isPlaying() then 
-        love.graphics.draw(creditsMovie, 0, 0, 0, gfxScale / 2, gfxScale / 2)
+        love.graphics.draw(creditsMovie, 0, 0, 0, gfxScale / 4, gfxScale / 4)
     else end
 
     -- love.graphics.print("Good job bud!", currWinDim.w / 2, currWinDim.h / 2, 0, 2, 2)

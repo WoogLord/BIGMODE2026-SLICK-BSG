@@ -1,5 +1,5 @@
 function init()
-    buildVersion = "v6"
+    buildVersion = "vFINAL"
     gameState = "mainmenu"
     playState = ""
     conversationState = ""

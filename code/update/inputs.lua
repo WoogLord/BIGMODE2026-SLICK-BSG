@@ -1,5 +1,5 @@
 function love.keypressed(key)
-    --if key == INPUTS_ARR.debug then isDebug = not isDebug end
+    if key == INPUTS_ARR.debug then isDebug = not isDebug end
     if key == INPUTS_ARR.fullscreen then allTheFullscreenChangeStuff() end
 
     -- ui -- mainMenu
