@@ -257,7 +257,7 @@ function drawConversation()
 
     if interactables[interactingWith].portraitFrame then
         love.graphics.draw(interactables[interactingWith].portraitFrame
-            , (currWinDim.w * 18 / 24) - (20), (currWinDim.h * 31 / 48) - (20),
+            , (currWinDim.w * 18 / 24) - (20 * gfxScale / 4), (currWinDim.h * 31 / 48) - (20 * gfxScale / 4),
             0, portScale, portScale)
     else
         -- default portraitFrame
@@ -293,7 +293,7 @@ function drawConversation()
     love.graphics.printf(toShow
         , 160 * gfxScale / 4
         , currWinDim.h * 2 / 3 + (150 / 1920 * currWinDim.h)
-        , (1250 / 1920 * currWinDim.w)
+        , 1180
         , "left", 0, gfxScale / 4, gfxScale / 4)
     love.graphics.setFont(responseFont)
 
