@@ -444,7 +444,7 @@ function init()
     
     jacketGuyTree = {
         {id = "1", npcText = "You like the jacket bro? It's genuine Armadillo leather.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
-        {id = "2", npcText = "Chicks dig a guy bomber jacket.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
+        {id = "2", npcText = "Chicks dig a guy in a bomber jacket.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "3", npcText = "Not going to lie, its getting a little hot in here", npcEmotion = 1, responses = {{text = "-->", nextDialog = "reset"}}},
         {id = "4", npcText = "Hey loser, your shirt looks like a piece of crap.", npcEmotion = 1, responses = {{text = "*you reach out and rip the jacket off his back*", nextDialog = "5"}}},
         {id = "5", npcText = "Erm..... I guess you can have it. You're probably more happy to have it than I am to lose it.", npcEmotion = 1, responses = {{text = "-->", nextDialog = "success"}}, checkPoint = 2}, -- Checkpoint 2
