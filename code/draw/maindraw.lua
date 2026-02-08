@@ -520,6 +520,15 @@ function drawPauseMenu()
         love.graphics.print(volumeMaster * 10, currWinDim.w / 2 + (#menuOptionsPause[2] * 10) + 144,
             currWinDim.h / 2 + mainMenuFont:getHeight() + 6)
     end
+
+     -- UI text
+    love.graphics.print("wasd or arrow keys to move", 50, 20, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
+    love.graphics.print("Press Z, E, or enter to interact", 50, 50, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
+    love.graphics.print("Press I to open inventory", 50, 80, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
+    love.graphics.print("Press F to fullscreen", 50, 110, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
+    love.graphics.print("Press X to exit conversations", 50, 140, 0, .7 * gfxScale / 4, .7 * gfxScale / 4)
+
+
     love.graphics.setColor(1, 1, 1, alphaTween)
     love.graphics.setFont(mainMenuFont)
 end
