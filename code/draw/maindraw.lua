@@ -24,6 +24,7 @@ function drawDebug()
     love.graphics.setColor(1,1,1,1)
     love.graphics.print("itemGetSfxDelayTimer: "..itemGetSfxDelayTimer..", itemGetSfxDelayTime: "..itemGetSfxDelayTime..", isPlayingDelayedSfx: "..tostring(isPlayingDelayedSfx), 0, 360)
     love.graphics.print("player.hitbox.w: "..player.hitbox.w..", player.hitbox.h: "..player.hitbox.h..", player.hitbox.x: "..player.hitbox.x..", player.hitbox.y: "..player.hitbox.y..", player.hitbox.tileX: "..player.hitbox.tileX..", player.hitbox.tileY: "..player.hitbox.tileY, 0, 380)
+    love.graphics.print("currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething:"..currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething, 0, 400)
 end
 
 -- Top level state handler

@@ -42,6 +42,7 @@ function love.update(dt)
     alphaTween = math.min((globalSpriteTimer) / introWindUpTime, 1)
     defeatAlphaTween = math.min(defeatTimer / defeatWindUpTime, 1)
     bossFightAlphaTween = math.min(bossFightFadeOutTimer / bossFightFadeOutWindDownTime, 1)
+    currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething = currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething + dt
     gameManager()    
     speedManager(dt)
     doFloaters()

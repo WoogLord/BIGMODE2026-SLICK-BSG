@@ -11,7 +11,10 @@ function soundManager(dt)
 end
 
 function musicManager(dt)
-    local hg = player.inClub and math.min(1,1) or math.max(0.001 * 1.5, 0.001 * 1.5)
+    local hg = player.inClub and 
+        math.min((math.exp(currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething/4)) - 1, 1)
+        or math.max((1 - currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething)
+            , 0.001 * 1.5)
     if currentTrack then currentTrack:setFilter{type = "lowpass", highgain = hg} 
         if isInBossFight then 
             if bossFightIntroMovie:isPlaying() then 

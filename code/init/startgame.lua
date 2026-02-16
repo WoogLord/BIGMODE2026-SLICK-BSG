@@ -13,6 +13,7 @@ function init()
     introWindUpTime = 1
     drawnMapOffsetX = 0
     drawnMapOffsetY = 0
+    currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething = 0
     
     -- defeat screen
     defeatScreen = love.graphics.newImage("assets/art/ui/defeat.png")

@@ -30,6 +30,7 @@ function gameManager()
     player.hitbox.tileX, player.hitbox.tileY = player.hitbox.x / tileWH, player.hitbox.y / tileWH
     -- interactableHitbox.w, interactableHitbox.h = interactableHitbox.w * gfxScale / 4, interactableHitbox.h * gfxScale / 4 
 
+
     handleCollision()
     handleConversation()
 
@@ -115,6 +116,9 @@ function handleCollision()
     else
         player.inClub = false
     end
+    
+    if player.inClub == lastInClub then else currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething = 0 end
+    lastInClub = player.inClub
 end
 
 function lastPositionSave()
@@ -475,6 +479,8 @@ function handleDialogSelection()
                 -- HAVE SORORITY GIRLS MOVE OUT OF WAY HERE
                 currentCollisionDraw = bg_Collision_PostSorortiy
                 currentCollisionData = bg_Collision_PostSorortiy_Data
+                player.mapTileX = (interactables[2].mapTrueX / 32) - 1
+                player.mapTileY = interactables[2].mapTrueY / 32
                 sororityDrawYOffset = -7.5 * tileWH
             end
         --Influancer girl section
