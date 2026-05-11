@@ -117,7 +117,10 @@ function handleCollision()
         player.inClub = false
     end
     
-    if player.inClub == lastInClub then else currentTimeSpentInOrOutOfClubRichardDidAskMeToMakeThisLongerOnTodaysDateFeburaryFiftennthOrSomething = 0 end
+    if player.inClub == lastInClub then 
+    elseif player.inClub == true and lastInClub == false then inClubExpoFadeTimer = -1 -- step into club (remove fade)
+    elseif player.inClub == false and lastInClub == true then inClubExpoFadeTimer = 0 -- step out of club (start the fade)   
+    end
     lastInClub = player.inClub
 end
 
